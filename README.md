@@ -1,3 +1,56 @@
+# Flash-CLI: Command-Line Vocabulary Training
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+Flash-CLI is a Python-based command-line vocabulary training application that seamlessly integrates with Google Sheets. Enhance your language skills, track progress, and master new words—all from your terminal.
+
+## UX
+
+### User Stories
+
+### Flowchart
+
+### Why the Terminal?
+The terminal is an ideal environment for vocabulary training for several reasons:
+
+- **Focus on Learning:** By removing distractions (fancy UI elements, animations, etc.), the terminal allows users to concentrate solely on expanding their vocabulary.
+- **Efficiency:** Terminal apps are lightweight and fast. Users can quickly launch the app, practice, and exit, thereby maximizing their time spent learning. 
+- **Keyboard-Centric Interaction:** Terminal apps encourage keyboard shortcuts and efficient navigation, which aligns well with learning and memorization.
+
+_Note_: For this specific project, the terminal environment is emulated within a browser. However, the app is designed to be used in a traditional terminal environment.
+
+## Features
+
+### Quiz Mode
+Test your vocabulary knowledge interactively.
+- Answer flashcard questions.
+- Difficulty adjusts based on your progress.
+- Chose from multiple-choice or fill-in-the-blank questions.
+
+### Adding New Flashcards
+Add new words and definitions to your vocabulary list.
+- Use the app to add new words and definitions.
+- Google Sheets reflects these changes.
+
+### Learning Progress
+Monitor the progress of all of your flashcards.
+- Each flashcard's progress is stored.
+- Update the Google Sheets document accordingly.
+
+### Real-Time Google Sheets Sync
+Automatically update your vocabulary data in a connected Google Sheets document.
+
+### Tools
+
+- [Google Sheets API](https://developers.google.com/sheets/api)
+- [Quizlet](https://quizlet.com/)
+
+## Credits
+
+
+
+
+
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 Welcome,
