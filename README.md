@@ -21,24 +21,63 @@ _Note_: For this specific project, the terminal environment is emulated within a
 
 ## Features
 
-### Quiz Mode
-Test your vocabulary knowledge interactively.
-- Answer flashcard questions.
-- Difficulty adjusts based on your progress.
-- Chose from multiple-choice or fill-in-the-blank questions.
-
-### Adding New Flashcards
-Add new words and definitions to your vocabulary list.
-- Use the app to add new words and definitions.
-- Google Sheets reflects these changes.
-
-### Learning Progress
-Monitor the progress of all of your flashcards.
-- Each flashcard's progress is stored.
-- Update the Google Sheets document accordingly.
+### Quiz Modes
+#### Flashcard Mode: Users can review flashcards and decide if they know the answer.
+#### Typed Answer Quizzes: Users type their answers directly.
 
 ### Real-Time Google Sheets Sync
-Automatically update your vocabulary data in a connected Google Sheets document.
+#### Automatically update your vocabulary data in a connected Google Sheets document.
+
+### Error Handling and Logging
+#### Gracefully handle unexpected errors (e.g., invalid input, network issues).
+#### Log application events for debugging and troubleshooting.
+
+## Future Features
+
+### Quiz Modes
+#### Multiple-Choice Quizzes: Randomized questions with answer choices.
+#### Timed Quizzes: Set a time limit for answering questions.
+
+### Flashcard Management
+#### Create, edit, and delete flashcards.
+#### Tag flashcards for better categorization.
+#### Organize flashcards into decks or collections.
+
+### Spaced Repetition
+#### Implement a spaced repetition algorithm (e.g., Leitner system) to optimize learning intervals.
+#### Gradually increase intervals for well-remembered words.
+#### Remind users to review flashcards at optimal times.
+
+### Statistics and Analytics
+#### Display overall progress (e.g., percentage of mastered words).
+#### Show performance trends over time (graphs, charts).
+#### Identify areas where improvement is needed (e.g., low success rate on specific flashcards).
+
+### Import/Export
+#### Import: Allow users to import existing vocabulary lists from other sources (e.g., Quizlet, Anki).
+#### Export: Enable users to export flashcards (e.g., as CSV files) for sharing or backup.
+
+### Interactive Help System
+#### Provide built-in documentation accessible via commands (e.g., help, man).
+#### Explain features, usage, and available commands.
+
+### Integration with Language APIs
+#### Use language APIs (e.g., WordNet, Google Translate) for:
+- Synonyms and antonyms
+- Example sentences
+- Word definitions
+- Pronunciations
+
+### Gamification
+#### Points and Badges: Reward users with points for completing quizzes or achieving milestones.
+#### Daily Streaks: Encourage consistent practice by maintaining daily streaks.
+
+### Customizable Themes
+#### Allow users to choose color schemes for the terminal interface (e.g., light mode, dark mode).
+
+### Backup and Restore
+#### Regularly back up user data (flashcards, progress) to prevent data loss.
+- Provide an option to restore from backups if needed (e.g., after reinstalling the app).
 
 ### Tools
 
