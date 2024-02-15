@@ -30,7 +30,6 @@ _Note_: For this specific project, the terminal environment is emulated within a
 
 ### Error Handling and Logging
 #### Gracefully handle unexpected errors (e.g., invalid input, network issues).
-#### Log application events for debugging and troubleshooting.
 
 ## Future Features
 
@@ -56,6 +55,9 @@ _Note_: For this specific project, the terminal environment is emulated within a
 ### Import/Export
 #### Import: Allow users to import existing vocabulary lists from other sources (e.g., Quizlet, Anki).
 #### Export: Enable users to export flashcards (e.g., as CSV files) for sharing or backup.
+
+### Error Handling and Logging
+#### Log application events for debugging and troubleshooting.
 
 ### Interactive Help System
 #### Provide built-in documentation accessible via commands (e.g., help, man).
