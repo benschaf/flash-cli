@@ -1,5 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
+# Credit for prettytable: https://pythonfusion.com/table-on-console-python/#37-terminaltables-or-asciitable
+from prettytable import PrettyTable
 
 # Credit for using the google sheets API goes to Code Institutes love sandwiches project: https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode
 SCOPE = [
@@ -28,6 +30,15 @@ class Flashcard_Set:
             flashcards.append(Flashcard(question, answer, mastery_level))
 
         return flashcards
+
+    def show_all(self):
+        table = PrettyTable()
+        table.field_names = ["Question", "Answer"]
+        
+        for flashcard in self.flashcards:
+            table.add_row([flashcard.question, flashcard.answer])
+        print(table)
+
 class Flashcard:
     """
     A class to represent a flashcard.
