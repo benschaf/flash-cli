@@ -102,19 +102,27 @@ def flashcard_mode():
     Returns:
         None
     """
-    print("Flashcard mode\n")
+    print("\n\nFlashcard mode")
     print("Loading set...")
     my_set = Flashcard_Set("flashcards")
-    for flashcard in my_set.flashcards:
-        flashcard.show_question()
-        input("Press any key to show the answer")
-        flashcard.show_answer()
-        answer = input("Did you know the answer? (y/n): ")
-        if answer == "y":
-            flashcard.update_mastery(1)
-        elif answer == "n":
-            flashcard.update_mastery(-1)
-        print("Next question:")
+    for idx in range(len(my_set.flashcards)):
+        print(f"\n\nFlashcard {idx} / {len(my_set.flashcards)}\n")
+        print("Question:")
+        my_set.flashcards[idx].show_question()
+        input("\nPress Enter to show the Answer")
+        print("\nAnswer:")
+        my_set.flashcards[idx].show_answer()
+        print("\n")
+        while True:
+            answer = input("Did you know the Answer? (y/n): ")
+            if answer == "y":
+                my_set.flashcards[idx].update_mastery(1)
+                break
+            elif answer == "n":
+                my_set.flashcards[idx].update_mastery(-1)
+                break
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
     print("Lesson finished")
     print("Uploading...")
     my_set.upload()
@@ -127,10 +135,15 @@ def pick_mode():
     Returns:
         str: The selected mode.
     """
-    print("f    Flashcard Mode")
-    print("t    Type answer Mode")
-    selected_mode = input("Select a mode: ")
-    return selected_mode
+    while True:
+        print("f: Flashcard Mode")
+        print("t: Type answer Mode")
+        # Credit for case insensitive inputs: https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
+        selected_mode = input("Select a mode (f/t): ").lower()
+        if selected_mode in ["f", "t"]: 
+            return selected_mode
+        else:
+            print("\nInvalid input. Please enter 'f' or 't'")
     
 def main():
     """
