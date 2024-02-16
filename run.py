@@ -39,6 +39,17 @@ class Flashcard_Set:
             table.add_row([flashcard.question, flashcard.answer])
         print(table)
 
+    def upload(self):
+        worksheet = SHEET.worksheet(self.title)
+        worksheet.clear()
+
+        data_to_upload = []
+        for flashcard in self.flashcards:
+            data_to_upload.append([flashcard.question, flashcard.answer, flashcard.mastery_level])
+
+        worksheet.append_row(["question", "answer", "mastery_level"])
+        worksheet.append_rows(data_to_upload)
+
 class Flashcard:
     """
     A class to represent a flashcard.
@@ -47,6 +58,17 @@ class Flashcard:
         self.question = question
         self.answer = answer
         self.mastery_level = mastery_level
+
+    # def show_full(self):
+
+    def show_question(self):
+        print(self.question)
+
+    def show_answer(self):
+        print(self.answer)
+    
+    def update_mastery(self, increment):
+        self.mastery_level += increment
 
 def flashcard_mode():
     print("Flashcard mode\n")
