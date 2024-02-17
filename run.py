@@ -10,10 +10,20 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
-CREDS = Credentials.from_service_account_file('creds.json')
+try:
+    CREDS = Credentials.from_service_account_file('creds.json')
+except FileNotFoundError as e:
+    print(f"Google API credentials missing:\n{e}")
+    exit()
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('flash_cli_sheet')
+
+SPREADSHEET_NAME = "flash_cli_sheet"
+try:
+    SHEET = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
+except gspread.SpreadsheetNotFound as e:
+    print(f"Google spreadsheet '{SPREADSHEET_NAME}' does not exist or isn't accessible.")
+    exit()
 
 # Credit for writing docstrings: https://www.datacamp.com/tutorial/docstrings-python?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9115817&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=CjwKCAiArLyuBhA7EiwA-qo80DbfmFCbaxqMhOuUbjm3RWcqe_zVQXPxO_LL6__tPOFhAhwsABLhxxoCPqwQAvD_BwE
 class Flashcard_Set:
@@ -104,7 +114,11 @@ def flashcard_mode():
     """
     print("\n\nFlashcard mode")
     print("Loading set...")
-    my_set = Flashcard_Set("flashcards")
+    try:
+        my_set = Flashcard_Set("flashcards")
+    except Exception as e:
+        print(f"Failed to load Flashcard Set 'flashcards'. Error: {e}")
+        return
     for idx in range(len(my_set.flashcards)):
         print(f"\n\nFlashcard {idx} / {len(my_set.flashcards)}\n")
         print("Question:")
