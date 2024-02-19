@@ -70,8 +70,22 @@ class Flashcard_Set:
         Returns:
             list: A list of Flashcard objects.
         """
+        print(f"Loading set from worksheet: '{self.title}'")
         flashcards = []
-        worksheet = SHEET.worksheet(self.title).get_all_records()
+        try:
+            worksheet = SHEET.worksheet(self.title).get_all_records()
+        except gspread.exceptions.WorksheetNotFound as e:
+            print(f"The worksheet '{self.title}' was not found. Error: {e}")
+            logging.exception("The worksheet '%s' was not found: %s", self.title, str(e))
+        except gspread.exceptions.APIError as e:
+            print(f"An error occurred with the Google Sheets API. Error: {e}")
+            logging.exception("An error occurred with the Google Sheets API: %s", str(e))
+        except Exception as e:
+            print(f"An unexpected error occurred. Error: {e}")
+            logging.exception("An unexpected error occurred: %s", str(e))
+        else:
+            print(f"Successfully loaded!")
+                
         for row in worksheet:
             question = row["question"]
             answer = row["answer"]
@@ -151,22 +165,13 @@ class Flashcard:
 
 def flashcard_mode():
     """
-    Runs the flashcard mode.
+    Run the flashcard mode.
 
-    This function loads a flashcard set, displays each flashcard's question, waits for user input to show the answer,
-    prompts the user to indicate if they knew the answer, updates the flashcard's mastery level accordingly,
-    and finally uploads the flashcard set.
-
-    Returns:
-        None
+    This function allows the user to go through a set of flashcards, display each flashcard's question,
+    show the answer, and update the mastery level based on the user's response.
     """
-    print("\n\nFlashcard mode")
-    print("Loading set...")
-    try:
-        my_set = Flashcard_Set("flashcards")
-    except Exception as e:
-        print(f"Failed to load Flashcard Set 'flashcards'. Error: {e}")
-        return
+    print("\n\nFlashcard mode\n\n")
+    my_set = Flashcard_Set("flashcards")
     for idx in range(len(my_set.flashcards)):
         print(f"\n\nFlashcard {idx} / {len(my_set.flashcards)}\n")
         print("Question:")
