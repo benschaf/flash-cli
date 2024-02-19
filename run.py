@@ -216,7 +216,7 @@ def flashcard_mode(current_set):
     """
     print("\n\nFlashcard mode\n\n")
     for idx in range(len(current_set.flashcards)):
-        print(f"\n\nFlashcard {idx} / {len(current_set.flashcards)}\n")
+        print(f"\n\nFlashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
         current_set.flashcards[idx].show_question()
         input("\nPress Enter to show the Answer")
@@ -240,7 +240,7 @@ def flashcard_mode(current_set):
 def type_answer_mode(current_set):
     print("Type answer Mode")
     for idx in range(len(current_set.flashcards)):
-        print(f"\n\nFlashcard {idx} / {len(current_set.flashcards)}\n")
+        print(f"\n\nFlashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
         current_set.flashcards[idx].show_question()
         user_answer = input("Type your answer: ")
