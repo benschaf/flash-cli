@@ -200,12 +200,13 @@ def pick_mode():
     while True:
         print("f: Flashcard Mode")
         print("t: Type answer Mode")
+        print("s: Pick another Set")
         # Credit for case insensitive inputs: https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
-        selected_mode = input("Select a mode (f/t): ").lower()
-        if selected_mode in ["f", "t"]: 
+        selected_mode = input("Select a mode (f/t/s): ").lower()
+        if selected_mode in ["f", "t", "s"]: 
             return selected_mode
         else:
-            print("\nInvalid input. Please enter 'f' or 't'")
+            print("\nInvalid input. Please enter 'f', 't' or 's'.")
 
 def flashcard_mode(current_set):
     """
@@ -271,11 +272,15 @@ def main():
     This is the main function that controls the flow of the flashcard program.
     It prompts the user to select a mode and then calls the corresponding function based on the selected mode.
     """
-    current_set = pick_set()
-    mode = pick_mode()
-    if mode == "f":
-        flashcard_mode(current_set)
-    elif mode == "t":
-        type_answer_mode(current_set)
+    while True:
+        current_set = pick_set()
+        while True:
+            mode = pick_mode()
+            if mode == "f":
+                flashcard_mode(current_set)
+            elif mode == "t":
+                type_answer_mode(current_set)
+            elif mode == "s":
+                break
 
 main()
