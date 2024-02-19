@@ -9,6 +9,7 @@ Flash-CLI is a Python-based command-line vocabulary training application that se
 ### User Stories
 
 ### Flowchart
+Link to the [Flowchart](https://drive.google.com/file/d/1rDfChnROSVD_QkKvOzWtL8e4Z6Wk0UX-/view?usp=sharing)
 
 ### Why the Terminal?
 The terminal is an ideal environment for vocabulary training for several reasons:
