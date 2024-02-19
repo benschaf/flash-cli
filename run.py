@@ -194,6 +194,32 @@ def flashcard_mode():
 
     my_set.upload()
 
+def pick_set():
+    """
+    Prompts the user to pick a set from a list of available sets.
+
+    Returns:
+        The selected worksheet object.
+    """
+    worksheets = SHEET.worksheets()
+    print("These are the available Sets:")
+    for idx in range(1, len(worksheets) + 1):
+        print(f"{idx}: {worksheets[idx - 1].title}")
+    while True:
+        input_string = input("\nType a set name or the corresponding number to pick a Set: ")
+        # Credit for checking if input string is an int: https://stackoverflow.com/questions/5424716/how-can-i-check-if-string-input-is-a-number
+        try: 
+            if int(input_string) in range(1, len(worksheets) + 1):
+                picked_worksheet = worksheets[int(input_string) - 1]
+                print(f"You picked: {picked_worksheet.title}")
+                return picked_worksheet
+        except ValueError:
+            for worksheet in worksheets:
+                if input_string == worksheet.title:
+                    print(f"You picked: {worksheet.title}")
+                    return worksheet
+        print(f"Invalid input. Please enter a number (1-{len(worksheets)}) or a valid worksheet name (case-sensitive).")
+
 def pick_mode():
     """
     Prompts the user to select a mode and returns the selected mode.
@@ -216,6 +242,7 @@ def main():
     This is the main function that controls the flow of the flashcard program.
     It prompts the user to select a mode and then calls the corresponding function based on the selected mode.
     """
+    current_set = pick_set()
     mode = pick_mode()
     if mode == "f":
         flashcard_mode()
