@@ -163,35 +163,6 @@ class Flashcard:
     def update_mastery(self, increment):
         self.mastery_level += increment
 
-def flashcard_mode(current_set):
-    """
-    Run the flashcard mode.
-
-    This function allows the user to go through a set of flashcards, display each flashcard's question,
-    show the answer, and update the mastery level based on the user's response.
-    """
-    print("\n\nFlashcard mode\n\n")
-    for idx in range(len(current_set.flashcards)):
-        print(f"\n\nFlashcard {idx} / {len(current_set.flashcards)}\n")
-        print("Question:")
-        current_set.flashcards[idx].show_question()
-        input("\nPress Enter to show the Answer")
-        print("\nAnswer:")
-        current_set.flashcards[idx].show_answer()
-        print("\n")
-        while True:
-            answer = input("Did you know the Answer? (y/n): ").lower()
-            if answer == "y":
-                current_set.flashcards[idx].update_mastery(1)
-                break
-            elif answer == "n":
-                current_set.flashcards[idx].update_mastery(-1)
-                break
-            else:
-                print("Invalid input. Please enter 'y' or 'n'.")
-    print("Lesson finished\n")
-
-    current_set.upload()
 
 def pick_set():
     """
@@ -235,6 +206,36 @@ def pick_mode():
             return selected_mode
         else:
             print("\nInvalid input. Please enter 'f' or 't'")
+
+def flashcard_mode(current_set):
+    """
+    Run the flashcard mode.
+
+    This function allows the user to go through a set of flashcards, display each flashcard's question,
+    show the answer, and update the mastery level based on the user's response.
+    """
+    print("\n\nFlashcard mode\n\n")
+    for idx in range(len(current_set.flashcards)):
+        print(f"\n\nFlashcard {idx} / {len(current_set.flashcards)}\n")
+        print("Question:")
+        current_set.flashcards[idx].show_question()
+        input("\nPress Enter to show the Answer")
+        print("\nAnswer:")
+        current_set.flashcards[idx].show_answer()
+        print("\n")
+        while True:
+            answer = input("Did you know the Answer? (y/n): ").lower()
+            if answer == "y":
+                current_set.flashcards[idx].update_mastery(1)
+                break
+            elif answer == "n":
+                current_set.flashcards[idx].update_mastery(-1)
+                break
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
+    print("Lesson finished\n")
+
+    current_set.upload()
     
 def main():
     """
