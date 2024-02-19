@@ -108,6 +108,8 @@ class Flashcard_Set:
         """
         Uploads the flashcards to the worksheet.
         """
+        print(f"Uploading to worksheet: '{self.title}'...")
+
         data_to_upload = self._convert_to_list_of_lists()
 
         try:
@@ -124,6 +126,8 @@ class Flashcard_Set:
         except Exception as e:
             print(f"An unexpected error occurred. Error: {e}")
             logging.exception("An unexpected error occurred: %s", str(e))
+        else:
+            print(f"Successfully uploaded!")
 
 class Flashcard:
     """
@@ -182,9 +186,8 @@ def flashcard_mode():
             else:
                 print("Invalid input. Please enter 'y' or 'n'.")
     print("Lesson finished")
-    print("Uploading...")
+
     my_set.upload()
-    print("Successfully uploaded.")
 
 def pick_mode():
     """
