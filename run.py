@@ -163,7 +163,7 @@ class Flashcard:
     def update_mastery(self, increment):
         self.mastery_level += increment
 
-def flashcard_mode():
+def flashcard_mode(current_set):
     """
     Run the flashcard mode.
 
@@ -171,35 +171,34 @@ def flashcard_mode():
     show the answer, and update the mastery level based on the user's response.
     """
     print("\n\nFlashcard mode\n\n")
-    my_set = Flashcard_Set("flashcards")
-    for idx in range(len(my_set.flashcards)):
-        print(f"\n\nFlashcard {idx} / {len(my_set.flashcards)}\n")
+    for idx in range(len(current_set.flashcards)):
+        print(f"\n\nFlashcard {idx} / {len(current_set.flashcards)}\n")
         print("Question:")
-        my_set.flashcards[idx].show_question()
+        current_set.flashcards[idx].show_question()
         input("\nPress Enter to show the Answer")
         print("\nAnswer:")
-        my_set.flashcards[idx].show_answer()
+        current_set.flashcards[idx].show_answer()
         print("\n")
         while True:
             answer = input("Did you know the Answer? (y/n): ").lower()
             if answer == "y":
-                my_set.flashcards[idx].update_mastery(1)
+                current_set.flashcards[idx].update_mastery(1)
                 break
             elif answer == "n":
-                my_set.flashcards[idx].update_mastery(-1)
+                current_set.flashcards[idx].update_mastery(-1)
                 break
             else:
                 print("Invalid input. Please enter 'y' or 'n'.")
     print("Lesson finished\n")
 
-    my_set.upload()
+    current_set.upload()
 
 def pick_set():
     """
     Prompts the user to pick a set from a list of available sets.
 
     Returns:
-        The selected worksheet object.
+        The selected worksheet converted into a Flahscard_Set object.
     """
     worksheets = SHEET.worksheets()
     print("These are the available Sets:")
@@ -212,12 +211,12 @@ def pick_set():
             if int(input_string) in range(1, len(worksheets) + 1):
                 picked_worksheet = worksheets[int(input_string) - 1]
                 print(f"You picked: {picked_worksheet.title}")
-                return picked_worksheet
+                return Flashcard_Set(picked_worksheet.title)
         except ValueError:
             for worksheet in worksheets:
                 if input_string == worksheet.title:
                     print(f"You picked: {worksheet.title}")
-                    return worksheet
+                    return Flashcard_Set(worksheet.title)
         print(f"Invalid input. Please enter a number (1-{len(worksheets)}) or a valid worksheet name (case-sensitive).")
 
 def pick_mode():
@@ -245,8 +244,8 @@ def main():
     current_set = pick_set()
     mode = pick_mode()
     if mode == "f":
-        flashcard_mode()
+        flashcard_mode(current_set)
     elif mode == "t":
-        type_answer_mode()
+        type_answer_mode(current_set)
 
 main()
