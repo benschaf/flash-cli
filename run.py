@@ -91,17 +91,27 @@ class Flashcard_Set:
             table.add_row([flashcard.question, flashcard.answer])
         print(table)
 
+    def _convert_to_list_of_lists(self):
+        """
+        Converts the flashcards into a list of lists.
+        A list of lists is needed for the google spreadsheets api.
+
+        Returns:
+            list: A list of lists containing the question, answer, and mastery level of each flashcard.
+        """
+        li_of_li = []
+        for flashcard in self.flashcards:
+            li_of_li.append([flashcard.question, flashcard.answer, flashcard.mastery_level])
+        return li_of_li
+
     def upload(self):
         """
         Uploads the flashcards to the worksheet.
         """
+        data_to_upload = self._convert_to_list_of_lists()
+
         worksheet = SHEET.worksheet(self.title)
         worksheet.clear()
-
-        data_to_upload = []
-        for flashcard in self.flashcards:
-            data_to_upload.append([flashcard.question, flashcard.answer, flashcard.mastery_level])
-
         worksheet.append_row(["question", "answer", "mastery_level"])
         worksheet.append_rows(data_to_upload)
 
