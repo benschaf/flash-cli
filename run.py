@@ -190,7 +190,7 @@ def flashcard_mode():
                 break
             else:
                 print("Invalid input. Please enter 'y' or 'n'.")
-    print("Lesson finished")
+    print("Lesson finished\n")
 
     my_set.upload()
 
