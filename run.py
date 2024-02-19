@@ -2,6 +2,11 @@ import gspread
 from google.oauth2.service_account import Credentials
 # Credit for prettytable: https://pythonfusion.com/table-on-console-python/#37-terminaltables-or-asciitable
 from prettytable import PrettyTable
+import logging
+
+# Credit for error logging: https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
+# Credit for formatting of log messages: https://docs.python.org/3/howto/logging.html
+logging.basicConfig(filename='error.log', level=logging.ERROR, format='%(asctime)s %(message)s')
 
 # Credit for using the google sheets API goes to Code Institutes love sandwiches project: https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode
 SCOPE = [
@@ -10,20 +15,39 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
+print("Loading spreadsheet ...")
+# Credit for exception handling: https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
 try:
     CREDS = Credentials.from_service_account_file('creds.json')
-except FileNotFoundError as e:
-    print(f"Google API credentials missing:\n{e}")
-    exit()
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-
-SPREADSHEET_NAME = "flash_cli_sheet"
-try:
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    SPREADSHEET_NAME = "flash_cli_sheet"
     SHEET = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
-except gspread.SpreadsheetNotFound as e:
-    print(f"Google spreadsheet '{SPREADSHEET_NAME}' does not exist or isn't accessible.")
-    exit()
+except FileNotFoundError as e:
+    print(f"Failed to load 'creds.json'. Please ensure the file exists in the same directory as this script.")
+    print(f"Error details: {e}")
+    logging.exception("Failed to load 'creds.json'. Please ensure the file exists in the same directory as this script. Error details: %s", str(e))
+except ValueError as e:
+    print (f"Failed to load credentials from 'creds.json'. Please ensure that 'creds.json' contains correctly formatted credentials for the google API.")
+    print(f"Error details: {e}")
+    logging.exception("Failed to load credentials from 'creds.json'. Please ensure that 'creds.json' contains correctly formatted credentials for the google API. Error details: %s", str(e))
+except gspread.exceptions.NoValidUrlKeyFound as e:
+    print(f"No valid Key was found in 'creds.json'. Please ensure that the authentication credentials are valid.")
+    print(f"Error details: {e}")
+    logging.exception("No valid Key was found in 'creds.json'. Please ensure that the authentication credentials are valid. Error details: %s", str(e))
+except gspread.exceptions.SpreadsheetNotFound as e:
+    print(f"Failed to find google spreadsheet: '{SPREADSHEET_NAME}'")
+    print(f"Error details: {e}")
+    logging.exception("Failed to find google spreadsheet: '%s'. Error details: %s", SPREADSHEET_NAME, str(e))
+except gspread.exceptions.APIError as e:
+    print(f"There was an error with the google API.")
+    print(f"Error details: {e}")
+    logging.exception("There was an error with the google API. Error details: %s", str(e))
+except Exception as e:
+    print(f"An unexpected error occured: {e}")
+    logging.exception("An unexpected error occured: %s", str(e))
+else:
+    print(f"Spreadsheet '{SPREADSHEET_NAME}' successfully loaded!")   
 
 # Credit for writing docstrings: https://www.datacamp.com/tutorial/docstrings-python?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9115817&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=CjwKCAiArLyuBhA7EiwA-qo80DbfmFCbaxqMhOuUbjm3RWcqe_zVQXPxO_LL6__tPOFhAhwsABLhxxoCPqwQAvD_BwE
 class Flashcard_Set:
