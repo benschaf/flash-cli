@@ -181,7 +181,7 @@ def flashcard_mode():
         my_set.flashcards[idx].show_answer()
         print("\n")
         while True:
-            answer = input("Did you know the Answer? (y/n): ").lower
+            answer = input("Did you know the Answer? (y/n): ").lower()
             if answer == "y":
                 my_set.flashcards[idx].update_mastery(1)
                 break
