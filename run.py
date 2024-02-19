@@ -110,10 +110,20 @@ class Flashcard_Set:
         """
         data_to_upload = self._convert_to_list_of_lists()
 
-        worksheet = SHEET.worksheet(self.title)
-        worksheet.clear()
-        worksheet.append_row(["question", "answer", "mastery_level"])
-        worksheet.append_rows(data_to_upload)
+        try:
+            worksheet = SHEET.worksheet(self.title)
+            worksheet.clear()
+            worksheet.append_row(["question", "answer", "mastery_level"])
+            worksheet.append_rows(data_to_upload)
+        except gspread.exceptions.WorksheetNotFound as e:
+            print(f"The worksheet '{self.title}' was not found. Error: {e}")
+            logging.exception("The worksheet '%s' was not found: %s", self.title, str(e))
+        except gspread.exceptions.APIError as e:
+            print(f"An error occurred with the Google Sheets API. Error: {e}")
+            logging.exception("An error occurred with the Google Sheets API: %s", str(e))
+        except Exception as e:
+            print(f"An unexpected error occurred. Error: {e}")
+            logging.exception("An unexpected error occurred: %s", str(e))
 
 class Flashcard:
     """
