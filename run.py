@@ -198,15 +198,17 @@ def pick_mode():
         str: The selected mode.
     """
     while True:
+        print("\nWhat do you want to do?")
         print("f: Flashcard Mode")
         print("t: Type answer Mode")
+        print("d: Display all of the cards in the Set")
         print("s: Pick another Set")
         # Credit for case insensitive inputs: https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
-        selected_mode = input("Select a mode (f/t/s): ").lower()
-        if selected_mode in ["f", "t", "s"]: 
+        selected_mode = input("Select a mode (f/t/d/s): ").lower()
+        if selected_mode in ["f", "t", "d", "s"]: 
             return selected_mode
         else:
-            print("\nInvalid input. Please enter 'f', 't' or 's'.")
+            print("\nInvalid input. Please enter 'f', 't', 'd' or 's'.")
 
 def flashcard_mode(current_set):
     """
@@ -280,6 +282,8 @@ def main():
                 flashcard_mode(current_set)
             elif mode == "t":
                 type_answer_mode(current_set)
+            elif mode == "d":
+                current_set.show_all()
             elif mode == "s":
                 break
 
