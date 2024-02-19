@@ -236,6 +236,35 @@ def flashcard_mode(current_set):
     print("Lesson finished\n")
 
     current_set.upload()
+
+def type_answer_mode(current_set):
+    print("Type answer Mode")
+    for idx in range(len(current_set.flashcards)):
+        print(f"\n\nFlashcard {idx} / {len(current_set.flashcards)}\n")
+        print("Question:")
+        current_set.flashcards[idx].show_question()
+        user_answer = input("Type your answer: ")
+        if user_answer == current_set.flashcards[idx].answer:
+            print("Correct!")
+            current_set.flashcards[idx].update_mastery(1)
+        else:
+            print(f"Seems you have made a mistake. Correct answer: {current_set.flashcards[idx].answer}")    
+            while True:
+                correction = input("Was your answer correct enough anyways? (y/n): ")
+                if correction == 'y':
+                    print("Treating answer as correct.")
+                    current_set.flashcards[idx].update_mastery(1)
+                    break
+                elif correction == 'n':
+                    print("Treating answer as incorrect.")
+                    current_set.flashcards[idx].update_mastery(-1)
+                    break
+                else:
+                    print("Invalid input. Please enter 'y' or 'n'.")
+    print("Lesson finished\n")
+    current_set.upload()
+
+
     
 def main():
     """
