@@ -176,7 +176,7 @@ def pick_set():
     for idx in range(1, len(worksheets) + 1):
         print(f"{idx}: {worksheets[idx - 1].title}")
     while True:
-        input_string = input("\nType a set name or the corresponding number to pick a Set: ")
+        input_string = input("\nType a set name or the corresponding number to pick a Set: \n")
         # Credit for checking if input string is an int: https://stackoverflow.com/questions/5424716/how-can-i-check-if-string-input-is-a-number
         try: 
             if int(input_string) in range(1, len(worksheets) + 1):
@@ -204,7 +204,7 @@ def pick_mode():
         print("d: Display all of the cards in the Set")
         print("s: Pick another Set")
         # Credit for case insensitive inputs: https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
-        selected_mode = input("Select a mode (f/t/d/s): ").lower()
+        selected_mode = input("Select a mode (f/t/d/s): \n").lower()
         if selected_mode in ["f", "t", "d", "s"]: 
             return selected_mode
         else:
@@ -222,12 +222,12 @@ def flashcard_mode(current_set):
         print(f"\n\nFlashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
         current_set.flashcards[idx].show_question()
-        input("\nPress Enter to show the Answer")
+        input("\nPress Enter to show the Answer\n")
         print("\nAnswer:")
         current_set.flashcards[idx].show_answer()
         print("\n")
         while True:
-            answer = input("Did you know the Answer? (y/n): ").lower()
+            answer = input("Did you know the Answer? (y/n): \n").lower()
             if answer == "y":
                 current_set.flashcards[idx].update_mastery(1)
                 break
@@ -246,14 +246,14 @@ def type_answer_mode(current_set):
         print(f"\n\nFlashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
         current_set.flashcards[idx].show_question()
-        user_answer = input("Type your answer: ")
+        user_answer = input("Type your answer: \n")
         if user_answer == current_set.flashcards[idx].answer:
             print("Correct!")
             current_set.flashcards[idx].update_mastery(1)
         else:
             print(f"Seems you have made a mistake. Correct answer: {current_set.flashcards[idx].answer}")    
             while True:
-                correction = input("Was your answer correct enough anyways? (y/n): ")
+                correction = input("Was your answer correct enough anyways? (y/n): \n")
                 if correction == 'y':
                     print("Treating answer as correct.")
                     current_set.flashcards[idx].update_mastery(1)
