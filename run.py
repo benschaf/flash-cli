@@ -197,18 +197,29 @@ def pick_mode():
     Returns:
         str: The selected mode.
     """
+    modes = {
+    "f": "Flashcard Mode",
+    "t": "Type answer Mode",
+    "d": "Display all of the cards in the Set",
+    "s": "Pick another Set",
+    "?": "Show help again"
+    }
+    # Credit for join method: https://docs.python.org/3/library/stdtypes.html#str.join
+    modes_keys_str = ", ".join(modes.keys())
     while True:
-        print("\nWhat do you want to do?")
-        print("f: Flashcard Mode")
-        print("t: Type answer Mode")
-        print("d: Display all of the cards in the Set")
-        print("s: Pick another Set")
+        print("\nMAIN MENU\nWhat do you want to do?")
+        for mode, description in modes.items():
+            print(f"{mode}: {description}")
         # Credit for case insensitive inputs: https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
-        selected_mode = input("Select a mode (f/t/d/s): \n").lower()
-        if selected_mode in ["f", "t", "d", "s"]: 
-            return selected_mode
-        else:
-            print("\nInvalid input. Please enter 'f', 't', 'd' or 's'.")
+        selected_mode = input(f"Select a mode ({modes_keys_str})\n").lower()
+        while True:
+            if selected_mode in modes:
+                if selected_mode == "?":
+                    break
+                else:
+                    return selected_mode
+            else:
+                selected_mode = input(f"Invalid input. Please enter one of these letters ({modes_keys_str})\n").lower()
 
 def flashcard_mode(current_set):
     """
