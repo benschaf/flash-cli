@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 # Credit for prettytable: https://pythonfusion.com/table-on-console-python/#37-terminaltables-or-asciitable
 from prettytable import PrettyTable
 import logging
+from rich import print
 
 # Credit for error logging: https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
 # Credit for formatting of log messages: https://docs.python.org/3/howto/logging.html
