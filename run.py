@@ -172,23 +172,26 @@ def pick_set():
         The selected worksheet converted into a Flahscard_Set object.
     """
     worksheets = SHEET.worksheets()
-    print("These are the available Sets:")
-    for idx in range(1, len(worksheets) + 1):
-        print(f"{idx}: {worksheets[idx - 1].title}")
     while True:
-        input_string = input("\nType a set name or the corresponding number to pick a Set: \n")
-        # Credit for checking if input string is an int: https://stackoverflow.com/questions/5424716/how-can-i-check-if-string-input-is-a-number
-        try: 
-            if int(input_string) in range(1, len(worksheets) + 1):
-                picked_worksheet = worksheets[int(input_string) - 1]
-                print(f"You picked: {picked_worksheet.title}")
-                return Flashcard_Set(picked_worksheet.title)
-        except ValueError:
-            for worksheet in worksheets:
-                if input_string == worksheet.title:
-                    print(f"You picked: {worksheet.title}")
-                    return Flashcard_Set(worksheet.title)
-        print(f"Invalid input. Please enter a number (1-{len(worksheets)}) or a valid worksheet name (case-sensitive).")
+        print("These are the available Sets:")
+        for idx in range(1, len(worksheets) + 1):
+            print(f"{idx}: {worksheets[idx - 1].title}")
+        input_string = input(f"\nType a set name or a corresponding number between 1 and {len(worksheets)} to pick a Set: \n")
+        while True:
+            if input_string == "?":
+                break
+            # Credit for checking if input string is an int: https://stackoverflow.com/questions/5424716/how-can-i-check-if-string-input-is-a-number
+            try: 
+                if int(input_string) in range(1, len(worksheets) + 1):
+                    picked_worksheet = worksheets[int(input_string) - 1]
+                    print(f"You picked: {picked_worksheet.title}")
+                    return Flashcard_Set(picked_worksheet.title)
+            except ValueError:
+                for worksheet in worksheets:
+                    if input_string == worksheet.title:
+                        print(f"You picked: {worksheet.title}")
+                        return Flashcard_Set(worksheet.title)
+            input_string = input(f"Invalid input. Please enter a number between 1 and {len(worksheets)}, or a valid worksheet name (case-sensitive).\nTo see the list of Sets again, enter '?'.\n")
 
 def pick_mode():
     """
@@ -206,8 +209,9 @@ def pick_mode():
     }
     # Credit for join method: https://docs.python.org/3/library/stdtypes.html#str.join
     modes_keys_str = ", ".join(modes.keys())
+    print("\nMAIN MENU\n")
     while True:
-        print("\nMAIN MENU\nWhat do you want to do?")
+        print("What do you want to do?")
         for mode, description in modes.items():
             print(f"{mode}: {description}")
         # Credit for case insensitive inputs: https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
@@ -277,8 +281,6 @@ def type_answer_mode(current_set):
                     print("Invalid input. Please enter 'y' or 'n'.")
     print("Lesson finished\n")
     current_set.upload()
-
-
     
 def main():
     """
