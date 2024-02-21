@@ -57,31 +57,31 @@ Invalid input: If the user enters an invalid command or input, the app will disp
 ## Future Features
 
 ### Quiz Modes
-#### Multiple-Choice Quizzes: Randomized questions with answer choices.
-#### Timed Quizzes: Set a time limit for answering questions.
+- Multiple-Choice Quizzes: Randomized questions with answer choices.
+- Timed Quizzes: Set a time limit for answering questions.
 
 ### Flashcard Management
-#### Create, edit, and delete flashcards.
-#### Tag flashcards for better categorization.
-#### Organize flashcards into decks or collections.
+- Create, edit, and delete flashcards.
+- Tag flashcards for better categorization.
+- Organize flashcards into decks or collections.
 
 ### Spaced Repetition
-#### Implement a spaced repetition algorithm (e.g., Leitner system) to optimize learning intervals.
-#### Gradually increase intervals for well-remembered words.
-#### Remind users to review flashcards at optimal times.
+- Implement a spaced repetition algorithm (e.g., Leitner system) to optimize learning intervals.
+- Gradually increase intervals for well-remembered words.
+- Remind users to review flashcards at optimal times.
 
 ### Statistics and Analytics
-#### Display overall progress (e.g., percentage of mastered words).
-#### Show performance trends over time (graphs, charts).
-#### Identify areas where improvement is needed (e.g., low success rate on specific flashcards).
+- Display overall progress (e.g., percentage of mastered words).
+- Show performance trends over time (graphs, charts).
+- Identify areas where improvement is needed (e.g., low success rate on specific flashcards).
 
 ### Interactive Help System
-#### Provide built-in documentation accessible via commands (e.g., help, man).
-#### Explain features, usage, and available commands.
+- Provide built-in documentation accessible via commands (e.g., help, man).
+- Explain features, usage, and available commands.
 
 ### Import/Export
-#### Import: Allow users to import existing vocabulary lists from other sources (e.g., Quizlet, Anki).
-#### Export: Enable users to export flashcards (e.g., as CSV files) for sharing or backup.
+- Import: Allow users to import existing vocabulary lists from other sources (e.g., Quizlet, Anki).
+- Export: Enable users to export flashcards (e.g., as CSV files) for sharing or backup.
 
 ### Integration with Language APIs
 #### Use language APIs (e.g., WordNet, Google Translate) for:
@@ -91,12 +91,12 @@ Invalid input: If the user enters an invalid command or input, the app will disp
 - Pronunciations
 
 ### Gamification
-#### Points and Badges: Reward users with points for completing quizzes or achieving milestones.
-#### Daily Streaks: Encourage consistent practice by maintaining daily streaks.
+- Points and Badges: Reward users with points for completing quizzes or achieving milestones.
+- Daily Streaks: Encourage consistent practice by maintaining daily streaks.
 
 ### Customizable Themes
-#### Allow users to choose color schemes for the terminal interface (e.g., light mode, dark mode).
-#### Use the rich library to create a more visually appealing interface.
+- Allow users to choose color schemes for the terminal interface (e.g., light mode, dark mode).
+- Use the rich library to create a more visually appealing interface.
 
 ### Backup and Restore
 #### Regularly back up user data (flashcards, progress) to prevent data loss.
