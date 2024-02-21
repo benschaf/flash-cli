@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+
 # Credit for prettytable: https://pythonfusion.com/table-on-console-python/#37-terminaltables-or-asciitable
 from prettytable import PrettyTable
 import logging
@@ -7,49 +8,66 @@ from rich import print
 
 # Credit for error logging: https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
 # Credit for formatting of log messages: https://docs.python.org/3/howto/logging.html
-logging.basicConfig(filename='error.log', level=logging.ERROR,
-                    format='%(asctime)s %(message)s')
+logging.basicConfig(
+    filename="error.log", level=logging.ERROR, format="%(asctime)s %(message)s"
+)
 
 # Credit for using the google sheets API goes to Code Institutes love sandwiches project: https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
+    "https://www.googleapis.com/auth/drive",
 ]
 
 print("Loading spreadsheet ...")
 # Credit for exception handling: https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
 try:
-    CREDS = Credentials.from_service_account_file('creds.json')
+    CREDS = Credentials.from_service_account_file("creds.json")
     SCOPED_CREDS = CREDS.with_scopes(SCOPE)
     GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
     SPREADSHEET_NAME = "flash_cli_sheet"
     SHEET = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
 except FileNotFoundError as e:
-    print(f"Failed to load 'creds.json'. Please ensure the file exists in the same directory as this script.")
+    print(
+        f"Failed to load 'creds.json'. Please ensure the file exists in the same directory as this script."
+    )
     print(f"Error details: {e}")
     logging.exception(
-        "Failed to load 'creds.json'. Please ensure the file exists in the same directory as this script. Error details: %s", str(e))
+        "Failed to load 'creds.json'. Please ensure the file exists in the same directory as this script. Error details: %s",
+        str(e),
+    )
 except ValueError as e:
-    print(f"Failed to load credentials from 'creds.json'. Please ensure that 'creds.json' contains correctly formatted credentials for the google API.")
+    print(
+        f"Failed to load credentials from 'creds.json'. Please ensure that 'creds.json' contains correctly formatted credentials for the google API."
+    )
     print(f"Error details: {e}")
     logging.exception(
-        "Failed to load credentials from 'creds.json'. Please ensure that 'creds.json' contains correctly formatted credentials for the google API. Error details: %s", str(e))
+        "Failed to load credentials from 'creds.json'. Please ensure that 'creds.json' contains correctly formatted credentials for the google API. Error details: %s",
+        str(e),
+    )
 except gspread.exceptions.NoValidUrlKeyFound as e:
-    print(f"No valid Key was found in 'creds.json'. Please ensure that the authentication credentials are valid.")
+    print(
+        f"No valid Key was found in 'creds.json'. Please ensure that the authentication credentials are valid."
+    )
     print(f"Error details: {e}")
     logging.exception(
-        "No valid Key was found in 'creds.json'. Please ensure that the authentication credentials are valid. Error details: %s", str(e))
+        "No valid Key was found in 'creds.json'. Please ensure that the authentication credentials are valid. Error details: %s",
+        str(e),
+    )
 except gspread.exceptions.SpreadsheetNotFound as e:
     print(f"Failed to find google spreadsheet: '{SPREADSHEET_NAME}'")
     print(f"Error details: {e}")
     logging.exception(
-        "Failed to find google spreadsheet: '%s'. Error details: %s", SPREADSHEET_NAME, str(e))
+        "Failed to find google spreadsheet: '%s'. Error details: %s",
+        SPREADSHEET_NAME,
+        str(e),
+    )
 except gspread.exceptions.APIError as e:
     print(f"There was an error with the google API.")
     print(f"Error details: {e}")
     logging.exception(
-        "There was an error with the google API. Error details: %s", str(e))
+        "There was an error with the google API. Error details: %s", str(e)
+    )
 except Exception as e:
     print(f"An unexpected error occured: {e}")
     logging.exception("An unexpected error occured: %s", str(e))
@@ -86,11 +104,13 @@ class Flashcard_Set:
         except gspread.exceptions.WorksheetNotFound as e:
             print(f"The worksheet '{self.title}' was not found. Error: {e}")
             logging.exception(
-                "The worksheet '%s' was not found: %s", self.title, str(e))
+                "The worksheet '%s' was not found: %s", self.title, str(e)
+            )
         except gspread.exceptions.APIError as e:
             print(f"An error occurred with the Google Sheets API. Error: {e}")
             logging.exception(
-                "An error occurred with the Google Sheets API: %s", str(e))
+                "An error occurred with the Google Sheets API: %s", str(e)
+            )
         except Exception as e:
             print(f"An unexpected error occurred. Error: {e}")
             logging.exception("An unexpected error occurred: %s", str(e))
@@ -127,7 +147,8 @@ class Flashcard_Set:
         li_of_li = []
         for flashcard in self.flashcards:
             li_of_li.append(
-                [flashcard.question, flashcard.answer, flashcard.mastery_level])
+                [flashcard.question, flashcard.answer, flashcard.mastery_level]
+            )
         return li_of_li
 
     def upload(self):
@@ -146,11 +167,13 @@ class Flashcard_Set:
         except gspread.exceptions.WorksheetNotFound as e:
             print(f"The worksheet '{self.title}' was not found. Error: {e}")
             logging.exception(
-                "The worksheet '%s' was not found: %s", self.title, str(e))
+                "The worksheet '%s' was not found: %s", self.title, str(e)
+            )
         except gspread.exceptions.APIError as e:
             print(f"An error occurred with the Google Sheets API. Error: {e}")
             logging.exception(
-                "An error occurred with the Google Sheets API: %s", str(e))
+                "An error occurred with the Google Sheets API: %s", str(e)
+            )
         except Exception as e:
             print(f"An unexpected error occurred. Error: {e}")
             logging.exception("An unexpected error occurred: %s", str(e))
@@ -192,8 +215,10 @@ def pick_set():
         print("These are the available Sets:")
         for idx in range(1, len(worksheets) + 1):
             print(f"{idx}: {worksheets[idx - 1].title}")
-        input_string = input(f"\nType a set name or a corresponding number between 1 and {
-                             len(worksheets)} to pick a Set: \n")
+        input_string = input(
+            f"\nType a set name or a corresponding number between 1 and {
+                             len(worksheets)} to pick a Set: \n"
+        )
         while True:
             if input_string == "?":
                 break
@@ -208,8 +233,9 @@ def pick_set():
                     if input_string == worksheet.title:
                         print(f"You picked: {worksheet.title}")
                         return Flashcard_Set(worksheet.title)
-            input_string = input(f"Invalid input. Please enter a number between 1 and {len(
-                worksheets)}, or a valid worksheet name (case-sensitive).\nTo see the list of Sets again, enter '?'.\n")
+            input_string = input(
+                f"Invalid input. Please enter a number between 1 and {len(worksheets)}, or a valid worksheet name (case-sensitive).\nTo see the list of Sets again, enter '?'.\n"
+            )
 
 
 def pick_mode():
@@ -224,7 +250,7 @@ def pick_mode():
         "t": "Type answer Mode",
         "d": "Display all of the cards in the Set",
         "s": "Pick another Set",
-        "?": "Show help again"
+        "?": "Show help again",
     }
     # Credit for join method: https://docs.python.org/3/library/stdtypes.html#str.join
     modes_keys_str = ", ".join(modes.keys())
@@ -242,8 +268,10 @@ def pick_mode():
                 else:
                     return selected_mode
             else:
-                selected_mode = input(f"Invalid input. Please enter one of these letters ({
-                                      modes_keys_str})\n").lower()
+                selected_mode = input(
+                    f"Invalid input. Please enter one of these letters ({
+                                      modes_keys_str})\n"
+                ).lower()
 
 
 def flashcard_mode(current_set):
@@ -288,16 +316,17 @@ def type_answer_mode(current_set):
             print("Correct!")
             current_set.flashcards[idx].update_mastery(1)
         else:
-            print(f"Seems you have made a mistake. Correct answer: {
-                  current_set.flashcards[idx].answer}")
+            print(
+                f"Seems you have made a mistake. Correct answer: {
+                  current_set.flashcards[idx].answer}"
+            )
             while True:
-                correction = input(
-                    "Was your answer correct enough anyways? (y/n): \n")
-                if correction == 'y':
+                correction = input("Was your answer correct enough anyways? (y/n): \n")
+                if correction == "y":
                     print("Treating answer as correct.")
                     current_set.flashcards[idx].update_mastery(1)
                     break
-                elif correction == 'n':
+                elif correction == "n":
                     print("Treating answer as incorrect.")
                     current_set.flashcards[idx].update_mastery(-1)
                     break
