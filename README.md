@@ -4,6 +4,8 @@
 
 Flash-CLI is a Python-based command-line vocabulary training application that seamlessly integrates with Google Sheets. Enhance your language skills, track progress, and master new words—all from your terminal.
 
+[Link to google Spreadsheet](https://docs.google.com/spreadsheets/d/1hGXKTWDj8vrl2kdby4OqQysjKpAUj-r4rwd_002I7Vc/edit?usp=sharing)
+
 ## UX
 
 ### User Stories
