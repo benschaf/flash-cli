@@ -81,6 +81,7 @@ Invalid input: If the user enters an invalid command or input, the app will disp
 
 ### Import/Export
 - Import: Allow users to import existing vocabulary lists from other sources (e.g., Quizlet, Anki).
+    - Just the import from quizlet would be an amazing ap in itself because exporting from quizlet to a spreadsheet is a pain.
 - Export: Enable users to export flashcards (e.g., as CSV files) for sharing or backup.
 
 ### Integration with Language APIs
