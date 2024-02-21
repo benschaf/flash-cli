@@ -314,10 +314,7 @@ def type_answer_mode(current_set):
             print("Correct!")
             current_set.flashcards[idx].update_mastery(1)
         else:
-            print(
-                f"Seems you have made a mistake. Correct answer: {
-                  current_set.flashcards[idx].answer}"
-            )
+            print(f"Seems you have made a mistake. Correct answer: {current_set.flashcards[idx].answer}")
             while True:
                 correction = input("Was your answer correct enough anyways? (y/n): \n")
                 if correction == "y":
