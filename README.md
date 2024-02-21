@@ -24,13 +24,35 @@ _Note_: For this specific project, the terminal environment is emulated within a
 
 ### Quiz Modes
 #### Flashcard Mode: Users can review flashcards and decide if they know the answer.
+Functionality:
+- Display a random flashcard only with the word (question).
+- Upon user input, reveal the definition (answer).
+- Prompt the user to indicate if they knew the answer or not.
+- Update the flashcard status based on the user's response.
+This mode is designed to help users for initial learning and self-assessment of their vocabulary. It's a simple and effective way to memorize new words and their meanings.
 #### Typed Answer Quizzes: Users type their answers directly.
+Functionality:
+- Display a word (question).
+- Prompt the user to type the definition (answer).
+- Check the user's input against the correct definition.
+- If the user's input is incorrect, display the correct definition and ask the user if they want to count their attempt as a success or failure.
+- Update the flashcard status based on the user's responses.
+This mode is designed to test the user's recall and understanding of the vocabulary. It's a more challenging and interactive way to practice and reinforce learning.
 
 ### Real-Time Google Sheets Sync
-#### Automatically update your vocabulary data in a connected Google Sheets document.
+The app automatically syncs vocabulary data with a connected Google Sheets document. This feature allows users to:
+- Add new words and definitions directly to the Google Sheets document.
+- Update existing flashcards with new information.
+- Export flashcards from google sheets to third-party applications.
+- Import flashcards from third-party applications to google sheets.
+
+The Google Sheet is set up so that every worksheet is a deck of flashcards. Each row represents a flashcard, with the word in the first column and the definition in the second column. The third column is used to store the status of the flashcard (1-5).
 
 ### Error Handling and Logging
+Flash-CLI gracefully handles unexpected errors and provides helpful messages to guide users. Additionally, the app logs application events for debugging and troubleshooting.
+
 #### Gracefully handle unexpected errors (e.g., invalid input, network issues).
+Invalid input: If the user enters an invalid command or input, the app will display a helpful message and prompt the user to try again.
 
 ## Future Features
 
@@ -53,16 +75,13 @@ _Note_: For this specific project, the terminal environment is emulated within a
 #### Show performance trends over time (graphs, charts).
 #### Identify areas where improvement is needed (e.g., low success rate on specific flashcards).
 
-### Import/Export
-#### Import: Allow users to import existing vocabulary lists from other sources (e.g., Quizlet, Anki).
-#### Export: Enable users to export flashcards (e.g., as CSV files) for sharing or backup.
-
-### Error Handling and Logging
-#### Log application events for debugging and troubleshooting.
-
 ### Interactive Help System
 #### Provide built-in documentation accessible via commands (e.g., help, man).
 #### Explain features, usage, and available commands.
+
+### Import/Export
+#### Import: Allow users to import existing vocabulary lists from other sources (e.g., Quizlet, Anki).
+#### Export: Enable users to export flashcards (e.g., as CSV files) for sharing or backup.
 
 ### Integration with Language APIs
 #### Use language APIs (e.g., WordNet, Google Translate) for:
@@ -77,6 +96,7 @@ _Note_: For this specific project, the terminal environment is emulated within a
 
 ### Customizable Themes
 #### Allow users to choose color schemes for the terminal interface (e.g., light mode, dark mode).
+#### Use the rich library to create a more visually appealing interface.
 
 ### Backup and Restore
 #### Regularly back up user data (flashcards, progress) to prevent data loss.
