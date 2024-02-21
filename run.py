@@ -28,7 +28,7 @@ try:
     SHEET = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
 except FileNotFoundError as e:
     print(
-        f"Failed to load 'creds.json'. Please ensure the file exists in the same directory as this script."
+        "Failed to load 'creds.json'. Please ensure the file exists in the same directory as this script."
     )
     print(f"Error details: {e}")
     logging.exception(
@@ -37,7 +37,7 @@ except FileNotFoundError as e:
     )
 except ValueError as e:
     print(
-        f"Failed to load credentials from 'creds.json'. Please ensure that 'creds.json' contains correctly formatted credentials for the google API."
+        "Failed to load credentials from 'creds.json'. Please ensure that 'creds.json' contains correctly formatted credentials for the google API."
     )
     print(f"Error details: {e}")
     logging.exception(
@@ -46,7 +46,7 @@ except ValueError as e:
     )
 except gspread.exceptions.NoValidUrlKeyFound as e:
     print(
-        f"No valid Key was found in 'creds.json'. Please ensure that the authentication credentials are valid."
+        "No valid Key was found in 'creds.json'. Please ensure that the authentication credentials are valid."
     )
     print(f"Error details: {e}")
     logging.exception(
@@ -62,7 +62,7 @@ except gspread.exceptions.SpreadsheetNotFound as e:
         str(e),
     )
 except gspread.exceptions.APIError as e:
-    print(f"There was an error with the google API.")
+    print("There was an error with the google API.")
     print(f"Error details: {e}")
     logging.exception(
         "There was an error with the google API. Error details: %s", str(e)
@@ -120,7 +120,7 @@ class Flashcard_Set:
             print(f"An unexpected error occurred. Error: {e}")
             logging.exception("An unexpected error occurred: %s", str(e))
         else:
-            print(f"Successfully loaded!")
+            print("Successfully loaded!")
 
         for row in worksheet:
             question = row["question"]
@@ -183,7 +183,7 @@ class Flashcard_Set:
             print(f"An unexpected error occurred. Error: {e}")
             logging.exception("An unexpected error occurred: %s", str(e))
         else:
-            print(f"Successfully uploaded!")
+            print("Successfully uploaded!")
 
 
 class Flashcard:
