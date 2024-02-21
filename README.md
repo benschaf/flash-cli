@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Flash-CLI is a Python-based command-line vocabulary training application that seamlessly integrates with Google Sheets. Enhance your language skills, track progress, and master new words—all from your terminal.
+Flash-CLI is a Python-based command-line flashcard application that seamlessly integrates with Google Sheets. Enhance your skills, compare your progress with everyone who used the app before, and master all kinds of flashcards — all from a Command Line Interface.
 
 [Link to google Spreadsheet](https://docs.google.com/spreadsheets/d/1hGXKTWDj8vrl2kdby4OqQysjKpAUj-r4rwd_002I7Vc/edit?usp=sharing)
 
@@ -31,7 +31,8 @@ Functionality:
 - Upon user input, reveal the definition (answer).
 - Prompt the user to indicate if they knew the answer or not.
 - Update the flashcard status based on the user's response.
-This mode is designed to help users for initial learning and self-assessment of their vocabulary. It's a simple and effective way to memorize new words and their meanings.
+- Provide personalized feedback based on the user's responses and the responses of the community so far.
+This mode is designed to help users for initial learning and self-assessment. It's a simple and effective way to memorize new flashcards.
 #### Typed Answer Quizzes: Users type their answers directly.
 Functionality:
 - Display a word (question).
@@ -39,16 +40,16 @@ Functionality:
 - Check the user's input against the correct definition.
 - If the user's input is incorrect, display the correct definition and ask the user if they want to count their attempt as a success or failure.
 - Update the flashcard status based on the user's responses.
-This mode is designed to test the user's recall and understanding of the vocabulary. It's a more challenging and interactive way to practice and reinforce learning.
+- Provide personalized feedback based on the user's responses and the responses of the community so far.
+This mode is designed to test the user's recall and understanding of the flashcard. It's a more challenging and interactive way to practice and reinforce learning.
 
 ### Real-Time Google Sheets Sync
-The app automatically syncs vocabulary data with a connected Google Sheets document. This feature allows users to:
-- Add new words and definitions directly to the Google Sheets document.
-- Update existing flashcards with new information.
-- Export flashcards from google sheets to third-party applications.
-- Import flashcards from third-party applications to google sheets.
+The app automatically syncs flashcard data with a connected Google Sheets document using the Google Sheets API. No user login is required.
 
-The Google Sheet is set up so that every worksheet is a deck of flashcards. Each row represents a flashcard, with the word in the first column and the definition in the second column. The third column is used to store the status of the flashcard (1-5).
+The Google Sheet is set up so that every worksheet is a deck of flashcards. Each row represents a flashcard, with the word in the first column and the definition in the second column. Further columns are used to store the status of the flashcard.
+
+### Real-Time Feedback:
+The app will provide personalized feedback based on collective performance. For example: “Only 1% of people got this question right, and you are one of them.”
 
 ### Error Handling and Logging
 Flash-CLI gracefully handles unexpected errors and provides helpful messages to guide users. Additionally, the app logs application events for debugging and troubleshooting.
@@ -63,28 +64,15 @@ Invalid input: If the user enters an invalid command or input, the app will disp
 - Timed Quizzes: Set a time limit for answering questions.
 
 ### Flashcard Management
-- Create, edit, and delete flashcards.
-- Tag flashcards for better categorization.
-- Organize flashcards into decks or collections.
-
-### Spaced Repetition
-- Implement a spaced repetition algorithm (e.g., Leitner system) to optimize learning intervals.
-- Gradually increase intervals for well-remembered words.
-- Remind users to review flashcards at optimal times.
+- Create, edit, and delete flashcard decks.
 
 ### Statistics and Analytics
-- Display overall progress (e.g., percentage of mastered words).
+- Display global progress (e.g., percentage of how many people knew an answer).
 - Show performance trends over time (graphs, charts).
-- Identify areas where improvement is needed (e.g., low success rate on specific flashcards).
 
 ### Interactive Help System
 - Provide built-in documentation accessible via commands (e.g., help, man).
 - Explain features, usage, and available commands.
-
-### Import/Export
-- Import: Allow users to import existing vocabulary lists from other sources (e.g., Quizlet, Anki).
-    - Just the import from quizlet would be an amazing ap in itself because exporting from quizlet to a spreadsheet is a pain.
-- Export: Enable users to export flashcards (e.g., as CSV files) for sharing or backup.
 
 ### Integration with Language APIs
 #### Use language APIs (e.g., WordNet, Google Translate) for:
@@ -95,7 +83,6 @@ Invalid input: If the user enters an invalid command or input, the app will disp
 
 ### Gamification
 - Points and Badges: Reward users with points for completing quizzes or achieving milestones.
-- Daily Streaks: Encourage consistent practice by maintaining daily streaks.
 
 ### Customizable Themes
 - Allow users to choose color schemes for the terminal interface (e.g., light mode, dark mode).
@@ -103,7 +90,6 @@ Invalid input: If the user enters an invalid command or input, the app will disp
 
 ### Backup and Restore
 #### Regularly back up user data (flashcards, progress) to prevent data loss.
-- Provide an option to restore from backups if needed (e.g., after reinstalling the app).
 
 ### Tools
 
