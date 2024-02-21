@@ -125,8 +125,14 @@ class Flashcard_Set:
         for row in worksheet:
             question = row["question"]
             answer = row["answer"]
-            mastery_level = row["mastery_level"]
-            flashcards.append(Flashcard(question, answer, mastery_level))
+            progress_dict = {
+                "flash_correct":row["flash_correct"],
+                "flash_incorrect":row["flash_incorrect"],
+                "write_correct":row["write_correct"],
+                "write_correct_user_opted":row["write_correct_user_opted"],
+                "write_incorrect":row["write_incorrect"]
+            }
+            flashcards.append(Flashcard(question, answer, progress_dict))
 
         return flashcards
 
@@ -147,13 +153,14 @@ class Flashcard_Set:
         A list of lists is needed for the google spreadsheets api.
 
         Returns:
-            list: A list of lists containing the question, answer, and mastery level of each flashcard.
+            list: A list of lists containing the question, answer, and progress level of each flashcard.
         """
         li_of_li = []
         for flashcard in self.flashcards:
-            li_of_li.append(
-                [flashcard.question, flashcard.answer, flashcard.mastery_level]
-            )
+            tmp_li = [flashcard.question, flashcard.answer]
+            for key in flashcard.progress_dict:
+                tmp_li.append(flashcard.progress_dict[key])
+            li_of_li.append(tmp_li)
         return li_of_li
 
     def upload(self):
@@ -167,7 +174,7 @@ class Flashcard_Set:
         try:
             worksheet = SHEET.worksheet(self.title)
             worksheet.clear()
-            worksheet.append_row(["question", "answer", "mastery_level"])
+            worksheet.append_row(["question", "answer", "flash_correct", "flash_incorrect", "write_correct", "write_correct_user_opted", "write_incorrect"])
             worksheet.append_rows(data_to_upload)
         except gspread.exceptions.WorksheetNotFound as e:
             print(f"The worksheet '{self.title}' was not found. Error: {e}")
@@ -191,10 +198,10 @@ class Flashcard:
     A class to represent a flashcard.
     """
 
-    def __init__(self, question, answer, mastery_level):
+    def __init__(self, question, answer, progress_dict):
         self.question = question
         self.answer = answer
-        self.mastery_level = mastery_level
+        self.progress_dict = progress_dict
 
     # def show_full(self):
 
@@ -204,9 +211,8 @@ class Flashcard:
     def show_answer(self):
         print(self.answer)
 
-    def update_mastery(self, increment):
-        self.mastery_level += increment
-
+    def update_progress(self, progress_key):
+        self.progress_dict[progress_key] += 1
 
 def pick_set():
     """
@@ -282,7 +288,7 @@ def flashcard_mode(current_set):
     Run the flashcard mode.
 
     This function allows the user to go through a set of flashcards, display each flashcard's question,
-    show the answer, and update the mastery level based on the user's response.
+    show the answer, and update the progress level based on the user's response.
     """
     print("\nFlashcard mode\n")
     for idx in range(len(current_set.flashcards)):
@@ -296,10 +302,10 @@ def flashcard_mode(current_set):
         while True:
             answer = input("Did you know the Answer? (y/n): \n").lower()
             if answer == "y":
-                current_set.flashcards[idx].update_mastery(1)
+                current_set.flashcards[idx].update_progress("flash_correct")
                 break
             elif answer == "n":
-                current_set.flashcards[idx].update_mastery(-1)
+                current_set.flashcards[idx].update_progress("flash_incorrect")
                 break
             else:
                 print("Invalid input. Please enter 'y' or 'n'.")
@@ -317,18 +323,18 @@ def type_answer_mode(current_set):
         user_answer = input("Type your answer: \n")
         if user_answer == current_set.flashcards[idx].answer:
             print("Correct!")
-            current_set.flashcards[idx].update_mastery(1)
+            current_set.flashcards[idx].update_progress("write_correct")
         else:
             print(f"Seems you have made a mistake. Correct answer: {current_set.flashcards[idx].answer}")
             while True:
                 correction = input("Was your answer correct enough anyways? (y/n): \n")
                 if correction == "y":
                     print("Treating answer as correct.")
-                    current_set.flashcards[idx].update_mastery(1)
+                    current_set.flashcards[idx].update_progress("write_correct_user_opted")
                     break
                 elif correction == "n":
                     print("Treating answer as incorrect.")
-                    current_set.flashcards[idx].update_mastery(-1)
+                    current_set.flashcards[idx].update_progress("write_incorrect")
                     break
                 else:
                     print("Invalid input. Please enter 'y' or 'n'.")
