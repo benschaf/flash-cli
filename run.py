@@ -1,3 +1,4 @@
+import os
 import gspread
 from google.oauth2.service_account import Credentials
 import logging
@@ -74,6 +75,12 @@ else:
 
 # Credit for writing docstrings: https://www.datacamp.com/tutorial/docstrings-python?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9115817&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=CjwKCAiArLyuBhA7EiwA-qo80DbfmFCbaxqMhOuUbjm3RWcqe_zVQXPxO_LL6__tPOFhAhwsABLhxxoCPqwQAvD_BwE
 
+# Credit for clear Terminal function: https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python
+def clear():
+    """
+    Clear function to clean-up the terminal so things don't get messy.
+    """
+    os.system("cls" if os.name == "nt" else "clear")
 
 class Flashcard_Set:
     """
@@ -334,6 +341,7 @@ if __name__ == "__main__":
     This is the main function that controls the flow of the flashcard program.
     It prompts the user to select a mode and then calls the corresponding function based on the selected mode.
     """
+    clear()
     while True:
         current_set = pick_set()
         while True:
