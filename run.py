@@ -277,15 +277,15 @@ def flashcard_mode(current_set):
     This function allows the user to go through a set of flashcards, display each flashcard's question,
     show the answer, and update the mastery level based on the user's response.
     """
-    print("\n\nFlashcard mode\n\n")
+    print("\nFlashcard mode\n")
     for idx in range(len(current_set.flashcards)):
-        print(f"\n\nFlashcard {idx + 1} / {len(current_set.flashcards)}\n")
+        print(f"Flashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
         current_set.flashcards[idx].show_question()
-        input("\nPress Enter to show the Answer\n")
+        input("\nPress Enter to show the Answer")
         print("\nAnswer:")
         current_set.flashcards[idx].show_answer()
-        print("\n")
+        print()
         while True:
             answer = input("Did you know the Answer? (y/n): \n").lower()
             if answer == "y":
