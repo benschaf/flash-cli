@@ -328,8 +328,8 @@ def type_answer_mode(current_set):
     print("Lesson finished\n")
     current_set.upload()
 
-
-def main():
+# Credit to Tim Nelson (CI Mentor) for calling the main function like that.
+if __name__ == "__main__":
     """
     This is the main function that controls the flow of the flashcard program.
     It prompts the user to select a mode and then calls the corresponding function based on the selected mode.
@@ -346,6 +346,3 @@ def main():
                 current_set.show_all()
             elif mode == "s":
                 break
-
-
-main()
