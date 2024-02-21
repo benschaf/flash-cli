@@ -216,8 +216,7 @@ def pick_set():
         for idx in range(1, len(worksheets) + 1):
             print(f"{idx}: {worksheets[idx - 1].title}")
         input_string = input(
-            f"\nType a set name or a corresponding number between 1 and {
-                             len(worksheets)} to pick a Set: \n"
+            f"\nType a set name or a corresponding number between 1 and {len(worksheets)} to pick a Set: \n"
         )
         while True:
             if input_string == "?":
@@ -269,8 +268,7 @@ def pick_mode():
                     return selected_mode
             else:
                 selected_mode = input(
-                    f"Invalid input. Please enter one of these letters ({
-                                      modes_keys_str})\n"
+                    f"Invalid input. Please enter one of these letters ({modes_keys_str})\n"
                 ).lower()
 
 
