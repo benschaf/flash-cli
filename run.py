@@ -248,6 +248,7 @@ def pick_set():
                 f"Invalid input. Please enter a number between 1 and {len(worksheets)}, or a valid worksheet name (case-sensitive).\nTo see the list of Sets again, enter '?'.\n"
             )
 
+# Credit for parameter type hints: https://stackoverflow.com/questions/2489669/how-do-python-functions-handle-the-types-of-parameters-that-you-pass-in
 def give_feedback_card(card: Flashcard, feedback: str):
     flash_tries = card.progress_dict["flash_correct"] + card.progress_dict["flash_incorrect"]
     flash_correct_percentage = round(card.progress_dict["flash_correct"] / flash_tries * 100)
@@ -255,38 +256,60 @@ def give_feedback_card(card: Flashcard, feedback: str):
     write_correct_percentage = round((card.progress_dict["write_correct"] / write_tries) * 100)
     write_correct_opted_percentage = round(((card.progress_dict["write_correct_user_opted"] + card.progress_dict["write_correct"]) / write_tries) * 100)
 
-    strs = []
+    msg_strs = []
     if feedback == "flash_correct":
-        strs = [f"Great job! You're part of the {flash_correct_percentage}% of people who knew the answer!",
+        msg_strs = [f"Great job! You're part of the {flash_correct_percentage}% of people who knew the answer!",
                               f"You're doing better than {100 - flash_correct_percentage}% of people who attempted this flashcard.",
                               "You knew the answer! Great job!"]
     elif feedback == "flash_incorrect":
         if flash_correct_percentage < 50:
-            strs = [f"Only {flash_correct_percentage}% of people knew the answer. Keep practicing!",
+            msg_strs = [f"Only {flash_correct_percentage}% of people knew the answer. Keep practicing!",
                     "Don't worry, less than half of the people who attempted this flashcard knew the answer.",
                     "Keep practicing!"]
         else:
-            strs = ["Keep practicing!"]
+            msg_strs = ["Keep practicing!"]
     elif feedback == "write_correct":
-        strs = [f"Great job! You're part of the {write_correct_percentage}% of people who knew the answer!",
+        msg_strs = [f"Great job! You're part of the {write_correct_percentage}% of people who knew the answer!",
                 f"You're doing better than {100 - write_correct_percentage}% of people who attempted this flashcard.",
                 "You wrote the correct answer! Great job!"]
     elif feedback == "write_correct_user_opted":
-        strs = [f"Great job! You're part of the {write_correct_opted_percentage}% of people who opted to know the answer or wrote it correctly!",
+        msg_strs = [f"Great job! You're part of the {write_correct_opted_percentage}% of people who opted to know the answer or wrote it correctly!",
                 f"You're doing better than {100 - write_correct_opted_percentage}% of people who attempted this flashcard.",
                 "You wrote the correct answer! Great job! You opted to treat the answer as correct."]
     elif feedback == "write_incorrect":
         if write_correct_percentage < 50:
-            strs = [f"Only {write_correct_percentage}% of people knew the answer. Keep practicing!",
+            msg_strs = [f"Only {write_correct_percentage}% of people knew the answer. Keep practicing!",
                     "Don't worry, less than half of the people who attempted this flashcard knew the answer.",
                     "You did not write the correct answer. Keep practicing!"]
         else:
-            strs = ["You did not write the correct answer. Keep practicing!",
+            msg_strs = ["You did not write the correct answer. Keep practicing!",
                     "Keep practicing!",
                     f"{write_correct_opted_percentage}% of people opted to treat the answer as correct or wrote it correctly. Keep practicing!"]
 
-    rnd_idx = random.randint(0, len(strs) - 1)
-    print(strs[rnd_idx])
+    rnd_idx = random.randint(0, len(msg_strs) - 1)
+    print(msg_strs[rnd_idx])
+
+def give_feedback_set(set: Flashcard_Set, answers: dict):
+    mode = "flash_correct"
+    if "flash_correct" in answers:
+        accuracy = round(answers["flash_correct"] / len(set.flashcards) * 100)
+    else:
+        accuracy = round((answers["write_correct"] + answers["write_correct_user_opted"]) / len(set.flashcards) * 100)
+        mode = "write_correct"
+    
+    msg_strs = ["Awesome! You are practicing well! Keep it up!"]
+    if accuracy > 50:
+        msg_strs += [
+            f"Great job! You got {answers[mode]} out of {len(set.flashcards)} flashcards correct!",
+            f"Congratulations! You got {accuracy}% of the flashcards correct!"
+        ]
+    elif accuracy <= 50:
+        msg_strs += [
+            f"Keep practicing! You got {answers[mode]} out of {len(set.flashcards)} flashcards correct!",
+            "You can do better! Keep practicing!"
+        ]
+    rnd_idx = random.randint(0, len(msg_strs) - 1)
+    print(msg_strs[rnd_idx])
 
 def pick_mode():
     """
@@ -331,6 +354,10 @@ def flashcard_mode(current_set):
     show the answer, and update the progress level based on the user's response.
     """
     print("\nFlashcard mode\n")
+    answers = {
+        "flash_correct": 0,
+        "flash_incorrect": 0,
+    }
     for idx in range(len(current_set.flashcards)):
         print(f"Flashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
@@ -344,20 +371,28 @@ def flashcard_mode(current_set):
             if answer == "y":
                 current_set.flashcards[idx].update_progress("flash_correct")
                 give_feedback_card(current_set.flashcards[idx], "flash_correct")
+                answers["flash_correct"] += 1
                 break
             elif answer == "n":
                 current_set.flashcards[idx].update_progress("flash_incorrect")
                 give_feedback_card(current_set.flashcards[idx], "flash_incorrect")
+                answers["flash_incorrect"] += 1
                 break
             else:
                 print("Invalid input. Please enter 'y' or 'n'.")
     print("Lesson finished\n")
+    give_feedback_set(current_set, answers)
 
     current_set.upload()
 
 
 def type_answer_mode(current_set):
     print("Type answer Mode")
+    answers = {
+        "write_correct": 0,
+        "write_correct_user_opted": 0,
+        "write_incorrect": 0,
+    }
     for idx in range(len(current_set.flashcards)):
         print(f"\n\nFlashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
@@ -367,6 +402,7 @@ def type_answer_mode(current_set):
             print("Correct!")
             current_set.flashcards[idx].update_progress("write_correct")
             give_feedback_card(current_set.flashcards[idx], "write_correct")
+            answers["write_correct"] += 1
         else:
             print(f"Seems you have made a mistake. Correct answer: {current_set.flashcards[idx].answer}")
             while True:
@@ -375,15 +411,18 @@ def type_answer_mode(current_set):
                     print("Treating answer as correct.")
                     current_set.flashcards[idx].update_progress("write_correct_user_opted")
                     give_feedback_card(current_set.flashcards[idx], "write_correct_user_opted")
+                    answers["write_correct_user_opted"] += 1
                     break
                 elif correction == "n":
                     print("Treating answer as incorrect.")
                     current_set.flashcards[idx].update_progress("write_incorrect")
                     give_feedback_card(current_set.flashcards[idx], "write_incorrect")
+                    answers["write_incorrect"] += 1
                     break
                 else:
                     print("Invalid input. Please enter 'y' or 'n'.")
     print("Lesson finished\n")
+    give_feedback_set(current_set, answers)
     current_set.upload()
 
 # Credit to Tim Nelson (CI Mentor) for calling the main function like that.
