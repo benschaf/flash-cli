@@ -146,6 +146,7 @@ class Flashcard_Set:
 
         for flashcard in self.flashcards:
             table.add_row([flashcard.question, flashcard.answer])
+        print(f"All flashcards in: '{self.title}'\n")
         print(table)
 
     def _convert_to_list_of_lists(self):
@@ -328,8 +329,7 @@ def give_feedback_card(card: Flashcard, feedback: str):
             "of people who opted to know the answer or wrote it correctly!",
             f"You're doing better than {100 - write_correct_opted_percentage}%"
             " of people who attempted this flashcard.",
-            "You wrote the correct answer! Great job! "
-            "You opted to treat the answer as correct.",
+            "Great job! You opted to treat the answer as correct.",
         ]
     elif feedback == "write_incorrect":
         if write_correct_percentage < 50:
@@ -480,33 +480,33 @@ def flashcard_mode(current_set):
 
 
 def type_answer_mode(current_set):
-    print("Type answer Mode")
     answers = {
         "write_correct": 0,
         "write_correct_user_opted": 0,
         "write_incorrect": 0,
     }
     for idx in range(len(current_set.flashcards)):
+        print("Interactive Quiz")
         print(f"\n\nFlashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
         current_set.flashcards[idx].show_question()
-        user_answer = input("Type your answer: \n")
+        user_answer = input("\nType your Answer: \n")
         if user_answer == current_set.flashcards[idx].answer:
-            print("Correct!")
+            print("\nCorrect!")
             current_set.flashcards[idx].update_progress("write_correct")
             give_feedback_card(current_set.flashcards[idx], "write_correct")
             answers["write_correct"] += 1
         else:
             print(
-                "Seems you have made a mistake. Correct answer: "
+                "\nSeems you have made a mistake.\nCorrect answer: "
                 f"{current_set.flashcards[idx].answer}"
             )
             while True:
                 correction = input(
-                    "Was your answer correct enough anyways? " "(y/n):\n"
+                    "\nWas your answer correct enough anyways? " "(y/n):\n"
                 )
                 if correction == "y":
-                    print("Treating answer as correct.")
+                    print("\nTreating answer as correct.")
                     current_set.flashcards[idx].update_progress(
                         "write_correct_user_opted"
                     )
@@ -516,7 +516,7 @@ def type_answer_mode(current_set):
                     answers["write_correct_user_opted"] += 1
                     break
                 elif correction == "n":
-                    print("Treating answer as incorrect.")
+                    print("\nTreating answer as incorrect.")
                     current_set.flashcards[idx].update_progress(
                         "write_incorrect")
                     give_feedback_card(
@@ -525,6 +525,8 @@ def type_answer_mode(current_set):
                     break
                 else:
                     print("Invalid input. Please enter 'y' or 'n'.")
+        input("\nPress Enter to continue\n")
+        clear_terminal()
     print("Lesson finished\n")
     give_feedback_set(current_set, answers)
     current_set.upload()
@@ -543,8 +545,8 @@ if __name__ == "__main__":
     while True:
         current_set = pick_set()
         clear_terminal()
-        print(f"You picked: {current_set.title}")
         while True:
+            print(f"Active Set: {current_set.title}")
             mode = pick_mode()
             if mode == "s":
                 flashcard_mode(current_set)
