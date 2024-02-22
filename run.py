@@ -535,11 +535,12 @@ def type_answer_mode(current_set):
                     break
                 else:
                     print("Invalid input. Please enter 'y' or 'n'.")
-        input("\nPress Enter to continue\n")
+        input("\nPress Enter to go back to the main menu\n")
         clear_terminal()
     print("Lesson finished\n")
     give_feedback_set(current_set, answers)
     current_set.upload()
+    input("\nPress Enter to continue\n")
 
 
 # Credit to Tim Nelson (CI Mentor) for calling the main function like that.
@@ -554,8 +555,8 @@ if __name__ == "__main__":
           "progress with the Flashcard CLI community.\n")
     while True:
         current_set = pick_set()
-        clear_terminal()
         while True:
+            clear_terminal()
             print(f"Active Set: {current_set.title}")
             mode = pick_mode()
             if mode == "s":
@@ -565,6 +566,5 @@ if __name__ == "__main__":
             elif mode == "r":
                 current_set.show_all()
                 input("\nPress Enter to go back to the main menu.\n")
-                clear_terminal()
             elif mode == "c":
                 break
