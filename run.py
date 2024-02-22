@@ -246,6 +246,7 @@ def pick_set():
         )
         while True:
             if input_string == "?":
+                clear_terminal()
                 break
             # Credit for checking if input string is an int:
             # https://stackoverflow.com/questions/5424716/how-can-i-check-if-string-input-is-a-number
@@ -454,17 +455,17 @@ def flashcard_mode(current_set):
     each flashcard's question, show the answer, and update the progress level
     based on the user's response.
     """
-    print("\nFlashcard mode\n")
     answers = {
         "flash_correct": 0,
         "flash_incorrect": 0,
     }
     for idx in range(len(current_set.flashcards)):
+        print("Study with Flashcards\n")
         print(f"Flashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
         current_set.flashcards[idx].show_question()
-        input("\nPress Enter to show the Answer")
-        print("\nAnswer:")
+        input("\nPress Enter to show the Answer\n")
+        print("Answer:")
         current_set.flashcards[idx].show_answer()
         print()
         while True:
@@ -483,10 +484,13 @@ def flashcard_mode(current_set):
                 break
             else:
                 print("Invalid input. Please enter 'y' or 'n'.")
+        input("\nPress Enter to continue\n")
+        clear_terminal()
     print("Lesson finished\n")
     give_feedback_set(current_set, answers)
 
     current_set.upload()
+    input("\nPress Enter to go back to the main menu\n")
 
 
 def type_answer_mode(current_set):
