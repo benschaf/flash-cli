@@ -97,7 +97,7 @@ else:
 # https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python
 
 
-def clear():
+def clear_terminal():
     """
     Clear function to clean-up the terminal so things don't get messy.
     """
@@ -544,7 +544,6 @@ if __name__ == "__main__":
     It prompts the user to select a mode and then calls the corresponding
     function based on the selected mode.
     """
-    clear()
     while True:
         current_set = pick_set()
         while True:
