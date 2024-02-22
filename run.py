@@ -76,10 +76,11 @@ except Exception as e:
     handle_exception(e, "An unexpected error occured.")
 else:
     clear_terminal()
-    print(f"Spreadsheet '{SPREADSHEET_NAME}' successfully loaded!")
+    print(f"Spreadsheet '{SPREADSHEET_NAME}' successfully loaded!\n")
 
 # Credit for writing docstrings:
 # https://www.datacamp.com/tutorial/docstrings-python?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9115817&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=CjwKCAiArLyuBhA7EiwA-qo80DbfmFCbaxqMhOuUbjm3RWcqe_zVQXPxO_LL6__tPOFhAhwsABLhxxoCPqwQAvD_BwE
+
 
 class Flashcard_Set:
     """
@@ -235,12 +236,12 @@ def pick_set():
     """
     worksheets = SHEET.worksheets()
     while True:
-        print("These are the available Sets:")
+        print("Pick a flashcard set. These are the available sets:")
         for idx in range(1, len(worksheets) + 1):
             print(f"{idx}: {worksheets[idx - 1].title}")
         input_string = input(
-            "\nType a set name or a corresponding number between 1 and "
-            f"{len(worksheets)} to pick a Set: \n"
+            "\nPlease enter the name of the set you'd like to pick, or its "
+            f"number (between 1 and {len(worksheets)}): \n"
         )
         while True:
             if input_string == "?":
@@ -255,7 +256,6 @@ def pick_set():
             except ValueError:
                 for worksheet in worksheets:
                     if input_string == worksheet.title:
-                        print(f"You picked: {worksheet.title}")
                         return Flashcard_Set(worksheet.title)
             input_string = input(
                 "Invalid input. "
@@ -390,28 +390,44 @@ def pick_mode():
         str: The selected mode.
     """
     modes = {
-        "f": "Flashcard Mode",
-        "t": "Type answer Mode",
-        "d": "Display all of the cards in the Set",
-        "s": "Pick another Set",
-        "?": "Show help again",
+        "s": "Study with Flashcards",
+        "i": "Interactive Quiz Mode",
+        "r": "Review All Flashcards",
+        "c": "Choose a Different Flashcard Set",
+        "?": "Need more details? Just type '?'",
+    }
+    modes_w_instr = {
+        "s": "Study with Flashcards:\n"
+        "In this mode, you'll be shown the question side of each card. Try to answer it in your mind, then press any key to see the answer.\n",
+        "i": "Interactive Quiz Mode:\n"
+        "In this mode, you'll be shown the question side of each card and asked to type the answer. Your answer will be checked against the correct answer.\n",
+        "r": "Review All Flashcards:\n"
+        "In this mode, you'll see all the questions and answers in the set.\n",
+        "c": "Choose a Different Flashcard Set:\n"
+        "In this mode, you can go back to the set selection menu to choose a different set of flashcards to study.\n",
     }
     # Credit for join method:
     # https://docs.python.org/3/library/stdtypes.html#str.join
     modes_keys_str = ", ".join(modes.keys())
     print("\nMAIN MENU\n")
+    print("What would you like to do next?")
+    for mode, description in modes.items():
+        print(f"{mode}: {description}")
     while True:
-        print("What do you want to do?")
-        for mode, description in modes.items():
-            print(f"{mode}: {description}")
         # Credit for case insensitive inputs:
         # https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
-        selected_mode = input(f"Select a mode ({modes_keys_str})\n").lower()
+        selected_mode = input(f"Select an option ({modes_keys_str})\n").lower()
         while True:
             if selected_mode in modes:
                 if selected_mode == "?":
+                    clear_terminal()
+                    print("Here are the available options again "
+                          "with their descriptions:\n")
+                    for mode, description in modes_w_instr.items():
+                        print(f"'{mode}' {description}")
                     break
                 else:
+                    clear_terminal()
                     return selected_mode
             else:
                 selected_mode = input(
@@ -521,15 +537,22 @@ if __name__ == "__main__":
     It prompts the user to select a mode and then calls the corresponding
     function based on the selected mode.
     """
+    print("Welcome to Flashcard CLI!")
+    print("This program allows you to practice flashcards and compare your "
+          "progress with the Flashcard CLI community.\n")
     while True:
         current_set = pick_set()
+        clear_terminal()
+        print(f"You picked: {current_set.title}")
         while True:
             mode = pick_mode()
-            if mode == "f":
+            if mode == "s":
                 flashcard_mode(current_set)
-            elif mode == "t":
+            elif mode == "i":
                 type_answer_mode(current_set)
-            elif mode == "d":
+            elif mode == "r":
                 current_set.show_all()
-            elif mode == "s":
+                input("\nPress Enter to go back to the main menu.\n")
+                clear_terminal()
+            elif mode == "c":
                 break
