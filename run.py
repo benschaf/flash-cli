@@ -535,12 +535,12 @@ def type_answer_mode(current_set):
                     break
                 else:
                     print("Invalid input. Please enter 'y' or 'n'.")
-        input("\nPress Enter to go back to the main menu\n")
+        input("\nPress Enter to continue\n")
         clear_terminal()
     print("Lesson finished\n")
     give_feedback_set(current_set, answers)
     current_set.upload()
-    input("\nPress Enter to continue\n")
+    input("\nPress Enter to go back to the main menu\n")
 
 
 # Credit to Tim Nelson (CI Mentor) for calling the main function like that.
