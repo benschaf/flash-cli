@@ -273,17 +273,17 @@ def give_feedback_card(card: Flashcard, feedback: str):
         card.progress_dict["flash_correct"] +
         card.progress_dict["flash_incorrect"]
     )
-    flash_correct_percentage = round(
-        card.progress_dict["flash_correct"] / flash_tries * 100
-    )
     write_tries = (
         card.progress_dict["write_correct"]
         + card.progress_dict["write_correct_user_opted"]
         + card.progress_dict["write_incorrect"]
     )
+    flash_correct_percentage = round(
+        card.progress_dict["flash_correct"] / flash_tries * 100
+    ) if flash_tries > 0 else 0
     write_correct_percentage = round(
         (card.progress_dict["write_correct"] / write_tries) * 100
-    )
+    ) if write_tries > 0 else 0
     write_correct_opted_percentage = round(
         (
             (
@@ -293,10 +293,12 @@ def give_feedback_card(card: Flashcard, feedback: str):
             / write_tries
         )
         * 100
-    )
+    ) if write_tries > 0 else 0
 
     msg_strs = []
     if feedback == "flash_correct":
+        if flash_correct_percentage == 0:
+            return
         msg_strs = [
             f"Great job! You're part of the {flash_correct_percentage}% "
             "of people who knew the answer!",
@@ -305,6 +307,8 @@ def give_feedback_card(card: Flashcard, feedback: str):
             "You knew the answer! Great job!",
         ]
     elif feedback == "flash_incorrect":
+        if flash_correct_percentage == 0:
+            return
         if flash_correct_percentage < 50:
             msg_strs = [
                 f"Only {flash_correct_percentage}% "
@@ -316,6 +320,8 @@ def give_feedback_card(card: Flashcard, feedback: str):
         else:
             msg_strs = ["Keep practicing!"]
     elif feedback == "write_correct":
+        if write_correct_percentage == 0:
+            return
         msg_strs = [
             f"Great job! You're part of the {write_correct_percentage}% "
             "of people who knew the answer!",
@@ -324,6 +330,8 @@ def give_feedback_card(card: Flashcard, feedback: str):
             "You wrote the correct answer! Great job!",
         ]
     elif feedback == "write_correct_user_opted":
+        if write_correct_opted_percentage == 0:
+            return
         msg_strs = [
             f"Great job! You're part of the {write_correct_opted_percentage}% "
             "of people who opted to know the answer or wrote it correctly!",
@@ -332,6 +340,8 @@ def give_feedback_card(card: Flashcard, feedback: str):
             "Great job! You opted to treat the answer as correct.",
         ]
     elif feedback == "write_incorrect":
+        if write_correct_opted_percentage == 0:
+            return
         if write_correct_percentage < 50:
             msg_strs = [
                 f"Only {write_correct_percentage}% of people knew the answer. "
