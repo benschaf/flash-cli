@@ -568,7 +568,10 @@ if __name__ == "__main__":
             elif mode == "i":
                 type_answer_mode(current_set)
             elif mode == "r":
-                current_set.show_all()
+                if current_set.title != "python (review mode not supportet yet)":
+                    current_set.show_all()
+                else:
+                    print("Review mode not supported yet for this set.")
                 input("\nPress Enter to go back to the main menu.\n")
             elif mode == "c":
                 break
