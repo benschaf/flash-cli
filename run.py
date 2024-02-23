@@ -387,12 +387,12 @@ def give_feedback_set(set: Flashcard_Set, answers: dict) -> None:
         ]
     elif accuracy <= 50:
         msg_strs += [
-            f"Keep practicing! You got {answers[mode]} out of "
-            f"{len(set.flashcards)} flashcards correct!",
+            f"You got {answers[mode]} out of {len(set.flashcards)} "
+            "flashcards correct!",
             "You can do better! Keep practicing!",
         ]
-    rnd_idx = random.randint(0, len(msg_strs) - 1)
-    print(msg_strs[rnd_idx])
+    print(msg_strs[0])
+    print(msg_strs[1])
 
 
 def pick_mode() -> str:
