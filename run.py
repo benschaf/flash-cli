@@ -447,55 +447,6 @@ def pick_mode():
                 ).lower()
 
 
-def flashcard_mode(current_set):
-    """
-    Run the flashcard mode.
-
-    This function allows the user to go through a set of flashcards, display
-    each flashcard's question, show the answer, and update the progress level
-    based on the user's response.
-    """
-    answers = {
-        "flash_correct": 0,
-        "flash_incorrect": 0,
-    }
-    for idx in range(len(current_set.flashcards)):
-        print("Study with Flashcards\n")
-        print(f"Flashcard {idx + 1} / {len(current_set.flashcards)}\n")
-        print("Question:")
-        current_set.flashcards[idx].show_question()
-        input("\nPress Enter to show the Answer\n")
-        print("Answer:")
-        current_set.flashcards[idx].show_answer()
-        print()
-        while True:
-            answer = input("Did you know the Answer? (y/n): \n").lower()
-            if answer == "y":
-                current_set.flashcards[idx].update_progress("flash_correct")
-                give_feedback_card(
-                    current_set.flashcards[idx], "flash_correct")
-                answers["flash_correct"] += 1
-                break
-            elif answer == "n":
-                current_set.flashcards[idx].update_progress("flash_incorrect")
-                give_feedback_card(
-                    current_set.flashcards[idx], "flash_incorrect")
-                answers["flash_incorrect"] += 1
-                break
-            else:
-                print("Invalid input. Please enter 'y' or 'n'.")
-        input("\nPress Enter to continue\n")
-        clear_terminal()
-    print("Lesson finished\n")
-    give_feedback_set(current_set, answers)
-
-    current_set.upload()
-    input("\nPress Enter to go back to the main menu\n")
-
-
-# Credit for multiple return types: https://realpython.com/python-type-hints-multiple-types/#:~:text=Sometimes%2C%20a%20function%20returns%20more,built%2Din%20tuple%20data%20structure.
-
-
 def input_or_quit(ipt: str) -> str | None:
     """
     Prompts the user to confirm if they want to quit the program.
@@ -517,6 +468,65 @@ def input_or_quit(ipt: str) -> str | None:
                     print("Invalid input. Please enter 'y' or 'n'.")
         else:
             return user_answer
+
+
+def flashcard_mode(current_set):
+    """
+    Run the flashcard mode.
+
+    This function allows the user to go through a set of flashcards, display
+    each flashcard's question, show the answer, and update the progress level
+    based on the user's response.
+    """
+    answers = {
+        "flash_correct": 0,
+        "flash_incorrect": 0,
+    }
+    for idx in range(len(current_set.flashcards)):
+        print("Study with Flashcards\n")
+        print(f"Flashcard {idx + 1} / {len(current_set.flashcards)}\n")
+        print("Question:")
+        current_set.flashcards[idx].show_question()
+        ipt = input_or_quit("\nPress Enter to show the Answer "
+                            "(or 'q' to quit)\n")
+        if ipt is None:
+            return
+        print("Answer:")
+        current_set.flashcards[idx].show_answer()
+        print()
+        while True:
+            answer = input_or_quit("Did you know the Answer? "
+                                   "(y, n, q): \n").lower()
+            if answer is None:
+                return
+            if answer == "y":
+                current_set.flashcards[idx].update_progress("flash_correct")
+                give_feedback_card(
+                    current_set.flashcards[idx], "flash_correct")
+                answers["flash_correct"] += 1
+                break
+            elif answer == "n":
+                current_set.flashcards[idx].update_progress("flash_incorrect")
+                give_feedback_card(
+                    current_set.flashcards[idx], "flash_incorrect")
+                answers["flash_incorrect"] += 1
+                break
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
+        ipt = input_or_quit("\nPress Enter to continue or 'q' to quit\n")
+        if ipt is None:
+            return
+        clear_terminal()
+    print("Lesson finished\n")
+    give_feedback_set(current_set, answers)
+
+    current_set.upload()
+    input("\nPress Enter to go back to the main menu\n")
+
+
+# Credit for multiple return types: https://realpython.com/python-type-hints-multiple-types/#:~:text=Sometimes%2C%20a%20function%20returns%20more,built%2Din%20tuple%20data%20structure.
+
+
 
 def type_answer_mode(current_set):
     answers = {
