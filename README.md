@@ -19,7 +19,7 @@ Link to the [Flowchart](https://drive.google.com/file/d/1rDfChnROSVD_QkKvOzWtL8e
 The terminal is an ideal environment for vocabulary training for several reasons:
 
 - **Focus on Learning:** By removing distractions (fancy UI elements, animations, etc.), the terminal allows users to concentrate solely on expanding their vocabulary.
-- **Efficiency:** Terminal apps are lightweight and fast. Users can quickly launch the app, practice, and exit, thereby maximizing their time spent learning. 
+- **Efficiency:** Terminal apps are lightweight and fast. Users can quickly launch the app, practice, and exit, thereby maximizing their time spent learning.
 - **Keyboard-Centric Interaction:** Terminal apps encourage keyboard shortcuts and efficient navigation, which aligns well with learning and memorization.
 
 _Note_: For this specific project, the terminal environment is emulated within a browser. However, the app is designed to be used in a traditional terminal environment.
@@ -51,7 +51,7 @@ The app automatically syncs flashcard data with a connected Google Sheets docume
 The Google Sheet is set up so that every worksheet is a deck of flashcards. Each row represents a flashcard, with the word in the first column and the definition in the second column. Further columns are used to store the status of the flashcard.
 
 ### Real-Time Feedback:
-The app will provide personalized feedback based on collective performance. For example: “Only 1% of people got this question right, and you are one of them.”
+The app will provide personalized feedback based on collective performance. For example: “Only 13% of people got this question right, and you are one of them.”
 
 ### Error Handling and Logging
 Flash-CLI gracefully handles unexpected errors and provides helpful messages to guide users. Additionally, the app logs application events for debugging and troubleshooting.
@@ -71,10 +71,6 @@ Invalid input: If the user enters an invalid command or input, the app will disp
 ### Statistics and Analytics
 - Display global progress (e.g., percentage of how many people knew an answer).
 - Show performance trends over time (graphs, charts).
-
-### Interactive Help System
-- Provide built-in documentation accessible via commands (e.g., help, man).
-- Explain features, usage, and available commands.
 
 ### Integration with Language APIs
 #### Use language APIs (e.g., WordNet, Google Translate) for:
