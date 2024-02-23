@@ -254,7 +254,6 @@ def pick_set():
             try:
                 if int(input_string) in range(1, len(worksheets) + 1):
                     picked_worksheet = worksheets[int(input_string) - 1]
-                    print(f"You picked: {picked_worksheet.title}")
                     return Flashcard_Set(picked_worksheet.title)
             except ValueError:
                 for worksheet in worksheets:
