@@ -449,7 +449,7 @@ def pick_mode() -> str:
                 ).lower()
 
 
-def input_or_quit(ipt: str) -> str | None:
+def input_or_quit(ipt: str) -> str:
     """
     Prompts the user to confirm if they want to quit the program.
 
@@ -528,10 +528,6 @@ def flashcard_mode(current_set: Flashcard_Set) -> None:
 
     current_set.upload()
     input("\nPress Enter to go back to the main menu\n")
-
-
-# Credit for multiple return types: https://realpython.com/python-type-hints-multiple-types/#:~:text=Sometimes%2C%20a%20function%20returns%20more,built%2Din%20tuple%20data%20structure.
-
 
 
 def type_answer_mode(current_set: Flashcard_Set) -> None:
