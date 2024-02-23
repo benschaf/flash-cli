@@ -2,6 +2,7 @@ import sys
 import os
 import random
 import time
+from typing import NoReturn
 import gspread
 from google.oauth2.service_account import Credentials
 import logging
@@ -23,7 +24,7 @@ logging.basicConfig(
 # https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python
 
 
-def clear_terminal():
+def clear_terminal() -> None:
     """
     Clear function to clean-up the terminal so things don't get messy.
     """
@@ -41,8 +42,10 @@ SCOPE = [
 # Credit for exception handling:
 # https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
 
+# Credit for NoReturn type hint: https://adamj.eu/tech/2021/05/20/python-type-hints-whats-the-point-of-noreturn/
 
-def handle_exception(e, message):
+
+def handle_exception(e: Exception, message: str) -> NoReturn:
     print(message)
     print(f"Error details: {e}")
     logging.exception(f"{message} Error details: %s", str(e))
@@ -83,6 +86,26 @@ else:
 # https://www.datacamp.com/tutorial/docstrings-python?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9115817&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=CjwKCAiArLyuBhA7EiwA-qo80DbfmFCbaxqMhOuUbjm3RWcqe_zVQXPxO_LL6__tPOFhAhwsABLhxxoCPqwQAvD_BwE
 
 
+class Flashcard:
+    """
+    A class to represent a flashcard.
+    """
+
+    def __init__(self, question: str, answer: str, progress_dict: dict):
+        self.question = question
+        self.answer = answer
+        self.progress_dict = progress_dict
+
+    def show_question(self) -> None:
+        print(self.question)
+
+    def show_question(self) -> None:
+        print(self.answer)
+
+    def update_progress(self, progress_key: str) -> None:
+        self.progress_dict[progress_key] += 1
+
+
 class Flashcard_Set:
     """
     Represents a set of flashcards.
@@ -93,11 +116,11 @@ class Flashcard_Set:
             the flashcards in the set.
     """
 
-    def __init__(self, title):
+    def __init__(self, title: str):
         self.title = title
         self.flashcards = self._load_flashcards()
 
-    def _load_flashcards(self):
+    def _load_flashcards(self) -> list[Flashcard]:
         """
         Loads the flashcards from the worksheet named like the title Attribute.
 
@@ -138,7 +161,7 @@ class Flashcard_Set:
 
         return flashcards
 
-    def show_all(self):
+    def show_all(self) -> None:
         """
         Displays all the flashcards in a table format.
         """
@@ -150,7 +173,7 @@ class Flashcard_Set:
         print(f"All flashcards in: '{self.title}'\n")
         print(table)
 
-    def _convert_to_list_of_lists(self):
+    def _convert_to_list_of_lists(self) -> list[list]:
         """
         Converts the flashcards into a list of lists.
         A list of lists is needed for the google spreadsheets api.
@@ -167,7 +190,7 @@ class Flashcard_Set:
             li_of_li.append(tmp_li)
         return li_of_li
 
-    def upload(self):
+    def upload(self) -> None:
         """
         Uploads the flashcards to the worksheet.
         """
@@ -207,29 +230,8 @@ class Flashcard_Set:
             print("Successfully uploaded!")
 
 
-class Flashcard:
-    """
-    A class to represent a flashcard.
-    """
 
-    def __init__(self, question, answer, progress_dict):
-        self.question = question
-        self.answer = answer
-        self.progress_dict = progress_dict
-
-    # def show_full(self):
-
-    def show_question(self):
-        print(self.question)
-
-    def show_answer(self):
-        print(self.answer)
-
-    def update_progress(self, progress_key):
-        self.progress_dict[progress_key] += 1
-
-
-def pick_set():
+def pick_set() -> Flashcard_Set:
     """
     Prompts the user to pick a set from a list of available sets.
 
@@ -269,7 +271,7 @@ def pick_set():
 
 # Credit for parameter type hints:
 # https://stackoverflow.com/questions/2489669/how-do-python-functions-handle-the-types-of-parameters-that-you-pass-in
-def give_feedback_card(card: Flashcard, feedback: str):
+def give_feedback_card(card: Flashcard, feedback: str) -> None:
     flash_tries = (
         card.progress_dict["flash_correct"] +
         card.progress_dict["flash_incorrect"]
@@ -364,7 +366,7 @@ def give_feedback_card(card: Flashcard, feedback: str):
     print(msg_strs[rnd_idx])
 
 
-def give_feedback_set(set: Flashcard_Set, answers: dict):
+def give_feedback_set(set: Flashcard_Set, answers: dict) -> None:
     mode = "flash_correct"
     if "flash_correct" in answers:
         accuracy = round(answers["flash_correct"] / len(set.flashcards) * 100)
@@ -393,7 +395,7 @@ def give_feedback_set(set: Flashcard_Set, answers: dict):
     print(msg_strs[rnd_idx])
 
 
-def pick_mode():
+def pick_mode() -> str:
     """
     Prompts the user to select a mode and returns the selected mode.
 
@@ -474,7 +476,7 @@ def input_or_quit(ipt: str) -> str | None:
             return user_answer
 
 
-def flashcard_mode(current_set):
+def flashcard_mode(current_set: Flashcard_Set) -> None:
     """
     Run the flashcard mode.
 
@@ -532,7 +534,7 @@ def flashcard_mode(current_set):
 
 
 
-def type_answer_mode(current_set):
+def type_answer_mode(current_set: Flashcard_Set) -> None:
     answers = {
         "write_correct": 0,
         "write_correct_user_opted": 0,
