@@ -493,6 +493,31 @@ def flashcard_mode(current_set):
     input("\nPress Enter to go back to the main menu\n")
 
 
+# Credit for multiple return types: https://realpython.com/python-type-hints-multiple-types/#:~:text=Sometimes%2C%20a%20function%20returns%20more,built%2Din%20tuple%20data%20structure.
+
+
+def input_or_quit(ipt: str) -> str | None:
+    """
+    Prompts the user to confirm if they want to quit the program.
+
+    Returns:
+        bool: True if the user confirms they want to quit, False otherwise.
+    """
+    while True:
+        user_answer = input(ipt)
+        if user_answer.lower() == "q":
+            while True:
+                user_input = input("Are you sure you want to quit? The progress of"
+                                " this quiz will be lost (y/n)\n").lower()
+                if user_input == "y":
+                    return
+                elif user_input == "n":
+                    break
+                else:
+                    print("Invalid input. Please enter 'y' or 'n'.")
+        else:
+            return user_answer
+
 def type_answer_mode(current_set):
     answers = {
         "write_correct": 0,
@@ -504,7 +529,9 @@ def type_answer_mode(current_set):
         print(f"\n\nFlashcard {idx + 1} / {len(current_set.flashcards)}\n")
         print("Question:")
         current_set.flashcards[idx].show_question()
-        user_answer = input("\nType your Answer: \n")
+        user_answer = input_or_quit("\nType your Answer (or 'q' to quit):\n")
+        if user_answer is None:
+            return
         if user_answer == current_set.flashcards[idx].answer:
             print("\nCorrect!")
             current_set.flashcards[idx].update_progress("write_correct")
@@ -516,9 +543,11 @@ def type_answer_mode(current_set):
                 f"{current_set.flashcards[idx].answer}"
             )
             while True:
-                correction = input(
-                    "\nWas your answer correct enough anyways? " "(y/n):\n"
+                correction = input_or_quit(
+                    "\nWas your answer correct enough anyways? (y, n, q):\n"
                 )
+                if correction is None:
+                    return
                 if correction == "y":
                     print("\nTreating answer as correct.")
                     current_set.flashcards[idx].update_progress(
@@ -539,7 +568,9 @@ def type_answer_mode(current_set):
                     break
                 else:
                     print("Invalid input. Please enter 'y' or 'n'.")
-        input("\nPress Enter to continue\n")
+        input_or_quit("\nPress Enter to continue\n")
+        if user_answer is None:
+            return
         clear_terminal()
     print("Lesson finished\n")
     give_feedback_set(current_set, answers)
