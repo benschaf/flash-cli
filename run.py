@@ -5,10 +5,10 @@ import time
 import gspread
 from google.oauth2.service_account import Credentials
 import logging
+from prettytable import PrettyTable
 
 # Credit for prettytable:
 # https://pythonfusion.com/table-on-console-python/#37-terminaltables-or-asciitable
-from prettytable import PrettyTable
 
 # Credit for error logging:
 # https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
