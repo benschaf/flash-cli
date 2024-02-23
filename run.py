@@ -171,7 +171,7 @@ class Flashcard_Set:
 
         for flashcard in self.flashcards:
             table.add_row([flashcard.question, flashcard.answer])
-        print(f"All flashcards in: '{self.title}'\n")
+        print(f"Showing all flashcards in: '{self.title}'\n")
         print(table)
 
     def _convert_to_list_of_lists(self) -> list[list]:
@@ -404,7 +404,7 @@ def pick_mode() -> str:
     """
     modes = {
         "s": "Study with Flashcards",
-        "i": "Interactive Quiz Mode",
+        "i": "Interactive Quiz",
         "r": "Review All Flashcards",
         "c": "Choose a Different Flashcard Set",
         "?": "Need more details? Just type '?'",
@@ -413,7 +413,7 @@ def pick_mode() -> str:
         "s": "Study with Flashcards:\n"
         "In this mode, you'll be shown the question side of each card. Try to "
         "answer it in your mind, then press any key to see the answer.\n",
-        "i": "Interactive Quiz Mode:\n"
+        "i": "Interactive Quiz:\n"
         "In this mode, you'll be shown the question side of each card and "
         "asked to type the answer. Your answer will be checked against the "
         "correct answer.\n",
@@ -433,7 +433,7 @@ def pick_mode() -> str:
     while True:
         # Credit for case insensitive inputs:
         # https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
-        selected_mode = input(f"Select an option ({modes_keys_str})\n").lower()
+        selected_mode = input(f"Select an option ({modes_keys_str}):\n").lower()
         while True:
             if selected_mode in modes:
                 if selected_mode == "?":
