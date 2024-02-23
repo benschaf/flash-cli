@@ -619,7 +619,7 @@ if __name__ == "__main__":
             elif mode == "r":
                 # Credit for line break:
                 # https://stackoverflow.com/questions/53162/how-can-i-do-a-line-break-line-continuation-in-python-split-up-a-long-line-of
-                if current_set.title != "python (review mode not sptd yet)":
+                if not current_set.title.__contains__("not supported"):
                     current_set.show_all()
                 else:
                     print("Review mode not supported yet for this set.")
