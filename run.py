@@ -1,6 +1,7 @@
 import sys
 import os
 import random
+import time
 import gspread
 from google.oauth2.service_account import Credentials
 import logging
@@ -461,6 +462,10 @@ def input_or_quit(ipt: str) -> str | None:
                 user_input = input("Are you sure you want to quit? The progress of"
                                 " this quiz will be lost (y/n)\n").lower()
                 if user_input == "y":
+                    # wait for 2 seconds before quitting
+                    print("Quitting...")
+                    # Credit for sleep function: https://www.datacamp.com/tutorial/python-time-sleep?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9042759&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=Cj0KCQiAoeGuBhCBARIsAGfKY7yufxE5zKBDYxMBH_VoxTSSnHmHTLuVcvkg8bWHAxgocfoWYEecr4oaAt8EEALw_wcB
+                    time.sleep(1)
                     return
                 elif user_input == "n":
                     break
