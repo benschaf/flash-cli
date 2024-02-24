@@ -100,7 +100,7 @@ class Flashcard:
     def show_question(self) -> None:
         print(self.question)
 
-    def show_question(self) -> None:
+    def show_answer(self) -> None:
         print(self.answer)
 
     def update_progress(self, progress_key: str) -> None:
