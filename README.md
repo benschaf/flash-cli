@@ -158,8 +158,8 @@ Example:
 
 ### Tools
 
-- [Google Sheets API](https://developers.google.com/sheets/api)
-- [Quizlet](https://quizlet.com/)
+- [Google Sheets API](https://developers.google.com/sheets/api) as the database for flashcards.
+- [Quizlet](https://quizlet.com/) for inspiration and comparison.
 
 ## Credits
 
