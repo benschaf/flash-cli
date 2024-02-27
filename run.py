@@ -453,10 +453,7 @@ def pick_mode() -> str:
                 ).lower()
 
 
-# Credit for multiple return hints: https://stackoverflow.com/questions/33945261/how-to-specify-multiple-return-types-using-type-hints
-
-
-def input_or_quit(ipt: str) -> Union[str, None]:
+def input_or_quit(ipt: str) -> str:
     """
     Prompts the user to confirm if they want to quit the program.
 
@@ -476,7 +473,7 @@ def input_or_quit(ipt: str) -> Union[str, None]:
                     # Credit for sleep function:
                     # https://www.datacamp.com/tutorial/python-time-sleep?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9042759&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=Cj0KCQiAoeGuBhCBARIsAGfKY7yufxE5zKBDYxMBH_VoxTSSnHmHTLuVcvkg8bWHAxgocfoWYEecr4oaAt8EEALw_wcB
                     time.sleep(1)
-                    return
+                    return "q"
                 elif user_input == "n":
                     break
                 else:
@@ -512,7 +509,7 @@ def flashcard_mode(current_set: Flashcard_Set) -> None:
         while True:
             answer = input_or_quit("Did you know the Answer? "
                                    "(y, n, q): \n").lower()
-            if answer is None:
+            if answer == "q":
                 return
             if answer == "y":
                 current_set.flashcards[idx].update_progress("flash_correct")
@@ -528,8 +525,10 @@ def flashcard_mode(current_set: Flashcard_Set) -> None:
                 break
             else:
                 print("Invalid input. Please enter 'y' or 'n'.")
-        ipt = input_or_quit("\nPress Enter to continue or 'q' to quit\n")
-        if ipt is None:
+        ipt = input_or_quit(
+            "\nPress Enter to continue or 'q' to quit\n"
+        ).lower()
+        if ipt == "q":
             return
         clear_terminal()
     print("Lesson finished\n")
