@@ -11,6 +11,16 @@ Flash-CLI is a Python-based command-line flashcard application that seamlessly i
 ## UX
 
 ### User Stories
+| As a | I want to | so that I can |
+| --- | --- | --- |
+| User | review flashcards in the terminal | focus on learning without distractions |
+| User | choose between multiple quiz modes | practice different quiz modes according to my preference and skill level |
+| User | review a random flashcard and indicate if I knew the definition or not (in flashcard mode) | test my memory of the definition, get immediate feedback, and update the flashcard status |
+| User | see a word and type the definition in typed answer mode | test my recall and understanding of the definition, get immediate feedback, and update the flashcard status |
+| App provider | sync the flashcards with Google Sheets | easily create and edit flashcard decks online |
+| User | receive real-time feedback based on my performance and the community's performance | monitor my progress and compare with others |
+| Developer | handle errors gracefully and provide helpful messages | avoid frustration and confusion for users of the app |
+| User | use keyboard shortcuts and efficient navigation in the terminal | improve my productivity and user experience |
 
 ### Flowchart
 Link to the [Flowchart](https://drive.google.com/file/d/1rDfChnROSVD_QkKvOzWtL8e4Z6Wk0UX-/view?usp=sharing)
