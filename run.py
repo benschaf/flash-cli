@@ -409,7 +409,7 @@ def determine_message_strings(
         return [
             f"Great job! You got {answers[mode]} out of {len(set.flashcards)} "
             "flashcards correct!",
-            f"Congratulations! You got {accuracy}% of the flashcards correct!",
+            f"Congratulations! That makes {accuracy}% right answers!",
         ]
     else:
         return [
