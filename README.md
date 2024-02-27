@@ -37,6 +37,12 @@ _Note_: For this specific project, the terminal environment is emulated within a
 ## Features
 
 ### Quiz Modes
+
+#### Main Menu and Navigation
+The app provides a main menu with options to choose between different quiz modes and to exit the app. Users can navigate the app using keyboard shortcuts that are displayed in the menu. If the user wishes to have more information about the options, they can use the help (?) command.
+All invalid inputs are handled gracefully, and the app provides helpful messages to guide users.
+![Main Menu](docs/images/feature-main-menu.png)
+
 #### Flashcard Mode: Users can review flashcards and decide if they know the answer.
 Functionality:
 - Display a random flashcard only with the word (question).
