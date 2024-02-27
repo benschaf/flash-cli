@@ -208,7 +208,7 @@ class Flashcard_Set:
         return data_to_upload
 
     def _upload_data_to_worksheet(self, data: list) -> None:
-        print(f"Uploading to worksheet: '{self.title}'...")
+        print(f"\nUploading to worksheet: '{self.title}'...")
         try:
             worksheet = SHEET.worksheet(self.title)
             worksheet.clear()
