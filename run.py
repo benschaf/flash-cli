@@ -723,6 +723,7 @@ def type_answer_mode(current_set: Flashcard_Set) -> None:
 
 
 # Credit to Tim Nelson (CI Mentor) for calling the main function like that.
+# https://medium.com/@mycodingmantras/what-does-if-name-main-mean-in-python-fa6b0460a62d#:~:text=The%20if%20__name__,set%20to%20__main__%20.
 if __name__ == "__main__":
     """
     This is the main function that controls the flow of the flashcard program.
