@@ -51,6 +51,8 @@ Functionality:
 - Update the flashcard status based on the user's response.
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
 This mode is designed to help users for initial learning and self-assessment. It's a simple and effective way to memorize new flashcards.
+![Flashcard Mode](docs/images/feature-flashcard-mode.png)
+
 #### Typed Answer Quizzes: Users type their answers directly.
 Functionality:
 - Display a word (question).
@@ -60,20 +62,69 @@ Functionality:
 - Update the flashcard status based on the user's responses.
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
 This mode is designed to test the user's recall and understanding of the flashcard. It's a more challenging and interactive way to practice and reinforce learning.
+![Typed Answer Mode](docs/images/feature-typed-answer-mode.png)
 
 ### Real-Time Google Sheets Sync
 The app automatically syncs flashcard data with a connected Google Sheets document using the Google Sheets API. No user login is required.
 
 The Google Sheet is set up so that every worksheet is a deck of flashcards. Each row represents a flashcard, with the word in the first column and the definition in the second column. Further columns are used to store the status of the flashcard.
+![Google Sheets](docs/images/feature-google-sheets-sync.png)
 
 ### Real-Time Feedback:
-The app will provide personalized feedback based on collective performance. For example: “Only 13% of people got this question right, and you are one of them.”
+The app will provide personalized and dynamically generated feedback based on collective performance. Feedback is given after answering most questions and at the end of each quiz. It's designed to motivate users and help put their progress into perspective.
+
+Here are some examples of the feedback:
+- "Great job! You're part of the 70% of people who knew the answer!"
+- "You're doing better than 30% of people who attempted this flashcard."
+- "You knew the answer! Great job!"
+- "Don't worry, less than half of the people who attempted this flashcard knew the answer."
+- "You're doing better than 40% of people who attempted this flashcard."
+- "You wrote the correct answer! Great job!"
+- "You're doing better than 20% of people who attempted this flashcard."
+- "50% of people opted to treat the answer as correct or wrote it correctly. Keep practicing!"
 
 ### Error Handling and Logging
 Flash-CLI gracefully handles unexpected errors and provides helpful messages to guide users. Additionally, the app logs application events for debugging and troubleshooting.
 
+This is achieved using a custom built helper function:
+```python
+def handle_exception(e: Exception, message: str) -> NoReturn:
+    """
+    Handles an exception by printing an error message, logging the error,
+    and exiting the program.
+
+    Args:
+        e (Exception): The exception that occurred.
+        message (str): The error message to display.
+
+    Returns:
+        None
+    """
+    print(message)
+    print(f"Error details: {e}")
+    logging.exception(f"{message} Error details: %s", str(e))
+    print("Quitting due to error.")
+    sys.exit(1)
+```
+[View Code in project](https://github.com/benschaf/flash-cli/blob/04f1b1e25fe9bb4242dcb49575435691b4b7cfb1/run.py#L58-L74)
+
+An example of how this function is called:
+```python
+try:
+    # more code ...
+    CREDS = Credentials.from_service_account_file("creds.json")
+    # more code ...
+except FileNotFoundError as e:
+    handle_exception(e, "Failed to load 'creds.json'. Please ensure the file "
+                     "exists in the same directory as this script.")
+```
+[Vew code in project](https://github.com/benschaf/flash-cli/blob/04f1b1e25fe9bb4242dcb49575435691b4b7cfb1/run.py#L77-L86)
+
 #### Gracefully handle unexpected errors (e.g., invalid input, network issues).
 Invalid input: If the user enters an invalid command or input, the app will display a helpful message and prompt the user to try again.
+
+Example:
+![Invalid Input](docs/images/feature-invalid-input.png)
 
 ## Future Features
 
