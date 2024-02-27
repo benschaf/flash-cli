@@ -133,24 +133,17 @@ class Flashcard_Set:
         try:
             worksheet = SHEET.worksheet(self.title).get_all_records()
         except gspread.exceptions.WorksheetNotFound as e:
-            print(f"The worksheet '{self.title}' was not found. Error: {e}")
-            logging.exception(
-                "The worksheet '%s' was not found: %s", self.title, str(e)
-            )
+            handle_exception(e, f"The worksheet '{self.title}' was not found.")
         except gspread.exceptions.APIError as e:
-            print(f"An error occurred with the Google Sheets API. Error: {e}")
-            logging.exception(
-                "An error occurred with the Google Sheets API: %s", str(e)
-            )
+            handle_exception(e, "An error occurred with the Google Sheets API.")
         except Exception as e:
-            print(f"An unexpected error occurred. Error: {e}")
-            logging.exception("An unexpected error occurred: %s", str(e))
+            handle_exception(e, "An unexpected error occurred.")
         else:
             print("Successfully loaded!")
 
         for row in worksheet:
-            question = row["question"]
-            answer = row["answer"]
+            question = str(row["question"])
+            answer = str(row["answer"])
             progress_dict = {
                 "flash_correct": row["flash_correct"],
                 "flash_incorrect": row["flash_incorrect"],
@@ -215,18 +208,11 @@ class Flashcard_Set:
             )
             worksheet.append_rows(data_to_upload)
         except gspread.exceptions.WorksheetNotFound as e:
-            print(f"The worksheet '{self.title}' was not found. Error: {e}")
-            logging.exception(
-                "The worksheet '%s' was not found: %s", self.title, str(e)
-            )
+            handle_exception(e, f"The worksheet '{self.title}' was not found.")
         except gspread.exceptions.APIError as e:
-            print(f"An error occurred with the Google Sheets API. Error: {e}")
-            logging.exception(
-                "An error occurred with the Google Sheets API: %s", str(e)
-            )
+            handle_exception(e, "An error occurred with the Google Sheets API.")
         except Exception as e:
-            print(f"An unexpected error occurred. Error: {e}")
-            logging.exception("An unexpected error occurred: %s", str(e))
+            handle_exception(e, "An unexpected error occurred.")
         else:
             print("Successfully uploaded!")
 
