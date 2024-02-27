@@ -460,6 +460,7 @@ def pick_mode() -> str:
     # Credit for join method:
     # https://docs.python.org/3/library/stdtypes.html#str.join
     modes_keys_str = ", ".join(modes.keys())
+
     print("\nMAIN MENU\n")
     print("What would you like to do next?")
     for mode, description in modes.items():
