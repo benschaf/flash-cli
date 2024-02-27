@@ -250,12 +250,12 @@ def pick_set() -> Flashcard_Set:
                 clear_terminal()
                 break
             # Credit for checking if input string is an int:
-            # https://stackoverflow.com/questions/5424716/how-can-i-check-if-string-input-is-a-number
-            try:
+            # https://www.w3schools.com/python/ref_func_isinstance.asp
+            if isinstance(input_string, int):
                 if int(input_string) in range(1, len(worksheets) + 1):
                     picked_worksheet = worksheets[int(input_string) - 1]
                     return Flashcard_Set(picked_worksheet.title)
-            except ValueError:
+            else:
                 for worksheet in worksheets:
                     if input_string.lower() == worksheet.title.lower():
                         return Flashcard_Set(worksheet.title)
