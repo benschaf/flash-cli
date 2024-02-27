@@ -1,3 +1,4 @@
+from pyclbr import _Object
 import sys
 import os
 import random
@@ -188,29 +189,27 @@ class Flashcard_Set:
             li_of_li.append(tmp_row)
         return li_of_li
 
-    def upload(self) -> None:
-        """
-        Uploads the flashcards to the worksheet.
-        """
+    def _prepare_data_for_upload(self) -> list:
+        headers = [
+            "question",
+            "answer",
+            "flash_correct",
+            "flash_incorrect",
+            "write_correct",
+            "write_correct_user_opted",
+            "write_incorrect",
+        ]
+        flashcard_rows = self._convert_to_list_of_lists()
+        data_to_upload = [headers]
+        data_to_upload.extend(flashcard_rows)
+        return data_to_upload
+
+    def _upload_data_to_worksheet(self, data: list) -> None:
         print(f"Uploading to worksheet: '{self.title}'...")
-
-        data_to_upload = self._convert_to_list_of_lists()
-
         try:
             worksheet = SHEET.worksheet(self.title)
             worksheet.clear()
-            worksheet.append_row(
-                [
-                    "question",
-                    "answer",
-                    "flash_correct",
-                    "flash_incorrect",
-                    "write_correct",
-                    "write_correct_user_opted",
-                    "write_incorrect",
-                ]
-            )
-            worksheet.append_rows(data_to_upload)
+            worksheet.append_rows(data)
         except gspread.exceptions.WorksheetNotFound as e:
             handle_exception(e, f"The worksheet '{self.title}' was not found.")
         except gspread.exceptions.APIError as e:
@@ -220,6 +219,16 @@ class Flashcard_Set:
         else:
             print("Successfully uploaded!")
 
+    def upload(self) -> None:
+        """
+        Uploads the flashcards to the worksheet.
+        """
+        data_to_upload = self._prepare_data_for_upload()
+        self._upload_data_to_worksheet(data_to_upload)
+
+def print_worksheet_titles(worksheets: List[gspread.Worksheet]) -> None:
+    for idx in range(1, len(worksheets) + 1):
+        print(f"{idx}: {worksheets[idx - 1].title}")
 
 def pick_set() -> Flashcard_Set:
     """
@@ -231,8 +240,7 @@ def pick_set() -> Flashcard_Set:
     worksheets = SHEET.worksheets()
     while True:
         print("Pick a flashcard set. These are the available sets:")
-        for idx in range(1, len(worksheets) + 1):
-            print(f"{idx}: {worksheets[idx - 1].title}")
+        print_worksheet_titles(worksheets)
         input_string = input(
             "\nPlease enter the name of the set you'd like to pick, or its "
             f"number (between 1 and {len(worksheets)}): \n"
