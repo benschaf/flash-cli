@@ -50,6 +50,7 @@ SCOPE = [
 # Credit for parameter type hints:
 # https://stackoverflow.com/questions/2489669/how-do-python-functions-handle-the-types-of-parameters-that-you-pass-in
 
+
 def handle_exception(e: Exception, message: str) -> NoReturn:
     print(message)
     print(f"Error details: {e}")
@@ -216,7 +217,8 @@ class Flashcard_Set:
         except gspread.exceptions.WorksheetNotFound as e:
             handle_exception(e, f"The worksheet '{self.title}' was not found.")
         except gspread.exceptions.APIError as e:
-            handle_exception(e, "An error occurred with the Google Sheets API.")
+            handle_exception(e, "An error occurred with the "
+                             "Google Sheets API.")
         except Exception as e:
             handle_exception(e, "An unexpected error occurred.")
         else:
@@ -229,9 +231,11 @@ class Flashcard_Set:
         data_to_upload = self._prepare_data_for_upload()
         self._upload_data_to_worksheet(data_to_upload)
 
+
 def print_worksheet_titles(worksheets: List[gspread.Worksheet]) -> None:
     for idx in range(1, len(worksheets) + 1):
         print(f"{idx}: {worksheets[idx - 1].title}")
+
 
 def pick_set() -> Flashcard_Set:
     """
@@ -303,7 +307,11 @@ def calculate_percentages(card: Flashcard) -> Tuple[int, int, int]:
         write_correct_opted_percentage
     )
 
-def generate_feedback_messages(feedback: str, card: Flashcard) -> Union[List[str], None]:
+
+def generate_feedback_messages(
+        feedback: str,
+        card: Flashcard
+) -> Union[List[str], None]:
     (
         flash_correct_percentage,
         write_correct_percentage,
@@ -381,11 +389,13 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
     rnd_idx = random.randint(0, len(message_strings) - 1)
     print(message_strings[rnd_idx])
 
+
 def determine_mode(answers: dict) -> str:
     if "flash_correct" in answers:
         return "flash_correct"
     else:
         return "write_correct"
+
 
 def determine_accuracy(set: Flashcard_Set, mode: str, answers: dict) -> int:
     if mode == "flash_correct":
@@ -397,7 +407,8 @@ def determine_accuracy(set: Flashcard_Set, mode: str, answers: dict) -> int:
             * 100
         )
     else:
-        return 0 # This should never happen
+        return 0  # This should never happen
+
 
 def determine_message_strings(
     set: Flashcard_Set,
@@ -466,7 +477,9 @@ def pick_mode() -> str:
     while True:
         # Credit for case insensitive inputs:
         # https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
-        selected_mode = input(f"Select an option ({modes_keys_str}):\n").lower()
+        selected_mode = input(
+            f"Select an option ({modes_keys_str}):\n"
+        ).lower()
         while True:
             if selected_mode in modes:
                 if selected_mode == "?":
