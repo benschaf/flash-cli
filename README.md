@@ -154,7 +154,7 @@ Example:
 - Use the rich library to create a more visually appealing interface.
 
 ### Backup and Restore
-#### Regularly back up user data (flashcards, progress) to prevent data loss.
+#### Regularly back up data (flashcards, progress) to prevent data loss.
 
 ### Tools
 
