@@ -1,3 +1,4 @@
+from ast import mod
 from pyclbr import _Object
 import sys
 import os
@@ -380,19 +381,30 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
     rnd_idx = random.randint(0, len(message_strings) - 1)
     print(message_strings[rnd_idx])
 
-
-def give_feedback_set(set: Flashcard_Set, answers: dict) -> None:
-    mode = "flash_correct"
+def determine_mode(answers: dict) -> str:
     if "flash_correct" in answers:
-        accuracy = round(answers["flash_correct"] / len(set.flashcards) * 100)
+        return "flash_correct"
     else:
-        accuracy = round(
+        return "write_correct"
+
+def determine_accuracy(set: Flashcard_Set, mode: str, answers: dict) -> int:
+    if mode == "flash_correct":
+        return round(answers["flash_correct"] / len(set.flashcards) * 100)
+    elif mode == "write_correct":
+        return round(
             (answers["write_correct"] + answers["write_correct_user_opted"])
             / len(set.flashcards)
             * 100
         )
-        mode = "write_correct"
+    else:
+        return 0 # This should never happen
 
+def determine_message_strings(
+    set: Flashcard_Set,
+    mode: str,
+    answers: dict,
+    accuracy: int
+) -> List[str]:
     msg_strs = ["Awesome! You are practicing well! Keep it up!"]
     if accuracy > 50:
         msg_strs += [
@@ -406,6 +418,13 @@ def give_feedback_set(set: Flashcard_Set, answers: dict) -> None:
             "flashcards correct!",
             "You can do better! Keep practicing!",
         ]
+    return msg_strs
+
+
+def give_feedback_set(set: Flashcard_Set, answers: dict) -> None:
+    mode = determine_mode(answers)
+    accuracy = determine_accuracy(set, mode, answers)
+    msg_strs = determine_message_strings(set, mode, answers, accuracy)
     print(msg_strs[0])
     print(msg_strs[1])
 
