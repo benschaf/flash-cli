@@ -251,7 +251,7 @@ def pick_set() -> Flashcard_Set:
                 break
             # Credit for checking if input string is an int:
             # https://www.w3schools.com/python/ref_func_isinstance.asp
-            if isinstance(input_string, int):
+            if input_string.isdigit():
                 if int(input_string) in range(1, len(worksheets) + 1):
                     picked_worksheet = worksheets[int(input_string) - 1]
                     return Flashcard_Set(picked_worksheet.title)
