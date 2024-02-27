@@ -405,20 +405,18 @@ def determine_message_strings(
     answers: dict,
     accuracy: int
 ) -> List[str]:
-    msg_strs = ["Awesome! You are practicing well! Keep it up!"]
     if accuracy > 50:
-        msg_strs += [
+        return [
             f"Great job! You got {answers[mode]} out of {len(set.flashcards)} "
             "flashcards correct!",
             f"Congratulations! You got {accuracy}% of the flashcards correct!",
         ]
-    elif accuracy <= 50:
-        msg_strs += [
+    else:
+        return [
             f"You got {answers[mode]} out of {len(set.flashcards)} "
             "flashcards correct!",
             "You can do better! Keep practicing!",
         ]
-    return msg_strs
 
 
 def give_feedback_set(set: Flashcard_Set, answers: dict) -> None:
