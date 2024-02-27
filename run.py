@@ -249,7 +249,7 @@ def pick_set() -> Flashcard_Set:
         print("Pick a flashcard set. These are the available sets:")
         print_worksheet_titles(worksheets)
         input_string = input(
-            "\nPlease enter the name of the set you'd like to pick, or its "
+            "\nPlease enter the name of the set you'd like to pick,\nor its "
             f"number (between 1 and {len(worksheets)}): \n"
         )
         while True:
@@ -269,7 +269,7 @@ def pick_set() -> Flashcard_Set:
             input_string = input(
                 "Invalid input. "
                 f"Please enter a number between 1 and {len(worksheets)}, "
-                f"or a valid worksheet name."
+                f"\nor a valid worksheet name."
                 "\nTo see the list of Sets again, enter '?'.\n"
             )
 
@@ -652,7 +652,7 @@ if __name__ == "__main__":
     function based on the selected mode.
     """
     print("Welcome to Flashcard CLI!")
-    print("This program allows you to practice flashcards and compare your "
+    print("This program allows you to practice flashcards and compare your\n"
           "progress with the Flashcard CLI community.\n")
     while True:
         current_set = pick_set()
