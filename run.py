@@ -2,7 +2,7 @@ import sys
 import os
 import random
 import time
-from typing import NoReturn, Union
+from typing import Dict, List, NoReturn, Union
 import gspread
 from google.oauth2.service_account import Credentials
 import logging
@@ -121,38 +121,43 @@ class Flashcard_Set:
         self.title = title
         self.flashcards = self._load_flashcards()
 
-    def _load_flashcards(self) -> list[Flashcard]:
-        """
-        Loads the flashcards from the worksheet named like the title Attribute.
-
-        Returns:
-            list: A list of Flashcard objects.
-        """
+    def _load_worksheet_data(self) -> List[Dict[str, Union[int, float, str]]]:
         print(f"Loading set from worksheet: '{self.title}'")
-        flashcards = []
         try:
             worksheet = SHEET.worksheet(self.title).get_all_records()
         except gspread.exceptions.WorksheetNotFound as e:
-            handle_exception(e, f"The worksheet '{self.title}' was not found.")
+            handle_exception(e, f"The worksheet '{self.title}' "
+                             "was not found.")
         except gspread.exceptions.APIError as e:
-            handle_exception(e, "An error occurred with the Google Sheets API.")
+            handle_exception(e, "An error occurred with the "
+                             "Google Sheets API.")
         except Exception as e:
             handle_exception(e, "An unexpected error occurred.")
         else:
             print("Successfully loaded!")
+            return worksheet
 
-        for row in worksheet:
-            question = str(row["question"])
-            answer = str(row["answer"])
-            progress_dict = {
-                "flash_correct": row["flash_correct"],
-                "flash_incorrect": row["flash_incorrect"],
-                "write_correct": row["write_correct"],
-                "write_correct_user_opted": row["write_correct_user_opted"],
-                "write_incorrect": row["write_incorrect"],
-            }
-            flashcards.append(Flashcard(question, answer, progress_dict))
+    def _create_flashcard_from_row(
+            self,
+            row: Dict[str, Union[int, float, str]]
+    ) -> Flashcard:
+        question = str(row["question"])
+        answer = str(row["answer"])
+        progress_dict = {
+            "flash_correct": row["flash_correct"],
+            "flash_incorrect": row["flash_incorrect"],
+            "write_correct": row["write_correct"],
+            "write_correct_user_opted": row["write_correct_user_opted"],
+            "write_incorrect": row["write_incorrect"],
+        }
+        return Flashcard(question, answer, progress_dict)
 
+    def _load_flashcards(self) -> List[Flashcard]:
+        worksheet_data = self._load_worksheet_data()
+        flashcards = [
+            self._create_flashcard_from_row(row)
+            for row in worksheet_data
+        ]
         return flashcards
 
     def show_all(self) -> None:
