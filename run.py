@@ -28,7 +28,11 @@ logging.basicConfig(
 
 def clear_terminal() -> None:
     """
-    Clear function to clean-up the terminal so things don't get messy.
+    Clears the terminal screen.
+
+    This function is used to clear the terminal screen. It uses the os specific
+    command to clear the terminal screen. It uses 'cls' for windows and 'clear'
+    for linux and mac.
     """
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -52,6 +56,17 @@ SCOPE = [
 
 
 def handle_exception(e: Exception, message: str) -> NoReturn:
+    """
+    Handles an exception by printing an error message, logging the error,
+    and exiting the program.
+
+    Args:
+        e (Exception): The exception that occurred.
+        message (str): The error message to display.
+
+    Returns:
+        None
+    """
     print(message)
     print(f"Error details: {e}")
     logging.exception(f"{message} Error details: %s", str(e))
@@ -95,6 +110,17 @@ else:
 class Flashcard:
     """
     A class to represent a flashcard.
+
+    Attributes:
+        question (str): The question on the flashcard.
+        answer (str): The answer to the question on the flashcard.
+        progress_dict (dict): A dictionary to track the progress of the flashcard.
+
+    Methods:
+        show_question(): Prints the question on the flashcard.
+        show_answer(): Prints the answer to the question on the flashcard.
+        update_progress(progress_key: str): Updates the progress of the flashcard.
+
     """
 
     def __init__(self, question: str, answer: str, progress_dict: dict):
@@ -103,30 +129,52 @@ class Flashcard:
         self.progress_dict = progress_dict
 
     def show_question(self) -> None:
+        """
+        Prints the question on the flashcard.
+        """
         print(self.question)
 
     def show_answer(self) -> None:
+        """
+        Prints the answer to the question on the flashcard.
+        """
         print(self.answer)
 
     def update_progress(self, progress_key: str) -> None:
+        """
+        Updates the progress of the flashcard.
+
+        Args:
+            progress_key (str): The key to identify the progress to be updated.
+        """
         self.progress_dict[progress_key] += 1
 
 
 class Flashcard_Set:
     """
-    Represents a set of flashcards.
+    A class to represent a set of flashcards.
 
     Attributes:
         title (str): The title of the flashcard set.
-        flashcards (list): A list of Flashcard objects representing
-            the flashcards in the set.
+        flashcards (List[Flashcard]): The flashcards in the set.
     """
-
     def __init__(self, title: str):
+        """
+        Constructs all the necessary attributes for the flashcard set object.
+
+        Args:
+            title (str): The title of the flashcard set.
+        """
         self.title = title
         self.flashcards = self._load_flashcards()
 
     def _load_worksheet_data(self) -> List[Dict[str, Union[int, float, str]]]:
+        """
+        Loads the worksheet data from Google Sheets.
+
+        Returns:
+            List[Dict[str, Union[int, float, str]]]: The data from the worksheet.
+        """
         print(f"Loading set from worksheet: '{self.title}'")
         try:
             worksheet = SHEET.worksheet(self.title).get_all_records()
@@ -146,6 +194,15 @@ class Flashcard_Set:
             self,
             row: Dict[str, Union[int, float, str]]
     ) -> Flashcard:
+        """
+        Creates a flashcard from a row of data.
+
+        Args:
+            row (Dict[str, Union[int, float, str]]): The row of data.
+
+        Returns:
+            Flashcard: The created flashcard.
+        """
         question = str(row["question"])
         answer = str(row["answer"])
         progress_dict = {
@@ -158,6 +215,12 @@ class Flashcard_Set:
         return Flashcard(question, answer, progress_dict)
 
     def _load_flashcards(self) -> List[Flashcard]:
+        """
+        Loads the flashcards from the worksheet data.
+
+        Returns:
+            List[Flashcard]: The loaded flashcards.
+        """
         worksheet_data = self._load_worksheet_data()
         flashcards = [
             self._create_flashcard_from_row(row)
@@ -178,12 +241,11 @@ class Flashcard_Set:
 
     def _convert_to_list_of_lists(self) -> list[list]:
         """
-        Converts the flashcards into a list of lists.
-        A list of lists is needed for the google spreadsheets api.
+        Converts the flashcards to a list of lists.
+        This makes the data compatible with the Google Sheets API.
 
         Returns:
-            list: A list of lists containing the question, answer, and progress
-                level of each flashcard.
+            list[list]: The flashcards as a list of lists.
         """
         li_of_li = []
         for flashcard in self.flashcards:
@@ -194,6 +256,15 @@ class Flashcard_Set:
         return li_of_li
 
     def _prepare_data_for_upload(self) -> list:
+        """
+        Prepares the flashcard data for upload to Google Sheets.
+        - Creates the header row.
+        - Converts the flashcards to a list of lists.
+        - Prepends the header row to the list of lists.
+
+        Returns:
+            list: The prepared data.
+        """
         headers = [
             "question",
             "answer",
@@ -209,6 +280,12 @@ class Flashcard_Set:
         return data_to_upload
 
     def _upload_data_to_worksheet(self, data: list) -> None:
+        """
+        Uploads the data to the Google Sheets worksheet.
+
+        Args:
+            data (list): The data to upload.
+        """
         print(f"\nUploading to worksheet: '{self.title}'...")
         try:
             worksheet = SHEET.worksheet(self.title)
@@ -226,7 +303,8 @@ class Flashcard_Set:
 
     def upload(self) -> None:
         """
-        Uploads the flashcards to the worksheet.
+        Prepares the flashcard data and uploads it to the Google Sheets
+        worksheet.
         """
         data_to_upload = self._prepare_data_for_upload()
         self._upload_data_to_worksheet(data_to_upload)
