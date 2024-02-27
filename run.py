@@ -2,7 +2,7 @@ import sys
 import os
 import random
 import time
-from typing import NoReturn
+from typing import NoReturn, Union
 import gspread
 from google.oauth2.service_account import Credentials
 import logging
@@ -453,7 +453,10 @@ def pick_mode() -> str:
                 ).lower()
 
 
-def input_or_quit(ipt: str) -> str:
+# Credit for multiple return hints: https://stackoverflow.com/questions/33945261/how-to-specify-multiple-return-types-using-type-hints
+
+
+def input_or_quit(ipt: str) -> Union[str, None]:
     """
     Prompts the user to confirm if they want to quit the program.
 
