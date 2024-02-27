@@ -532,17 +532,17 @@ def pick_mode() -> str:
     }
     modes_w_instr = {
         "s": "Study with Flashcards:\n"
-        "In this mode, you'll be shown the question side of each card. Try to "
+        "In this mode, you'll be shown the question side of each card.\nTry to "
         "answer it in your mind, then press any key to see the answer.\n",
         "i": "Interactive Quiz:\n"
         "In this mode, you'll be shown the question side of each card and "
-        "asked to type the answer. Your answer will be checked against the "
+        "asked to\ntype the answer. Your answer will be checked against the "
         "correct answer.\n",
         "r": "Review All Flashcards:\n"
         "In this mode, you'll see all the questions and answers in the set.\n",
         "c": "Choose a Different Flashcard Set:\n"
         "In this mode, you can go back to the set selection menu to choose a "
-        "different set of flashcards to study.\n",
+        "different\nset of flashcards to study.\n",
     }
     # Credit for join method:
     # https://docs.python.org/3/library/stdtypes.html#str.join
