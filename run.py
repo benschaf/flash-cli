@@ -245,12 +245,12 @@ def pick_set() -> Flashcard_Set:
                     return Flashcard_Set(picked_worksheet.title)
             except ValueError:
                 for worksheet in worksheets:
-                    if input_string == worksheet.title:
+                    if input_string.lower() == worksheet.title.lower():
                         return Flashcard_Set(worksheet.title)
             input_string = input(
                 "Invalid input. "
                 f"Please enter a number between 1 and {len(worksheets)}, "
-                f"or a valid worksheet name (case-sensitive)."
+                f"or a valid worksheet name."
                 "\nTo see the list of Sets again, enter '?'.\n"
             )
 
