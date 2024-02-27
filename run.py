@@ -166,7 +166,6 @@ class Flashcard_Set:
         """
         table = PrettyTable()
         table.field_names = ["Question", "Answer"]
-
         for flashcard in self.flashcards:
             table.add_row([flashcard.question, flashcard.answer])
         print(f"Showing all flashcards in: '{self.title}'\n")
@@ -183,10 +182,10 @@ class Flashcard_Set:
         """
         li_of_li = []
         for flashcard in self.flashcards:
-            tmp_li = [flashcard.question, flashcard.answer]
+            tmp_row = [flashcard.question, flashcard.answer]
             for key in flashcard.progress_dict:
-                tmp_li.append(flashcard.progress_dict[key])
-            li_of_li.append(tmp_li)
+                tmp_row.append(flashcard.progress_dict[key])
+            li_of_li.append(tmp_row)
         return li_of_li
 
     def upload(self) -> None:
