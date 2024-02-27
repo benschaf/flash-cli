@@ -3,7 +3,7 @@ import sys
 import os
 import random
 import time
-from typing import Dict, List, NoReturn, Union
+from typing import Dict, List, NoReturn, Tuple, Union
 import gspread
 from google.oauth2.service_account import Credentials
 import logging
@@ -46,6 +46,8 @@ SCOPE = [
 # Credit for NoReturn type hint:
 # https://adamj.eu/tech/2021/05/20/python-type-hints-whats-the-point-of-noreturn/
 
+# Credit for parameter type hints:
+# https://stackoverflow.com/questions/2489669/how-do-python-functions-handle-the-types-of-parameters-that-you-pass-in
 
 def handle_exception(e: Exception, message: str) -> NoReturn:
     print(message)
@@ -267,9 +269,7 @@ def pick_set() -> Flashcard_Set:
             )
 
 
-# Credit for parameter type hints:
-# https://stackoverflow.com/questions/2489669/how-do-python-functions-handle-the-types-of-parameters-that-you-pass-in
-def give_feedback_card(card: Flashcard, feedback: str) -> None:
+def calculate_percentages(card: Flashcard) -> Tuple[int, int, int]:
     flash_tries = (
         card.progress_dict["flash_correct"] +
         card.progress_dict["flash_incorrect"]
@@ -296,11 +296,23 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
         * 100
     ) if write_tries > 0 else 0
 
-    msg_strs = []
+    return (
+        flash_correct_percentage,
+        write_correct_percentage,
+        write_correct_opted_percentage
+    )
+
+def generate_feedback_messages(feedback: str, card: Flashcard) -> Union[List[str], None]:
+    (
+        flash_correct_percentage,
+        write_correct_percentage,
+        write_correct_opted_percentage
+    ) = calculate_percentages(card)
+
     if feedback == "flash_correct":
         if flash_correct_percentage == 0:
             return
-        msg_strs = [
+        return [
             f"Great job! You're part of the {flash_correct_percentage}% "
             "of people who knew the answer!",
             f"You're doing better than {100 - flash_correct_percentage}% "
@@ -311,7 +323,7 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
         if flash_correct_percentage == 0:
             return
         if flash_correct_percentage < 50:
-            msg_strs = [
+            return [
                 f"Only {flash_correct_percentage}% "
                 "of people knew the answer. Keep practicing!",
                 "Don't worry, less than half of the people who "
@@ -319,11 +331,11 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
                 "Keep practicing!",
             ]
         else:
-            msg_strs = ["Keep practicing!"]
+            return ["Keep practicing!"]
     elif feedback == "write_correct":
         if write_correct_percentage == 0:
             return
-        msg_strs = [
+        return [
             f"Great job! You're part of the {write_correct_percentage}% "
             "of people who knew the answer!",
             f"You're doing better than {100 - write_correct_percentage}% "
@@ -333,7 +345,7 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
     elif feedback == "write_correct_user_opted":
         if write_correct_opted_percentage == 0:
             return
-        msg_strs = [
+        return [
             f"Great job! You're part of the {write_correct_opted_percentage}% "
             "of people who opted to know the answer or wrote it correctly!",
             f"You're doing better than {100 - write_correct_opted_percentage}%"
@@ -344,7 +356,7 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
         if write_correct_opted_percentage == 0:
             return
         if write_correct_percentage < 50:
-            msg_strs = [
+            return [
                 f"Only {write_correct_percentage}% of people knew the answer. "
                 "Keep practicing!",
                 "Don't worry, less than half of the people who attempted this "
@@ -352,7 +364,7 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
                 "You did not write the correct answer. Keep practicing!",
             ]
         else:
-            msg_strs = [
+            return [
                 "You did not write the correct answer. Keep practicing!",
                 "Keep practicing!",
                 f"{write_correct_opted_percentage}% "
@@ -360,8 +372,13 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
                 "wrote it correctly. Keep practicing!",
             ]
 
-    rnd_idx = random.randint(0, len(msg_strs) - 1)
-    print(msg_strs[rnd_idx])
+
+def give_feedback_card(card: Flashcard, feedback: str) -> None:
+    message_strings = generate_feedback_messages(feedback, card)
+    if message_strings is None:
+        return
+    rnd_idx = random.randint(0, len(message_strings) - 1)
+    print(message_strings[rnd_idx])
 
 
 def give_feedback_set(set: Flashcard_Set, answers: dict) -> None:
