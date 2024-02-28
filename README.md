@@ -43,14 +43,12 @@ _Note_: For this specific project, the terminal environment is emulated within a
 
 ## Features
 
-### Quiz Modes
-
-#### Main Menu and Navigation
+### Main Menu and Navigation
 The app provides a main menu with options to choose between different quiz modes and to exit the app. Users can navigate the app using keyboard shortcuts that are displayed in the menu. If the user wishes to have more information about the options, they can use the help (?) command.
 All invalid inputs are handled gracefully, and the app provides helpful messages to guide users.
-![Main Menu](docs/images/feature-main-menu.png)
+![Main Menu](documentation/images/feature-main-menu.png)
 
-#### Flashcard Mode: Users can review flashcards and decide if they know the answer.
+### Flashcard Mode: Users can review flashcards and decide if they know the answer.
 Functionality:
 - Display a random flashcard only with the word (question).
 - Upon user input, reveal the definition (answer).
@@ -58,9 +56,9 @@ Functionality:
 - Update the flashcard status based on the user's response.
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
 This mode is designed to help users for initial learning and self-assessment. It's a simple and effective way to memorize new flashcards.
-![Flashcard Mode](docs/images/feature-flashcard-mode.png)
+![Flashcard Mode](documentation/images/feature-flashcard-mode.png)
 
-#### Typed Answer Quizzes: Users type their answers directly.
+### Typed Answer Quizzes: Users type their answers directly.
 Functionality:
 - Display a word (question).
 - Prompt the user to type the definition (answer).
@@ -69,13 +67,13 @@ Functionality:
 - Update the flashcard status based on the user's responses.
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
 This mode is designed to test the user's recall and understanding of the flashcard. It's a more challenging and interactive way to practice and reinforce learning.
-![Typed Answer Mode](docs/images/feature-typed-answer-mode.png)
+![Typed Answer Mode](documentation/images/feature-typed-answer-mode.png)
 
 ### Real-Time Google Sheets Sync
 The app automatically syncs flashcard data with a connected Google Sheets document using the Google Sheets API. No user login is required.
 
 The Google Sheet is set up so that every worksheet is a deck of flashcards. Each row represents a flashcard, with the word in the first column and the definition in the second column. Further columns are used to store the status of the flashcard.
-![Google Sheets](docs/images/feature-google-sheets-sync.png)
+![Google Sheets](documentation/images/feature-google-sheets-sync.png)
 
 ### Real-Time Feedback:
 The app will provide personalized and dynamically generated feedback based on collective performance. Feedback is given after answering most questions and at the end of each quiz. It's designed to motivate users and help put their progress into perspective.
@@ -127,41 +125,40 @@ except FileNotFoundError as e:
 ```
 [Vew code in project](https://github.com/benschaf/flash-cli/blob/04f1b1e25fe9bb4242dcb49575435691b4b7cfb1/run.py#L77-L86)
 
-#### Gracefully handle unexpected errors (e.g., invalid input, network issues).
+### Gracefully handle unexpected errors (e.g., invalid input).
 Invalid input: If the user enters an invalid command or input, the app will display a helpful message and prompt the user to try again.
 
 Example:
-![Invalid Input](docs/images/feature-invalid-input.png)
+![Invalid Input](documentation/images/feature-invalid-input.png)
 
 ## Future Features
 
-### Quiz Modes
-- Multiple-Choice Quizzes: Randomized questions with answer choices.
-- Timed Quizzes: Set a time limit for answering questions.
+- Quiz Modes
+    - Multiple-Choice Quizzes: Randomized questions with answer choices.
+    - Timed Quizzes: Set a time limit for answering questions.
 
-### Flashcard Management
-- Create, edit, and delete flashcard decks.
+- Flashcard Management
+    - Create, edit, and delete flashcard decks.
 
-### Statistics and Analytics
-- Display global progress (e.g., percentage of how many people knew an answer).
-- Show performance trends over time (graphs, charts).
+- Statistics and Analytics
+    - Display global progress (e.g., percentage of how many people knew an answer).
+    - Show performance trends over time (graphs, charts).
 
-### Integration with Language APIs
-#### Use language APIs (e.g., WordNet, Google Translate) for:
-- Synonyms and antonyms
-- Example sentences
-- Word definitions
-- Pronunciations
+- Use language APIs (e.g., WordNet, Google Translate) for:
+    - Synonyms and antonyms
+    - Example sentences
+    - Word definitions
+    - Pronunciations
 
-### Gamification
-- Points and Badges: Reward users with points for completing quizzes or achieving milestones.
+- Gamification
+    - Points and Badges: Reward users with points for completing quizzes or achieving milestones.
 
-### Customizable Themes
-- Allow users to choose color schemes for the terminal interface (e.g., light mode, dark mode).
-- Use the rich library to create a more visually appealing interface.
+- Customizable Themes
+    - Allow users to choose color schemes for the terminal interface (e.g., light mode, dark mode).
+    - Use the rich library to create a more visually appealing interface.
 
-### Backup and Restore
-#### Regularly back up data (flashcards, progress) to prevent data loss.
+- Backup and Restore
+    - Regularly back up data (flashcards, progress) to prevent data loss.
 
 ### Tools
 
