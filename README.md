@@ -437,9 +437,9 @@ All the Credits and hyperlinks can be found in the [run.py](run.py) file on the 
 - Line: 757: [Credit for line break](https://stackoverflow.com/questions/53162/how-can-i-do-a-line-break-line-continuation-in-python-split-up-a-long-line-of)
 
 ### Media
-- French Flashcard Set: https://quizlet.com/744634653/french-adjectives-adjectives-in-french-flash-cards/
-- German Flashcard Set: https://quizlet.com/300188987/german-verbs-flash-cards/
-- Python Flashcard Set: https://quizlet.com/493123451/python-flash-cards/
+- French Flashcard Set: [CJHSalmeron on Quizlet](https://quizlet.com/744634653/french-adjectives-adjectives-in-french-flash-cards/)
+- German Flashcard Set: [Rubir22 on Quizlet](https://quizlet.com/300188987/german-verbs-flash-cards/)
+- Python Flashcard Set: [Tash207 on Quizlet](https://quizlet.com/493123451/python-flash-cards/)
 
 ## Acknowledgements
 - I would like to thank my Code Institute mentor, [Tim Nelson](https://tim.2bn.dev/) for his support throughout the development of this project.
