@@ -402,11 +402,13 @@ The emulated CLI has some quirks and limitations compared to a traditional termi
 
 All of these differences are taken into account during development, and the app is designed to work seamlessly in both environments.
 
-
 ## Credits
 
 ### Content
 All the Credits and hyperlinks can be found in the [run.py](run.py) file on the indicated lines.
+
+Note that this list of credits is automatically generated from the run.py file using the [copy-credits.py](copy-credits.py) script.
+The script was written by me, with much help from the Microsoft Edge Copilot.
 
 - Line: 11: [Credit for prettytable](https://pythonfusion.com/table-on-console-python/#37-terminaltables-or-asciitable)
 
@@ -430,13 +432,13 @@ All the Credits and hyperlinks can be found in the [run.py](run.py) file on the 
 
 - Line: 554: [Credit for join method](https://docs.python.org/3/library/stdtypes.html#str.join)
 
-- Line: 563: [Credit for case insensitive inputs](https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive)
+- Line: 564: [Credit for case insensitive inputs](https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive)
 
-- Line: 607: [Credit for sleep function](https://www.datacamp.com/tutorial/python-time-sleep?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9042759&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=Cj0KCQiAoeGuBhCBARIsAGfKY7yufxE5zKBDYxMBH_VoxTSSnHmHTLuVcvkg8bWHAxgocfoWYEecr4oaAt8EEALw_wcB)
+- Line: 619: [Credit for sleep function](https://www.datacamp.com/tutorial/python-time-sleep?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9042759&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=Cj0KCQiAoeGuBhCBARIsAGfKY7yufxE5zKBDYxMBH_VoxTSSnHmHTLuVcvkg8bWHAxgocfoWYEecr4oaAt8EEALw_wcB)
 
-- Line: 735: [Credit to Tim Nelson (CI Mentor) for calling the main function like that.](https://medium.com/@mycodingmantras/what-does-if-name-main-mean-in-python-fa6b0460a62d#:~:text=The%20if%20__name__,set%20to%20__main__%20.)
+- Line: 747: [Credit to Tim Nelson (CI Mentor) for calling the main function like that.](https://medium.com/@mycodingmantras/what-does-if-name-main-mean-in-python-fa6b0460a62d#:~:text=The%20if%20__name__,set%20to%20__main__%20.)
 
-- Line: 757: [Credit for line break](https://stackoverflow.com/questions/53162/how-can-i-do-a-line-break-line-continuation-in-python-split-up-a-long-line-of)
+- Line: 769: [Credit for line break](https://stackoverflow.com/questions/53162/how-can-i-do-a-line-break-line-continuation-in-python-split-up-a-long-line-of)
 
 ### Media
 - French Flashcard Set: [CJHSalmeron on Quizlet](https://quizlet.com/744634653/french-adjectives-adjectives-in-french-flash-cards/)
