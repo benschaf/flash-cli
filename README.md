@@ -1,4 +1,4 @@
-# Flash-CLI: Command-Line Vocabulary Training
+# [Flash-CLI](https://flash-cli-1471beedfcc0.herokuapp.com): Command-Line Vocabulary Training
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -9,6 +9,13 @@ Flash-CLI is a Python-based command-line flashcard application that seamlessly i
 [Link to live Website](https://flash-cli-1471beedfcc0.herokuapp.com/)
 
 ## UX
+
+### Value for the Target Audience
+Flash-CLI is designed for anyone who wants to expand their vocabulary and improve their language skills. The app is suitable for students, language learners, and professionals who want to learn new words and concepts efficiently.
+
+The app is designed to be user-friendly and accessible to everyone, regardless of their technical background. It's a lightweight and fast tool that allows users to focus on learning without distractions.
+
+Flash-CLI sets itself apart because it provides real-time feedback based on the user's performance and the community's performance. This feature motivates users and helps them put their progress into perspective.
 
 ### User Stories
 | As a | I want to | so that I can |
