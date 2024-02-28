@@ -1,5 +1,11 @@
 # [Flash-CLI](https://flash-cli-1471beedfcc0.herokuapp.com): Command-Line Vocabulary Training
 
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fflash-cli-1471beedfcc0.herokuapp.com%2F)](https://flash-cli-1471beedfcc0.herokuapp.com/)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/benschaf/flash-cli)](https://github.com/benschaf/flash-cli/commits)
+[![GitHub issues](https://img.shields.io/github/issues/benschaf/flash-cli)](https://github.com/benschaf/flash-cli/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/benschaf/flash-cli)](https://github.com/benschaf/flash-cli/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub language count](https://img.shields.io/github/languages/count/benschaf/flash-cli)](https://github.com/benschaf/flash-cli)
+
 Flash-CLI is a Python-based command-line flashcard application that seamlessly integrates with Google Sheets. Enhance your skills, compare your progress with everyone who used the app before, and master all kinds of flashcards — all from a Command Line Interface.
 
 [Link to google Spreadsheet](https://docs.google.com/spreadsheets/d/1hGXKTWDj8vrl2kdby4OqQysjKpAUj-r4rwd_002I7Vc/edit?usp=sharing)
