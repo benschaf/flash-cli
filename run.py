@@ -554,6 +554,7 @@ def pick_mode() -> str:
     # Credit for join method:
     # https://docs.python.org/3/library/stdtypes.html#str.join
     modes_keys_str = ", ".join(modes.keys())
+    back_option_enabled = False
 
     print("\nMAIN MENU\n")
     print("What would you like to do next?")
@@ -562,12 +563,22 @@ def pick_mode() -> str:
     while True:
         # Credit for case insensitive inputs:
         # https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
-        selected_mode = input(
-            f"Select an option ({modes_keys_str}):\n"
-        ).lower()
+        selected_mode = ""
+        if back_option_enabled:
+            selected_mode = input(
+                f"Select an option ({modes_keys_str}):\n"
+                "or 'b' to go back to the main menu.\n"
+            ).lower()
+        else:
+            selected_mode = input(
+                f"Select an option ({modes_keys_str}):\n"
+            ).lower()
         while True:
+            if selected_mode == "b":
+                return "b"
             if selected_mode in modes:
                 if selected_mode == "?":
+                    back_option_enabled = True
                     clear_terminal()
                     print("Here are the available options again "
                           "with their descriptions:\n")
@@ -581,6 +592,7 @@ def pick_mode() -> str:
                 selected_mode = input(
                     "Invalid input. "
                     f"Please enter one of these letters ({modes_keys_str})\n"
+                    "or 'b' to go back to the main menu.\n"
                 ).lower()
 
 
@@ -763,3 +775,5 @@ if __name__ == "__main__":
                 input("\nPress Enter to go back to the main menu.\n")
             elif mode == "c":
                 break
+            elif mode == "b":
+                continue
