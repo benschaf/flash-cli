@@ -41,6 +41,7 @@ _Note_: For this specific project, the terminal environment is emulated within a
 ### Main Menu and Navigation
 The app provides a main menu with options to choose between different quiz modes and to exit the app. Users can navigate the app using keyboard shortcuts that are displayed in the menu. If the user wishes to have more information about the options, they can use the help (?) command.
 All invalid inputs are handled gracefully, and the app provides helpful messages to guide users.
+
 ![Main Menu](documentation/images/feature-main-menu.png)
 
 ### Flashcard Mode: Users can review flashcards and decide if they know the answer.
@@ -51,6 +52,7 @@ Functionality:
 - Update the flashcard status based on the user's response.
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
 This mode is designed to help users for initial learning and self-assessment. It's a simple and effective way to memorize new flashcards.
+
 ![Flashcard Mode](documentation/images/feature-flashcard-mode.png)
 
 ### Typed Answer Quizzes: Users type their answers directly.
@@ -62,12 +64,14 @@ Functionality:
 - Update the flashcard status based on the user's responses.
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
 This mode is designed to test the user's recall and understanding of the flashcard. It's a more challenging and interactive way to practice and reinforce learning.
+
 ![Typed Answer Mode](documentation/images/feature-typed-answer-mode.png)
 
 ### Real-Time Google Sheets Sync
 The app automatically syncs flashcard data with a connected Google Sheets document using the Google Sheets API. No user login is required.
 
 The Google Sheet is set up so that every worksheet is a deck of flashcards. Each row represents a flashcard, with the word in the first column and the definition in the second column. Further columns are used to store the status of the flashcard.
+
 ![Google Sheets](documentation/images/feature-google-sheets-sync.png)
 
 ### Real-Time Feedback:
@@ -124,6 +128,7 @@ except FileNotFoundError as e:
 Invalid input: If the user enters an invalid command or input, the app will display a helpful message and prompt the user to try again.
 
 Example:
+
 ![Invalid Input](documentation/images/feature-invalid-input.png)
 
 ## Future Features
