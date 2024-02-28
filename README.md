@@ -282,40 +282,115 @@ The primary functions outside of the classes used on this application are:
 - `flashcard_mode()`: The flashcard mode allows the user to review flashcards and decide if they know the answer.
 - `typed_answer_mode()`: The typed answer mode allows the user to type their answers directly.
 
-## Acknowledgements
+### Imports
 
+I've used the following Python packages and/or external imported packages.
 
+- `import sys`: sys is used for system-specific parameters and functions.
+- `import os`: os provides a way of using operating system dependent functionality.
+- `import random`: random is used for generating random numbers.
+- `import time`: time provides various time-related functions.
+- `from typing import Dict, List, NoReturn, Tuple, Union`: These are used for type hinting in function signatures and variable declarations.
+- `import gspread`: gspread is used for interacting with Google Spreadsheets.
+- `from google.oauth2.service_account import Credentials`: Credentials is used for authenticating with the Google Sheets API.
+- `import logging`: logging is used for logging errors, information, and warnings.
+- `from prettytable import PrettyTable`: PrettyTable is used for creating ASCII art tables.
 
+## Testing
 
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+For all testing, please refer to the [TESTING.md](TESTING.md) file.
 
-Welcome,
+## Deployment
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+Code Institute has provided a [template](https://github.com/Code-Institute-Org/python-essentials-template) to display the terminal view of this backend application in a modern web browser.
+This is to improve the accessibility of the project to others.
 
-## Reminders
+The live deployed application can be found deployed on [Heroku](https://flash-cli-1471beedfcc0.herokuapp.com).
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+### Heroku Deployment
 
-## Creating the Heroku app
+This project uses [Heroku](https://www.heroku.com), a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+Deployment steps are as follows, after account setup:
 
-1. `heroku/python`
-2. `heroku/nodejs`
+- Select **New** in the top-right corner of your Heroku Dashboard, and select **Create new app** from the dropdown menu.
+- Your app name must be unique, and then choose a region closest to you (EU or USA), and finally, select **Create App**.
+- From the new app **Settings**, click **Reveal Config Vars**, and set the value of KEY to `PORT`, and the value to `8000` then select *add*.
+- If using any confidential credentials, such as CREDS.JSON, then these should be pasted in the Config Variables as well.
+- Further down, to support dependencies, select **Add Buildpack**.
+- The order of the buildpacks is important, select `Python` first, then `Node.js` second. (if they are not in this order, you can drag them to rearrange them)
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+Heroku needs two additional files in order to deploy properly.
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+- requirements.txt
+- Procfile
 
-Connect your GitHub repository and deploy as normal.
+You can install this project's **requirements** (where applicable) using:
 
-## Constraints
+- `pip3 install -r requirements.txt`
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+If you have your own packages that have been installed, then the requirements file needs updated using:
 
----
+- `pip3 freeze --local > requirements.txt`
+
+The **Procfile** can be created with the following command:
+
+- `echo web: node index.js > Procfile`
+
+For Heroku deployment, follow these steps to connect your own GitHub repository to the newly created app:
+
+Either:
+
+- Select **Automatic Deployment** from the Heroku app.
+
+Or:
+
+- In the Terminal/CLI, connect to Heroku using this command: `heroku login -i`
+- Set the remote for Heroku: `heroku git:remote -a app_name` (replace *app_name* with your app name)
+- After performing the standard Git `add`, `commit`, and `push` to GitHub, you can now type:
+	- `git push heroku main`
+
+The frontend terminal should now be connected and deployed to Heroku!
+
+### Local Deployment
+
+This project can be cloned or forked in order to make a local copy on your own system.
+
+For either method, you will need to install any applicable packages found within the *requirements.txt* file.
+
+- `pip3 install -r requirements.txt`.
+
+If using any confidential credentials, such as `CREDS.json` or `env.py` data, these will need to be manually added to your own newly created project as well.
+
+#### Cloning
+
+You can clone the repository by following these steps:
+
+1. Go to the [GitHub repository](https://github.com/benschaf/flash-cli)
+2. Locate the Code button above the list of files and click it
+3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
+4. Open Git Bash or Terminal
+5. Change the current working directory to the one where you want the cloned directory
+6. In your IDE Terminal, type the following command to clone my repository:
+	- `git clone https://github.com/benschaf/flash-cli.git`
+7. Press Enter to create your local clone.
+
+Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/benschaf/flash-cli)
+
+Please note that in order to directly open the project in Gitpod, you need to have the browser extension installed.
+A tutorial on how to do that can be found [here](https://www.gitpod.io/docs/configure/user-settings/browser-extension).
+
+#### Forking
+
+By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository.
+You can fork this repository by using the following steps:
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/benschaf/flash-cli)
+2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
+
+### Local VS Deployment
 
 Happy coding!
