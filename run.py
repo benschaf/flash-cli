@@ -579,10 +579,13 @@ def pick_mode() -> str:
 
 def input_or_quit(ipt: str) -> str:
     """
-    Prompts the user to confirm if they want to quit the program.
+    Function that prompts the user for input and checks if they want to quit.
+
+    Args:
+        ipt (str): The prompt message for the user.
 
     Returns:
-        bool: True if the user confirms they want to quit, False otherwise.
+        str: The user's input, or 'q' if they choose to quit.
     """
     while True:
         user_answer = input(ipt)
@@ -625,7 +628,7 @@ def flashcard_mode(current_set: Flashcard_Set) -> None:
         current_set.flashcards[idx].show_question()
         ipt = input_or_quit("\nPress Enter to show the Answer "
                             "(or 'q' to quit)\n")
-        if ipt is None:
+        if ipt == "q":
             return
         print("Answer:")
         current_set.flashcards[idx].show_answer()
@@ -674,7 +677,7 @@ def type_answer_mode(current_set: Flashcard_Set) -> None:
         print("Question:")
         current_set.flashcards[idx].show_question()
         user_answer = input_or_quit("\nType your Answer (or 'q' to quit):\n")
-        if user_answer is None:
+        if user_answer == "q":
             return
         if user_answer == current_set.flashcards[idx].answer:
             print("\nCorrect!")
@@ -690,7 +693,7 @@ def type_answer_mode(current_set: Flashcard_Set) -> None:
                 correction = input_or_quit(
                     "\nWas your answer correct enough anyways? (y, n, q):\n"
                 )
-                if correction is None:
+                if correction == "q":
                     return
                 if correction == "y":
                     print("\nTreating answer as correct.")
@@ -713,7 +716,7 @@ def type_answer_mode(current_set: Flashcard_Set) -> None:
                 else:
                     print("Invalid input. Please enter 'y' or 'n'.")
         input_or_quit("\nPress Enter to continue\n")
-        if user_answer is None:
+        if user_answer == "q":
             return
         clear_terminal()
     print("Lesson finished\n")
