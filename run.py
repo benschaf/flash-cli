@@ -1,5 +1,3 @@
-from ast import mod
-from pyclbr import _Object
 import sys
 import os
 import random
