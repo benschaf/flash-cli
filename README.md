@@ -189,38 +189,98 @@ Below is the flowchart of the main process of this Python program. It shows the 
 
 ![screenshot](documentation/flowchart.png)
 
-**Line: 40**: Credit for using the google sheets API:
--  https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode
+### Classes & Functions
 
-**Line: 48**: Credit for exception handling:
--  https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
+The program uses two classes as a blueprint for the project's objects (OOP).
+The `Flashcard` class represents a single flashcard, and the `Flashcard_Set` class represents a set (deck) of flashcards.
+A number of `Flashcard` objects are stored in a `Flashcard_Set` object.
+The objects are created using the data from the Google Sheets document. In the document, a worksheet represents a `Flahscard_Set` and each row represents a `Flashcard`.
 
-**Line: 51**: Credit for NoReturn type hint:
--  https://adamj.eu/tech/2021/05/20/python-type-hints-whats-the-point-of-noreturn/
+```python
+class Flashcard:
+    """
+    A class to represent a flashcard.
 
-**Line: 54**: Credit for parameter type hints:
--  https://stackoverflow.com/questions/2489669/how-do-python-functions-handle-the-types-of-parameters-that-you-pass-in
+    Attributes:
+        question (str): The question on the flashcard.
+        answer (str): The answer to the question on the flashcard.
+        progress_dict (dict): A dictionary to track the
+        progress of the flashcard.
 
-**Line: 106**: Credit for writing docstrings:
--  https://www.datacamp.com/tutorial/docstrings-python?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9115817&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=CjwKCAiArLyuBhA7EiwA-qo80DbfmFCbaxqMhOuUbjm3RWcqe_zVQXPxO_LL6__tPOFhAhwsABLhxxoCPqwQAvD_BwE
+    Methods:
+        show_question(): Prints the question on the flashcard.
+        show_answer(): Prints the answer to the question on the flashcard.
+        update_progress(progress_key: str): Updates the
+        progress of the flashcard.
 
-**Line: 337**: Credit for checking if input string is an int:
--  https://www.w3schools.com/python/ref_func_isinstance.asp
+    """
+    def __init__(self, question: str, answer: str, progress_dict: dict):
+        self.question = question
+        self.answer = answer
+        self.progress_dict = progress_dict
 
-**Line: 547**: Credit for join method:
--  https://docs.python.org/3/library/stdtypes.html#str.join
+    def show_question(self) -> None:
+        # function code
+    def show_answer(self) -> None:
+        # function code
+    def update_progress(self, progress_key: str) -> None:
+        # function code
+```
 
-**Line: 556**: Credit for case insensitive inputs:
--  https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
+```python
+class Flashcard_Set:
+    """
+    A class to represent a set of flashcards.
 
-**Line: 597**: Credit for sleep function:
--  https://www.datacamp.com/tutorial/python-time-sleep?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9042759&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=Cj0KCQiAoeGuBhCBARIsAGfKY7yufxE5zKBDYxMBH_VoxTSSnHmHTLuVcvkg8bWHAxgocfoWYEecr4oaAt8EEALw_wcB
+    Attributes:
+        title (str): The title of the flashcard set.
+        flashcards (List[Flashcard]): The flashcards in the set.
 
-**Line: 725**: Credit to Tim Nelson (CI Mentor) for calling the main function like that.
--  https://medium.com/@mycodingmantras/what-does-if-name-main-mean-in-python-fa6b0460a62d#:~:text=The%20if%20__name__,set%20to%20__main__%20.
+    Methods:
+        _load_flashcards(): Loads the flashcards from the worksheet data.
+        show_all(): Displays all the flashcards in a table format.
+        upload() -> None: Prepares the flashcard data and uploads it to the
+        Google Sheets worksheet.
 
-**Line: 747**: Credit for line break:
--  https://stackoverflow.com/questions/53162/how-can-i-do-a-line-break-line-continuation-in-python-split-up-a-long-line-of
+        Note: The methods above all use helper methods to perform their tasks.
+        These helper methods are not listed here.
+    """
+    def __init__(self, title: str):
+        """
+        Initializes a Flashcard_Set object.
+        Uses the load_flashcards method to load the flashcards from the
+        worksheet data.
+        """
+        self.title = title
+        self.flashcards = self._load_flashcards()
+
+    def _load_worksheet_data(self) -> List[Dict[str, Union[int, float, str]]]:
+        # ...
+    def _create_flashcard_from_row(
+            self,
+            row: Dict[str, Union[int, float, str]]
+    ) -> Flashcard:
+        # ...
+    def _load_flashcards(self) -> List[Flashcard]:
+        # ...
+    def show_all(self) -> None:
+        # ...
+    def _convert_to_list_of_lists(self) -> list[list]:
+        # ...
+    def _prepare_data_for_upload(self) -> list:
+        # ...
+    def _upload_data_to_worksheet(self, data: list) -> None:
+        # ...
+    def upload(self) -> None:
+        # ...
+```
+
+The primary functions outside of the classes used on this application are:
+- `pick_set()`: Allows the user to choose a set of flashcards to practice.
+- `give_feedback_card()` and `give_feedback_set()`: Provides personalized feedback based on the user's performance and the community's performance.
+- `pick_mode()`: Allows the user to choose between different quiz modes and other actions. This function is the main menu of the app.
+- `flashcard_mode()`: The flashcard mode allows the user to review flashcards and decide if they know the answer.
+- `typed_answer_mode()`: The typed answer mode allows the user to type their answers directly.
 
 ## Acknowledgements
 
