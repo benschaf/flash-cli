@@ -393,4 +393,70 @@ You can fork this repository by using the following steps:
 
 ### Local VS Deployment
 
-Happy coding!
+Since this project is a backend application, the local version is not significantly different from the live deployment on Heroku. The main difference is that the local version is run in a terminal environment, while the live deployment is emulated in a modern web browser.
+
+The emulated CLI has some quirks and limitations compared to a traditional terminal environment. Some libraries tend to behave differently in the emulated environment, and the terminal view is limited to 80 columns by 24 rows. This means that each line of text needs to be 80 characters or less, otherwise it will be wrapped onto a second line.
+
+All of these differences are taken into account during development, and the app is designed to work seamlessly in both environments.
+
+
+## Credits
+
+### Content
+All the Credits and hyperlinks can be found in the [run.py](run.py) file on the indicated lines.
+
+**Line: 11**: Credit for prettytable:
+-  https://pythonfusion.com/table-on-console-python/#37-terminaltables-or-asciitable
+
+**Line: 14**: Credit for error logging:
+-  https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
+
+**Line: 16**: Credit for formatting of log messages:
+-  https://docs.python.org/3/howto/logging.html
+
+**Line: 23**: Credit for clear Terminal function:
+-  https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python
+
+**Line: 38**: Credit for using the google sheets API:
+-  https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode
+
+**Line: 46**: Credit for exception handling:
+-  https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
+
+**Line: 49**: Credit for NoReturn type hint:
+-  https://adamj.eu/tech/2021/05/20/python-type-hints-whats-the-point-of-noreturn/
+
+**Line: 52**: Credit for parameter type hints:
+-  https://stackoverflow.com/questions/2489669/how-do-python-functions-handle-the-types-of-parameters-that-you-pass-in
+
+**Line: 104**: Credit for writing docstrings:
+-  https://www.datacamp.com/tutorial/docstrings-python?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9115817&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=CjwKCAiArLyuBhA7EiwA-qo80DbfmFCbaxqMhOuUbjm3RWcqe_zVQXPxO_LL6__tPOFhAhwsABLhxxoCPqwQAvD_BwE
+
+**Line: 344**: Credit for checking if input string is an int:
+-  https://www.w3schools.com/python/ref_func_isinstance.asp
+
+**Line: 554**: Credit for join method:
+-  https://docs.python.org/3/library/stdtypes.html#str.join
+
+**Line: 563**: Credit for case insensitive inputs:
+-  https://stackoverflow.com/questions/50192965/how-to-make-user-input-not-case-sensitive
+
+**Line: 607**: Credit for sleep function:
+-  https://www.datacamp.com/tutorial/python-time-sleep?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9042759&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=Cj0KCQiAoeGuBhCBARIsAGfKY7yufxE5zKBDYxMBH_VoxTSSnHmHTLuVcvkg8bWHAxgocfoWYEecr4oaAt8EEALw_wcB
+
+**Line: 735**: Credit to Tim Nelson (CI Mentor) for calling the main function like that.
+-  https://medium.com/@mycodingmantras/what-does-if-name-main-mean-in-python-fa6b0460a62d#:~:text=The%20if%20__name__,set%20to%20__main__%20.
+
+**Line: 757**: Credit for line break:
+-  https://stackoverflow.com/questions/53162/how-can-i-do-a-line-break-line-continuation-in-python-split-up-a-long-line-of
+
+### Media
+- French Flashcard Set: https://quizlet.com/744634653/french-adjectives-adjectives-in-french-flash-cards/
+- German Flashcard Set: https://quizlet.com/300188987/german-verbs-flash-cards/
+- Python Flashcard Set: https://quizlet.com/493123451/python-flash-cards/
+
+## Acknowledgements
+- I would like to thank my Code Institute mentor, [Tim Nelson](https://tim.2bn.dev/) for his support throughout the development of this project.
+- I would like to thank the [Code Institute](https://codeinstitute.net/) tutor team for their assistance with troubleshooting and debugging some project issues.
+- I would like to thank the Code Institute Slack community for the moral support; it kept me going during periods of self doubt and imposter syndrome.
+- I would like to thank my wife Maria, for believing in me, and allowing me to make this transition into software development.
