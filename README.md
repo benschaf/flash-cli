@@ -282,7 +282,7 @@ The primary functions outside of the classes used on this application are:
 
 ### Imports
 
-I've used the following Python packages and/or external imported packages.
+I've used the following Python packages and external imported packages.
 
 - `import sys`: sys is used for system-specific parameters and functions.
 - `import os`: os provides a way of using operating system dependent functionality.
