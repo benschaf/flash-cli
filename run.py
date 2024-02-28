@@ -112,15 +112,16 @@ class Flashcard:
     Attributes:
         question (str): The question on the flashcard.
         answer (str): The answer to the question on the flashcard.
-        progress_dict (dict): A dictionary to track the progress of the flashcard.
+        progress_dict (dict): A dictionary to track the
+        progress of the flashcard.
 
     Methods:
         show_question(): Prints the question on the flashcard.
         show_answer(): Prints the answer to the question on the flashcard.
-        update_progress(progress_key: str): Updates the progress of the flashcard.
+        update_progress(progress_key: str): Updates the
+        progress of the flashcard.
 
     """
-
     def __init__(self, question: str, answer: str, progress_dict: dict):
         self.question = question
         self.answer = answer
@@ -155,13 +156,21 @@ class Flashcard_Set:
     Attributes:
         title (str): The title of the flashcard set.
         flashcards (List[Flashcard]): The flashcards in the set.
+
+    Methods:
+        _load_flashcards(): Loads the flashcards from the worksheet data.
+        show_all(): Displays all the flashcards in a table format.
+        upload() -> None: Prepares the flashcard data and uploads it to the
+        Google Sheets worksheet.
+
+        Note: The methods above all use helper methods to perform their tasks.
+        These helper methods are not listed here.
     """
     def __init__(self, title: str):
         """
-        Constructs all the necessary attributes for the flashcard set object.
-
-        Args:
-            title (str): The title of the flashcard set.
+        Initializes a Flashcard_Set object.
+        Uses the load_flashcards method to load the flashcards from the
+        worksheet data.
         """
         self.title = title
         self.flashcards = self._load_flashcards()
