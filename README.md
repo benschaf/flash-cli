@@ -164,6 +164,19 @@ Example:
 
 - [Google Sheets API](https://developers.google.com/sheets/api) as the database for flashcards.
 - [Quizlet](https://quizlet.com/) for inspiration and comparison.
+- [HTML](https://en.wikipedia.org/wiki/HTML) used to display a terminal in the browser.
+- [Python](https://www.python.org) used as the back-end programming language (main focus of the project).
+- [Git](https://git-scm.com) used for version control. (`git add`, `git commit`, `git push`)
+- [GitHub](https://github.com) used for secure online code storage.
+- [Gitpod](https://gitpod.io) used as a cloud-based IDE for development.
+- [Heroku](https://www.heroku.com) used for hosting the deployed back-end site.
+- [draw.io](https://www.drawio.com/) used for Flowchart creation
+- [Windows Snipping Tool](https://support.microsoft.com/de-de/windows/aufnehmen-von-screenshots-mithilfe-des-snipping-tools-00246869-1843-655f-f220-97299b865f6b) used to take screenshots and screencasts on Windows
+- [Github Issues](https://github.com/benschaf/tabletennis-vs-pingpong/issues) used for issue tracking
+- [GitHub Projects](https://github.com/users/benschaf/projects/3) used for project management in conjunction with GitHub Issues
+- [shields.io](https://shields.io/) used to create the badges in the README.md file
+
+## Data Model
 
 ## Credits
 All the Credits and hyperlinks can be found in the [run.py](run.py) file on the indicated lines.
