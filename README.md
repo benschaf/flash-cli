@@ -178,20 +178,16 @@ Example:
 
 ## Data Model
 
-## Credits
-All the Credits and hyperlinks can be found in the [run.py](run.py) file on the indicated lines.
+### Flowchart
 
-**Line: 13**: Credit for prettytable:
--  https://pythonfusion.com/table-on-console-python/#37-terminaltables-or-asciitable
+To follow best practice, a flowchart was created for the app's logic,
+and mapped out before coding began using a free version of [Draw.io](https://www.draw.io).
 
-**Line: 16**: Credit for error logging:
--  https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
+Below is the flowchart of the main process of this Python program. It shows the entire cycle of the program.
 
-**Line: 18**: Credit for formatting of log messages:
--  https://docs.python.org/3/howto/logging.html
+[Link to the Flowchart](https://drive.google.com/file/d/1rDfChnROSVD_QkKvOzWtL8e4Z6Wk0UX-/view?usp=sharing)
 
-**Line: 25**: Credit for clear Terminal function:
--  https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python
+![screenshot](documentation/flowchart.png)
 
 **Line: 40**: Credit for using the google sheets API:
 -  https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode
