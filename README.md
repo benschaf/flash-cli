@@ -29,9 +29,6 @@ Flash-CLI sets itself apart because it provides real-time feedback based on the 
 | Developer | handle errors gracefully and provide helpful messages | avoid frustration and confusion for users of the app |
 | User | use keyboard shortcuts and efficient navigation in the terminal | improve my productivity and user experience |
 
-### Flowchart
-Link to the [Flowchart](https://drive.google.com/file/d/1rDfChnROSVD_QkKvOzWtL8e4Z6Wk0UX-/view?usp=sharing)
-
 ### Why the Terminal?
 The terminal is an ideal environment for vocabulary training for several reasons:
 
@@ -187,13 +184,16 @@ Below is the flowchart of the main process of this Python program. It shows the 
 
 [Link to the Flowchart](https://drive.google.com/file/d/1rDfChnROSVD_QkKvOzWtL8e4Z6Wk0UX-/view?usp=sharing)
 
-![screenshot](documentation/flowchart.png)
+![screenshot](documentation/images/flowchart.png)
 
 ### Classes & Functions
 
 The program uses two classes as a blueprint for the project's objects (OOP).
+
 The `Flashcard` class represents a single flashcard, and the `Flashcard_Set` class represents a set (deck) of flashcards.
+
 A number of `Flashcard` objects are stored in a `Flashcard_Set` object.
+
 The objects are created using the data from the Google Sheets document. In the document, a worksheet represents a `Flahscard_Set` and each row represents a `Flashcard`.
 
 ```python
