@@ -86,6 +86,11 @@ The Google Sheet is set up so that every worksheet is a deck of flashcards. Each
 
 ![Google Sheets](documentation/images/feature-google-sheets-sync.png)
 
+Link to the [Google Sheets document](https://docs.google.com/spreadsheets/d/1hGXKTWDj8vrl2kdby4OqQysjKpAUj-r4rwd_002I7Vc/edit?usp=sharing) used by the app.
+
+Screenshot of the Google Sheets document used by the app:
+![Google Sheets Screenshot](documentation/images/feature-google-sheets-screenshot.png)
+
 ### Real-Time Feedback:
 The app will provide personalized and dynamically generated feedback based on collective performance. Feedback is given after answering most questions and at the end of each quiz. It's designed to motivate users and help put their progress into perspective.
 
