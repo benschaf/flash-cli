@@ -410,7 +410,7 @@ You can fork this repository by using the following steps:
 
 Since this project is a backend application, the local version is not significantly different from the live deployment on Heroku. The main difference is that the local version is run in a terminal environment, while the live deployment is emulated in a modern web browser.
 
-The emulated CLI has some quirks and limitations compared to a traditional terminal environment. Some libraries tend to behave differently in the emulated environment, and the terminal view is limited to 80 columns by 24 rows. This means that each line of text needs to be 80 characters or less, otherwise it will be wrapped onto a second line.
+The emulated CLI has some quirks and limitations compared to a traditional terminal environment. Some libraries tend to behave differently in the emulated environment, and the terminal view is limited to 80 columns by 24 rows. This means that each line of text needs to be 80 characters or less, otherwise it will be wrapped onto a second line. Additionally, the clear terminal function does not work as expected in the emulated environment.
 
 All of these differences are taken into account during development, and the app is designed to work seamlessly in both environments.
 
