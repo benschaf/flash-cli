@@ -318,6 +318,16 @@ class Flashcard_Set:
 
 
 def print_worksheet_titles(worksheets: List[gspread.Worksheet]) -> None:
+    """
+    Prints the titles of the given list of worksheets along with
+    an index number for each title.
+
+    Args:
+        worksheets (List[gspread.Worksheet]): A list of worksheets.
+
+    Returns:
+        None
+    """
     for idx in range(1, len(worksheets) + 1):
         print(f"{idx}: {worksheets[idx - 1].title}")
 
@@ -360,6 +370,16 @@ def pick_set() -> Flashcard_Set:
 
 
 def calculate_percentages(card: Flashcard) -> Tuple[int, int, int]:
+    """
+    Calculates the percentages of correct answers for all quiz types.
+
+    Args:
+        card (Flashcard): The flashcard object containing progress information.
+
+    Returns:
+        Tuple[int, int, int]: A tuple containing the percentages of correct answers of this
+        flashcard for the flashcard quiz, the write quiz, and the write quiz with opted correct answers.
+    """
     flash_tries = (
         card.progress_dict["flash_correct"] +
         card.progress_dict["flash_incorrect"]
@@ -397,6 +417,17 @@ def generate_feedback_messages(
         feedback: str,
         card: Flashcard
 ) -> Union[List[str], None]:
+    """
+    Generate feedback messages based on the given feedback type and flashcard.
+
+    Args:
+        feedback (str): The type of requested feedback.
+        card (Flashcard): The flashcard object.
+
+    Returns:
+        Union[List[str], None]: A list of feedback messages or None if no feedback is applicable.
+
+    """
     (
         flash_correct_percentage,
         write_correct_percentage,
@@ -468,6 +499,16 @@ def generate_feedback_messages(
 
 
 def give_feedback_card(card: Flashcard, feedback: str) -> None:
+    """
+    Prints a random feedback message for a given flashcard.
+
+    Args:
+        feedback (str): The type of feedback requested.
+        card (Flashcard): The flashcard object for which feedback is given.
+
+    Returns:
+        None
+    """
     message_strings = generate_feedback_messages(feedback, card)
     if message_strings is None:
         return
@@ -476,6 +517,16 @@ def give_feedback_card(card: Flashcard, feedback: str) -> None:
 
 
 def determine_mode(answers: dict) -> str:
+    """
+    Determines the mode based on the given answers.
+    This is to help determine which mode to calculate the accuracy for.
+
+    Args:
+        answers (dict): A dictionary containing the answers.
+
+    Returns:
+        str: The determined mode. Possible values are "flash_correct" or "write_correct".
+    """
     if "flash_correct" in answers:
         return "flash_correct"
     else:
@@ -483,6 +534,17 @@ def determine_mode(answers: dict) -> str:
 
 
 def determine_accuracy(set: Flashcard_Set, mode: str, answers: dict) -> int:
+    """
+    Calculate the accuracy of a flashcard set based on the given mode and answers.
+
+    Args:
+        set (Flashcard_Set): The flashcard set to calculate accuracy for.
+        mode (str): The mode of accuracy calculation. Possible values are "flash_correct" and "write_correct".
+        answers (dict): A dictionary containing the number of correct answers.
+
+    Returns:
+        int: The accuracy percentage rounded to the nearest whole number.
+    """
     if mode == "flash_correct":
         return round(answers["flash_correct"] / len(set.flashcards) * 100)
     elif mode == "write_correct":
@@ -501,6 +563,19 @@ def determine_message_strings(
     answers: dict,
     accuracy: int
 ) -> List[str]:
+    """
+    Determines the message strings based on the accuracy of the answers.
+
+    Args:
+        set (Flashcard_Set): The flashcard set.
+        mode (str): The mode of accuracy calculation.
+        answers (dict): The correct answers provided by the user.
+        accuracy (int): The accuracy of the answers in percentage.
+
+    Returns:
+        List[str]: A list of message strings based on the accuracy.
+
+    """
     if accuracy > 50:
         return [
             f"Great job! You got {answers[mode]} out of {len(set.flashcards)} "
@@ -516,6 +591,17 @@ def determine_message_strings(
 
 
 def give_feedback_set(set: Flashcard_Set, answers: dict) -> None:
+    """
+    Provides feedback for a given flashcard set based on the user's answers
+    After a quiz has been completed.
+
+    Args:
+        set (Flashcard_Set): The flashcard set to provide feedback for.
+        answers (dict): A dictionary containing the number of correct answers for each flashcard.
+
+    Returns:
+        None
+    """
     mode = determine_mode(answers)
     accuracy = determine_accuracy(set, mode, answers)
     msg_strs = determine_message_strings(set, mode, answers, accuracy)
@@ -685,6 +771,15 @@ def flashcard_mode(current_set: Flashcard_Set) -> None:
 
 
 def type_answer_mode(current_set: Flashcard_Set) -> None:
+    """
+    Runs the interactive quiz mode for answering flashcards.
+
+    Args:
+        current_set (Flashcard_Set): The flashcard set to be used for the quiz.
+
+    Returns:
+        None
+    """
     answers = {
         "write_correct": 0,
         "write_correct_user_opted": 0,
