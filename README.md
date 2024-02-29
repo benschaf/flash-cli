@@ -99,6 +99,8 @@ Here are some examples of the feedback:
 - "You're doing better than 20% of people who attempted this flashcard."
 - "50% of people opted to treat the answer as correct or wrote it correctly. Keep practicing!"
 
+![Feedback](documentation/images/feature-feedback.png)
+
 ### Error Handling and Logging
 Flash-CLI gracefully handles unexpected errors and provides helpful messages to guide users. Additionally, the app logs application events for debugging and troubleshooting.
 
@@ -135,6 +137,8 @@ except FileNotFoundError as e:
                      "exists in the same directory as this script.")
 ```
 [Vew code in project](https://github.com/benschaf/flash-cli/blob/04f1b1e25fe9bb4242dcb49575435691b4b7cfb1/run.py#L77-L86)
+
+![Error Handling](documentation/images/feature-error.png)
 
 ### Gracefully handle unexpected errors (e.g., invalid input).
 Invalid input: If the user enters an invalid command or input, the app will display a helpful message and prompt the user to try again.

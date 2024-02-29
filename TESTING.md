@@ -276,19 +276,16 @@ so this should as simple as creating a table with the user story, matching with 
 from the respective feature.
 
 🛑🛑🛑🛑🛑 END OF NOTES (to be deleted) 🛑🛑🛑🛑🛑
-
-| User Story | Screenshot |
-| --- | --- |
-| As a new site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/feature01.png) |
-| As a new site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/feature02.png) |
-| As a new site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/feature03.png) |
-| As a returning site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/feature04.png) |
-| As a returning site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/feature05.png) |
-| As a returning site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/feature06.png) |
-| As a site administrator, I should be able to ____________, so that I can ____________. | ![screenshot](documentation/feature07.png) |
-| As a site administrator, I should be able to ____________, so that I can ____________. | ![screenshot](documentation/feature08.png) |
-| As a site administrator, I should be able to ____________, so that I can ____________. | ![screenshot](documentation/feature09.png) |
-| repeat for all remaining user stories | x |
+| User Story | Feature | Screenshot |
+| --- | --- | --- |
+| As a User, I want to review flashcards in the terminal, so that I can focus on learning without distractions. | Study with Flashcards | ![screenshot](documentation/images/defensive-flashcards-1.gif) |
+| As a User, I want to choose between multiple quiz modes, so that I can practice different quiz modes according to my preference and skill level. | Main Menu | ![screenshot](documentation/images/defensive-mainmenu-1.gif) |
+| As a User, I want to review a random flashcard and indicate if I knew the definition or not (in flashcard mode), so that I can test my memory of the definition, get immediate feedback, and update the flashcard status. | Study with Flashcards | ![screenshot](documentation/images/defensive-flashcards-4.gif) |
+| As a User, I want to see a word and type the definition in typed answer mode, so that I can test my recall and understanding of the definition, get immediate feedback, and update the flashcard status. | Interactive Quiz | ![screenshot](documentation/images/defensive-quiz-1.gif) |
+| As an App provider, I want to sync the flashcards with Google Sheets, so that I can easily create and edit flashcard decks online. | Real Time Sync | ![screenshot](documentation/images/defensive-onload-1.gif) |
+| As a User, I want to receive real-time feedback based on my performance and the community's performance, so that I can monitor my progress and compare with others. | Real Time Feedback | ![screenshot](documentation/images/feature-feedback.png) |
+| As a Developer, I want to handle errors gracefully and provide helpful messages, so that I can avoid frustration and confusion for users of the app. | Error Handling and Logging | ![screenshot](documentation/images/feature-error.png) |
+| As a User, I want to use keyboard shortcuts and efficient navigation in the terminal, so that I can improve my productivity and user experience. | Whole Application | ![screenshot](documentation/images/feature-main-menu.png) |
 
 ## Bugs
 
