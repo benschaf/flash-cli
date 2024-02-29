@@ -175,12 +175,12 @@ Sample Lighthouse testing documentation:
 
 I've tested my deployed project using the Lighthouse Audit tool to check for any major issues.
 
-| Page | Mobile | Desktop | Notes |
-| --- | --- | --- | --- |
-| Home | ![screenshot](documentation/lighthouse-home-mobile.png) | ![screenshot](documentation/lighthouse-home-desktop.png) | Some minor warnings |
-| About | ![screenshot](documentation/lighthouse-about-mobile.png) | ![screenshot](documentation/lighthouse-about-desktop.png) | Some minor warnings |
-| Gallery | ![screenshot](documentation/lighthouse-gallery-mobile.png) | ![screenshot](documentation/lighthouse-gallery-desktop.png) | Slow response time due to large images |
-| x | x | x | repeat for any other tested pages/sizes |
+| Device | Screenshot | Notes |
+| --- | --- | --- |
+| Mobile | ![screenshot](documentation/images/lighthouse-mobile.png) | Some minor warnings |
+| Desktop | ![screenshot](documentation/images/lighthouse-desktop.png) | Some minor warnings |
+
+The most prominent takeaway from the Lighthouse Audit is that the pageload of the application is affected visibly because the application attempts a download from the Google Sheets API. This is a necessary part of the application, and the user is informed of this while the application is loading. 
 
 ## Defensive Programming
 
