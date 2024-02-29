@@ -192,6 +192,7 @@ Example:
 - [GitHub Projects](https://github.com/users/benschaf/projects/3) used for project management in conjunction with GitHub Issues
 - [shields.io](https://shields.io/) used to create the badges in the README.md file
 - [LICEcap](https://www.cockos.com/licecap/) used to create GIFs for the TESTING.md file
+- [copy-credits.py](copy-credits.py) used to automatically generate the credits for the README.md file (this script was written by me as a side project, using much help from the Microsoft Edge Copilot)
 
 ## Data Model
 
@@ -425,7 +426,6 @@ All of these differences are taken into account during development, and the app 
 All the Credits and hyperlinks can be found in the [run.py](run.py) file on the indicated lines.
 
 Note that this list of credits is automatically generated from the run.py file using the [copy-credits.py](copy-credits.py) script.
-The script was written by me, with much help from the Microsoft Edge Copilot.
 
 - Line: 11: [Credit for prettytable](https://pythonfusion.com/table-on-console-python/#37-terminaltables-or-asciitable)
 
