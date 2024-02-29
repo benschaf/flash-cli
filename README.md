@@ -5,8 +5,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/benschaf/flash-cli)](https://github.com/benschaf/flash-cli/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/benschaf/flash-cli)](https://github.com/benschaf/flash-cli/issues?q=is%3Aissue+is%3Aclosed)
 [![GitHub language count](https://img.shields.io/github/languages/count/benschaf/flash-cli)](https://github.com/benschaf/flash-cli)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/benschaf/flash-cli)](https://github.com/benschaf/flash-cli)
-[![GitHub top language](https://img.shields.io/github/languages/top/benschaf/flash-cli)](https://github.com/benschaf/flash-cli)
 [![Python version](https://img.shields.io/badge/python-3.12.1-blue)](https://www.python.org/downloads/release/python-380/)
 [![npm version](https://img.shields.io/badge/npm-10.2.4-blue)](https://www.npmjs.com/package/npm)
 [![Docker](https://img.shields.io/badge/docker-supported-blue)](https://www.docker.com/)
