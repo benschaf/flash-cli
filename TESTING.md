@@ -33,9 +33,9 @@ Note: since this is a CLI application, the responsiveness testing is limited. I 
 
 | Device | Screenshot | Notes |
 | --- | --- | --- |
-| Google Pixel 6 | ![screenshot](documentation/responsive-pixel.png) | Terminal View is too large, inputting commands with the phone keyboard is awkward but it works |
-| Desktop | ![screenshot](documentation/responsive-desktop.png) | Works as expected, Terminal will only take up top left space of the screen |
-| Tablet (emulated) | ![screenshot](documentation/responsive-tablet.png) | Works as expected, same inputting issues that are present on mobile |
+| Google Pixel 6 | ![screenshot](documentation/images/responsive-pixel.png) | Terminal View is too large, inputting commands with the phone keyboard is awkward but it works |
+| Desktop | ![screenshot](documentation/images/responsive-desktop.png) | Works as expected, Terminal will only take up top left space of the screen |
+| Tablet (emulated) | ![screenshot](documentation/images/responsive-tablet.png) | Works as expected, same inputting issues that are present on mobile |
 
 ### Responsiveness within the CLI
 The CLI application is not designed to be responsive in the traditional sense, as it is a terminal-based application.
