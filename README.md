@@ -187,6 +187,7 @@ Example:
 - [Github Issues](https://github.com/benschaf/tabletennis-vs-pingpong/issues) used for issue tracking
 - [GitHub Projects](https://github.com/users/benschaf/projects/3) used for project management in conjunction with GitHub Issues
 - [shields.io](https://shields.io/) used to create the badges in the README.md file
+- [LICEcap](https://www.cockos.com/licecap/) used to create GIFs for the TESTING.md file
 
 ## Data Model
 
