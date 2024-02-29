@@ -180,7 +180,7 @@ class Flashcard_Set:
         Loads the worksheet data from Google Sheets.
 
         Returns:
-            List[Dict[str, Union[int, float, str]]]: The data from the worksheet.
+            List[Dict[str, Union[int, float, str]]]: The worksheet data.
         """
         print(f"Loading set from worksheet: '{self.title}'")
         try:
@@ -539,8 +539,8 @@ def pick_mode() -> str:
     }
     modes_w_instr = {
         "s": "Study with Flashcards:\n"
-        "In this mode, you'll be shown the question side of each card.\nTry to "
-        "answer it in your mind, then press any key to see the answer.\n",
+        "In this mode, you'll be shown the question side of each card.\nTry to"
+        " answer it in your mind, then press any key to see the answer.\n",
         "i": "Interactive Quiz:\n"
         "In this mode, you'll be shown the question side of each card and "
         "asked to\ntype the answer. Your answer will be checked against the "
