@@ -65,7 +65,9 @@ def handle_exception(e: Exception, message: str) -> Union[None, NoReturn]:
         print("Reconnecting ...")
         return
     else:
-        confirmation = input("Are you sure? If you enter 'y', the program will quit. (y/n)\n").lower()
+        confirmation = input(
+            "Are you sure? If you enter 'y', the program will quit. (y/n)\n"
+        ).lower()
         if confirmation == "y":
             print("Quitting due to error.")
             sys.exit(1)
@@ -87,10 +89,11 @@ def load_spreadsheet() -> gspread.Spreadsheet:
     """
     Loads the google spreadsheet and sets up the gspread client.
 
-    This function loads the google spreadsheet and sets up the gspread client
-    with the required credentials. It uses the 'creds.json' file to authenticate
-    the client. It also sets up the gspread client with the required scopes.
-    The function also handles exceptions that may occur during the setup process.
+    This function loads the google spreadsheet and sets up the gspread
+    client with the required credentials. It uses the 'creds.json'
+    file to authenticate the client. It also sets up the gspread client
+    with the required scopes. The function also handles exceptions that
+    may occur during the setup process.
 
     Returns:
         gspread.Spreadsheet: The loaded google spreadsheet.
@@ -104,19 +107,21 @@ def load_spreadsheet() -> gspread.Spreadsheet:
             SPREADSHEET_NAME = "flash_cli_sheet"
             SHEET = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
         except FileNotFoundError as e:
-            handle_exception(e, "Failed to load 'creds.json'. Please ensure the file "
-                            "exists in the same directory as this script.")
+            handle_exception(e, "Failed to load 'creds.json'. Please ensure "
+                             "the file exists in the same directory as this "
+                             "script.")
         except ValueError as e:
-            handle_exception(e, "Failed to load credentials from 'creds.json'. "
-                            "Please ensure that 'creds.json' contains correctly "
-                            "formatted credentials for the google API.")
+            handle_exception(e, "Failed to load credentials from "
+                             "'creds.json'. Please ensure that 'creds.json' "
+                             "contains correctly formatted credentials for "
+                             "the google API.")
         except gspread.exceptions.NoValidUrlKeyFound as e:
             handle_exception(e, "No valid Key was found in 'creds.json'. "
-                            "Please ensure that the "
-                            "authentication credentials are valid.")
+                             "Please ensure that the "
+                             "authentication credentials are valid.")
         except gspread.exceptions.SpreadsheetNotFound as e:
             handle_exception(e, "Failed to find google spreadsheet: "
-                            f"'{SPREADSHEET_NAME}'")
+                             f"'{SPREADSHEET_NAME}'")
         except gspread.exceptions.APIError as e:
             handle_exception(e, "There was an error with the google API.")
         except Exception as e:
@@ -125,6 +130,7 @@ def load_spreadsheet() -> gspread.Spreadsheet:
             clear_terminal()
             print(f"Spreadsheet '{SPREADSHEET_NAME}' successfully loaded!\n")
             return SHEET
+
 
 SHEET = load_spreadsheet()
 
@@ -149,6 +155,7 @@ class Flashcard:
         progress of the flashcard.
 
     """
+
     def __init__(self, question: str, answer: str, progress_dict: dict):
         self.question = question
         self.answer = answer
@@ -193,6 +200,7 @@ class Flashcard_Set:
         Note: The methods above all use helper methods to perform their tasks.
         These helper methods are not listed here.
     """
+
     def __init__(self, title: str):
         """
         Initializes a Flashcard_Set object.
@@ -215,10 +223,10 @@ class Flashcard_Set:
                 worksheet = SHEET.worksheet(self.title).get_all_records()
             except gspread.exceptions.WorksheetNotFound as e:
                 handle_exception(e, f"The worksheet '{self.title}' "
-                                "was not found.")
+                                 "was not found.")
             except gspread.exceptions.APIError as e:
                 handle_exception(e, "An error occurred with the "
-                                "Google Sheets API.")
+                                 "Google Sheets API.")
             except Exception as e:
                 handle_exception(e, "An unexpected error occurred.")
             else:
@@ -328,10 +336,11 @@ class Flashcard_Set:
                 worksheet.clear()
                 worksheet.append_rows(data)
             except gspread.exceptions.WorksheetNotFound as e:
-                handle_exception(e, f"The worksheet '{self.title}' was not found.")
+                handle_exception(e, f"The worksheet '{
+                                 self.title}' was not found.")
             except gspread.exceptions.APIError as e:
                 handle_exception(e, "An error occurred with the "
-                                "Google Sheets API.")
+                                 "Google Sheets API.")
             except Exception as e:
                 handle_exception(e, "An unexpected error occurred.")
             else:
@@ -407,8 +416,9 @@ def calculate_percentages(card: Flashcard) -> Tuple[int, int, int]:
         card (Flashcard): The flashcard object containing progress information.
 
     Returns:
-        Tuple[int, int, int]: A tuple containing the percentages of correct answers of this
-        flashcard for the flashcard quiz, the write quiz, and the write quiz with opted correct answers.
+        Tuple[int, int, int]: A tuple containing the percentages of correct
+            answers of this flashcard for the flashcard quiz, the write quiz,
+            and the write quiz with opted correct answers.
     """
     flash_tries = (
         card.progress_dict["flash_correct"] +
@@ -455,7 +465,8 @@ def generate_feedback_messages(
         card (Flashcard): The flashcard object.
 
     Returns:
-        Union[List[str], None]: A list of feedback messages or None if no feedback is applicable.
+        Union[List[str], None]: A list of feedback messages or None if no
+        feedback is applicable.
 
     """
     (
@@ -555,7 +566,8 @@ def determine_mode(answers: dict) -> str:
         answers (dict): A dictionary containing the answers.
 
     Returns:
-        str: The determined mode. Possible values are "flash_correct" or "write_correct".
+        str: The determined mode. Possible values are "flash_correct"
+        or "write_correct".
     """
     if "flash_correct" in answers:
         return "flash_correct"
@@ -565,11 +577,13 @@ def determine_mode(answers: dict) -> str:
 
 def determine_accuracy(set: Flashcard_Set, mode: str, answers: dict) -> int:
     """
-    Calculate the accuracy of a flashcard set based on the given mode and answers.
+    Calculate the accuracy of a flashcard set based on the given mode
+    and answers.
 
     Args:
         set (Flashcard_Set): The flashcard set to calculate accuracy for.
-        mode (str): The mode of accuracy calculation. Possible values are "flash_correct" and "write_correct".
+        mode (str): The mode of accuracy calculation. Possible values are
+        "flash_correct" and "write_correct".
         answers (dict): A dictionary containing the number of correct answers.
 
     Returns:
@@ -627,7 +641,8 @@ def give_feedback_set(set: Flashcard_Set, answers: dict) -> None:
 
     Args:
         set (Flashcard_Set): The flashcard set to provide feedback for.
-        answers (dict): A dictionary containing the number of correct answers for each flashcard.
+        answers (dict): A dictionary containing the number of correct answers
+        for each flashcard.
 
     Returns:
         None
