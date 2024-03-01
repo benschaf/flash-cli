@@ -14,9 +14,9 @@ Flash-CLI is a Python-based command-line flashcard application that seamlessly i
 
 ![title image](documentation/images/title-image.png)
 
-[Link to google Spreadsheet](https://docs.google.com/spreadsheets/d/1hGXKTWDj8vrl2kdby4OqQysjKpAUj-r4rwd_002I7Vc/edit?usp=sharing): This is the Google Spreadsheet that the app uses to store the flashcards.
+[Link to the google Spreadsheet](https://docs.google.com/spreadsheets/d/1hGXKTWDj8vrl2kdby4OqQysjKpAUj-r4rwd_002I7Vc/edit?usp=sharing): This is the Google Spreadsheet that the app uses to store the flashcards.
 
-[Link to live Website](https://flash-cli-1471beedfcc0.herokuapp.com/)
+[Link to the live Website](https://flash-cli-1471beedfcc0.herokuapp.com/)
 
 ## UX
 
@@ -32,11 +32,11 @@ Flash-CLI sets itself apart because it provides real-time feedback based on the 
 | --- | --- | --- |
 | User | review flashcards in the terminal | focus on learning without distractions |
 | User | choose between multiple quiz modes | practice different quiz modes according to my preference and skill level |
-| User | review a random flashcard and indicate if I knew the definition or not (in flashcard mode) | test my memory of the definition, get immediate feedback, and update the flashcard status |
+| User | review a random flashcard and indicate if I knew the definition or not | test my memory of the definition, get immediate feedback, and update the flashcard status |
 | User | see a word and type the definition in typed answer mode | test my recall and understanding of the definition, get immediate feedback, and update the flashcard status |
 | App provider | sync the flashcards with Google Sheets | easily create and edit flashcard decks online |
 | User | receive real-time feedback based on my performance and the community's performance | monitor my progress and compare with others |
-| Developer | handle errors gracefully and provide helpful messages | avoid frustration and confusion for users of the app |
+| User | avoid frustration and confusion when an error happens or when I enter invalid input | have a smooth and enjoyable user experience |
 | User | use keyboard shortcuts and efficient navigation in the terminal | improve my productivity and user experience |
 
 ### Why the Terminal?
@@ -46,7 +46,7 @@ The terminal is an ideal environment for vocabulary training for several reasons
 - **Efficiency:** Terminal apps are lightweight and fast. Users can quickly launch the app, practice, and exit, thereby maximizing their time spent learning.
 - **Keyboard-Centric Interaction:** Terminal apps encourage keyboard shortcuts and efficient navigation, which aligns well with learning and memorization.
 
-_Note_: For this specific project, the terminal environment is emulated within a browser. However, the app is designed to be used in a traditional terminal environment.
+_Note_: For this specific project, the terminal environment is emulated within a browser for ease of initial access. However, the app is designed to be used in a traditional terminal environment.
 
 ## Features
 
@@ -54,7 +54,7 @@ _Note_: For this specific project, the terminal environment is emulated within a
 The app provides a main menu with options to choose between different quiz modes and to exit the app. Users can navigate the app using keyboard shortcuts that are displayed in the menu. If the user wishes to have more information about the options, they can use the help (?) command.
 All invalid inputs are handled gracefully, and the app provides helpful messages to guide users.
 
-Screenshot of Main Menu:
+Screenshot of the Main Menu:
 ![Main Menu](documentation/images/feature-main-menu.png)
 
 ### Flashcard Mode: Users can review flashcards and decide if they know the answer.
@@ -64,6 +64,7 @@ Functionality:
 - Prompt the user to indicate if they knew the answer or not.
 - Update the flashcard status based on the user's response.
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
+
 This mode is designed to help users for initial learning and self-assessment. It's a simple and effective way to memorize new flashcards.
 
 Screenshot of Flashcard Mode:
@@ -77,6 +78,7 @@ Functionality:
 - If the user's input is incorrect, display the correct definition and ask the user if they want to count their attempt as a success or failure.
 - Update the flashcard status based on the user's responses.
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
+
 This mode is designed to test the user's recall and understanding of the flashcard. It's a more challenging and interactive way to practice and reinforce learning.
 
 Screenshot of Typed Answer Mode:
@@ -101,12 +103,11 @@ The app will provide personalized and dynamically generated feedback based on co
 Here are some examples of the feedback:
 - "Great job! You're part of the 70% of people who knew the answer!"
 - "You're doing better than 30% of people who attempted this flashcard."
+- "Congratulations, you got 80% of the questions right!"
 - "You knew the answer! Great job!"
 - "Don't worry, less than half of the people who attempted this flashcard knew the answer."
 - "You're doing better than 40% of people who attempted this flashcard."
 - "You wrote the correct answer! Great job!"
-- "You're doing better than 20% of people who attempted this flashcard."
-- "50% of people opted to treat the answer as correct or wrote it correctly. Keep practicing!"
 
 Screenshot of Real-Time Feedback:
 ![Feedback](documentation/images/feature-feedback.png)

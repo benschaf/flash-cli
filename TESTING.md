@@ -96,7 +96,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | As a User, I want to see a word and type the definition in typed answer mode, so that I can test my recall and understanding of the definition, get immediate feedback, and update the flashcard status. | Interactive Quiz | ![screenshot](documentation/images/defensive-quiz-1.gif) |
 | As an App provider, I want to sync the flashcards with Google Sheets, so that I can easily create and edit flashcard decks online. | Real Time Sync | ![screenshot](documentation/images/defensive-onload-1.gif) |
 | As a User, I want to receive real-time feedback based on my performance and the community's performance, so that I can monitor my progress and compare with others. | Real Time Feedback | ![screenshot](documentation/images/feature-feedback.png) |
-| As a Developer, I want to handle errors gracefully and provide helpful messages, so that I can avoid frustration and confusion for users of the app. | Error Handling and Logging | ![screenshot](documentation/images/feature-error.png) |
+| As a User, I want to avoid frustration and confusion when an error happens or when I enter invalid input, so that I can have a smooth and enjoyable user experience. | Error Handling and Logging | ![screenshot](documentation/images/feature-error.png) |
 | As a User, I want to use keyboard shortcuts and efficient navigation in the terminal, so that I can improve my productivity and user experience. | Whole Application | ![screenshot](documentation/images/feature-main-menu.png) |
 
 ## Bugs
