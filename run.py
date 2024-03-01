@@ -514,7 +514,7 @@ def generate_feedback_messages(
             return
         return [
             f"Great job! You're part of the {write_correct_opted_percentage}% "
-            "of people who opted to know the answer or wrote it correctly!",
+            "of people who\nopted to know the answer or wrote it correctly!",
             f"You're doing better than {100 - write_correct_opted_percentage}%"
             " of people who attempted this flashcard.",
             "Great job! You opted to treat the answer as correct.",
