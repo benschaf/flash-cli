@@ -337,8 +337,8 @@ class Flashcard_Set:
                 worksheet.clear()
                 worksheet.append_rows(data)
             except gspread.exceptions.WorksheetNotFound as e:
-                handle_exception(e, f"The worksheet '{
-                                 self.title}' was not found.")
+                handle_exception(e, f"The worksheet '{self.title}' "
+                                 "was not found.")
             except gspread.exceptions.APIError as e:
                 handle_exception(e, "An error occurred with the "
                                  "Google Sheets API.")
