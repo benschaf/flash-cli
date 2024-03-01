@@ -177,7 +177,7 @@ else:
 Screenshot of Error Handling:
 ![Error Handling](documentation/images/feature-error.png)
 
-### Gracefully handle unexpected errors (e.g., invalid input).
+### Gracefully handle invalid inputs
 Invalid input: If the user enters an invalid command or input, the app will display a helpful message and prompt the user to try again.
 
 Example:
