@@ -35,14 +35,6 @@ def clear_terminal() -> None:
     os.system("cls" if os.name == "nt" else "clear")
 
 
-# Credit for using the google sheets API:
-# https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive",
-]
-
 # Credit for exception handling:
 # https://medium.com/@saadjamilakhtar/5-best-practices-for-python-exception-handling-5e54b876a20
 
@@ -53,10 +45,10 @@ SCOPE = [
 # https://stackoverflow.com/questions/2489669/how-do-python-functions-handle-the-types-of-parameters-that-you-pass-in
 
 
-def handle_exception(e: Exception, message: str) -> NoReturn:
+def handle_exception(e: Exception, message: str) -> Union[None, NoReturn]:
     """
-    Handles an exception by printing an error message, logging the error,
-    and exiting the program.
+    Handles an exception by printing an error message and logging the error.
+    The user is prompted to decide whether to reconnect or quit the program.
 
     Args:
         e (Exception): The exception that occurred.
@@ -68,38 +60,73 @@ def handle_exception(e: Exception, message: str) -> NoReturn:
     print(message)
     print(f"Error details: {e}")
     logging.exception(f"{message} Error details: %s", str(e))
-    print("Quitting due to error.")
-    sys.exit(1)
+    quitting = input("Do you want to try connecting again? (y/n)\n").lower()
+    if quitting == "y":
+        print("Reconnecting ...")
+        return
+    else:
+        confirmation = input("Are you sure? If you enter 'y', the program will quit. (y/n)\n").lower()
+        if confirmation == "y":
+            print("Quitting due to error.")
+            sys.exit(1)
+        else:
+            print("Reconnecting ...")
+            return
 
 
-try:
-    print("Loading spreadsheet ...")
-    CREDS = Credentials.from_service_account_file("creds.json")
-    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    SPREADSHEET_NAME = "flash_cli_sheet"
-    SHEET = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
-except FileNotFoundError as e:
-    handle_exception(e, "Failed to load 'creds.json'. Please ensure the file "
-                     "exists in the same directory as this script.")
-except ValueError as e:
-    handle_exception(e, "Failed to load credentials from 'creds.json'. "
-                     "Please ensure that 'creds.json' contains correctly "
-                     "formatted credentials for the google API.")
-except gspread.exceptions.NoValidUrlKeyFound as e:
-    handle_exception(e, "No valid Key was found in 'creds.json'. "
-                     "Please ensure that the "
-                     "authentication credentials are valid.")
-except gspread.exceptions.SpreadsheetNotFound as e:
-    handle_exception(e, "Failed to find google spreadsheet: "
-                     f"'{SPREADSHEET_NAME}'")
-except gspread.exceptions.APIError as e:
-    handle_exception(e, "There was an error with the google API.")
-except Exception as e:
-    handle_exception(e, "An unexpected error occured.")
-else:
-    clear_terminal()
-    print(f"Spreadsheet '{SPREADSHEET_NAME}' successfully loaded!\n")
+# Credit for using the google sheets API:
+# https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive",
+]
+
+
+def load_spreadsheet() -> gspread.Spreadsheet:
+    """
+    Loads the google spreadsheet and sets up the gspread client.
+
+    This function loads the google spreadsheet and sets up the gspread client
+    with the required credentials. It uses the 'creds.json' file to authenticate
+    the client. It also sets up the gspread client with the required scopes.
+    The function also handles exceptions that may occur during the setup process.
+
+    Returns:
+        gspread.Spreadsheet: The loaded google spreadsheet.
+    """
+    while True:
+        try:
+            print("Loading spreadsheet ...")
+            CREDS = Credentials.from_service_account_file("creds.json")
+            SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+            GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+            SPREADSHEET_NAME = "flash_cli_sheet"
+            SHEET = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
+        except FileNotFoundError as e:
+            handle_exception(e, "Failed to load 'creds.json'. Please ensure the file "
+                            "exists in the same directory as this script.")
+        except ValueError as e:
+            handle_exception(e, "Failed to load credentials from 'creds.json'. "
+                            "Please ensure that 'creds.json' contains correctly "
+                            "formatted credentials for the google API.")
+        except gspread.exceptions.NoValidUrlKeyFound as e:
+            handle_exception(e, "No valid Key was found in 'creds.json'. "
+                            "Please ensure that the "
+                            "authentication credentials are valid.")
+        except gspread.exceptions.SpreadsheetNotFound as e:
+            handle_exception(e, "Failed to find google spreadsheet: "
+                            f"'{SPREADSHEET_NAME}'")
+        except gspread.exceptions.APIError as e:
+            handle_exception(e, "There was an error with the google API.")
+        except Exception as e:
+            handle_exception(e, "An unexpected error occured.")
+        else:
+            clear_terminal()
+            print(f"Spreadsheet '{SPREADSHEET_NAME}' successfully loaded!\n")
+            return SHEET
+
+SHEET = load_spreadsheet()
 
 # Credit for writing docstrings:
 # https://www.datacamp.com/tutorial/docstrings-python?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=157156373751&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=684592138751&utm_targetid=dsa-2218886984100&utm_loc_interest_ms=&utm_loc_physical_ms=9115817&utm_content=&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na&gad_source=1&gclid=CjwKCAiArLyuBhA7EiwA-qo80DbfmFCbaxqMhOuUbjm3RWcqe_zVQXPxO_LL6__tPOFhAhwsABLhxxoCPqwQAvD_BwE
@@ -182,20 +209,21 @@ class Flashcard_Set:
         Returns:
             List[Dict[str, Union[int, float, str]]]: The worksheet data.
         """
-        print(f"Loading set from worksheet: '{self.title}'")
-        try:
-            worksheet = SHEET.worksheet(self.title).get_all_records()
-        except gspread.exceptions.WorksheetNotFound as e:
-            handle_exception(e, f"The worksheet '{self.title}' "
-                             "was not found.")
-        except gspread.exceptions.APIError as e:
-            handle_exception(e, "An error occurred with the "
-                             "Google Sheets API.")
-        except Exception as e:
-            handle_exception(e, "An unexpected error occurred.")
-        else:
-            print("Successfully loaded!")
-            return worksheet
+        while True:
+            print(f"Loading set from worksheet: '{self.title}'")
+            try:
+                worksheet = SHEET.worksheet(self.title).get_all_records()
+            except gspread.exceptions.WorksheetNotFound as e:
+                handle_exception(e, f"The worksheet '{self.title}' "
+                                "was not found.")
+            except gspread.exceptions.APIError as e:
+                handle_exception(e, "An error occurred with the "
+                                "Google Sheets API.")
+            except Exception as e:
+                handle_exception(e, "An unexpected error occurred.")
+            else:
+                print("Successfully loaded!")
+                return worksheet
 
     def _create_flashcard_from_row(
             self,
@@ -293,20 +321,22 @@ class Flashcard_Set:
         Args:
             data (list): The data to upload.
         """
-        print(f"\nUploading to worksheet: '{self.title}'...")
-        try:
-            worksheet = SHEET.worksheet(self.title)
-            worksheet.clear()
-            worksheet.append_rows(data)
-        except gspread.exceptions.WorksheetNotFound as e:
-            handle_exception(e, f"The worksheet '{self.title}' was not found.")
-        except gspread.exceptions.APIError as e:
-            handle_exception(e, "An error occurred with the "
-                             "Google Sheets API.")
-        except Exception as e:
-            handle_exception(e, "An unexpected error occurred.")
-        else:
-            print("Successfully uploaded!")
+        while True:
+            print(f"\nUploading to worksheet: '{self.title}'...")
+            try:
+                worksheet = SHEET.worksheet(self.title)
+                worksheet.clear()
+                worksheet.append_rows(data)
+            except gspread.exceptions.WorksheetNotFound as e:
+                handle_exception(e, f"The worksheet '{self.title}' was not found.")
+            except gspread.exceptions.APIError as e:
+                handle_exception(e, "An error occurred with the "
+                                "Google Sheets API.")
+            except Exception as e:
+                handle_exception(e, "An unexpected error occurred.")
+            else:
+                print("Successfully uploaded!")
+                return
 
     def upload(self) -> None:
         """
