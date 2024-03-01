@@ -60,6 +60,8 @@ The most prominent takeaway from the Lighthouse Audit is that the pageload of th
 
 Defensive programming was manually tested with the below user acceptance testing:
 
+Click on a screencast to enlarge it.
+
 | Checkpoint in Application Flow | Expectation | Test | Result | Fix | Screenshot |
 | --- | --- | --- | --- | --- | --- |
 | On Application load | A Flashcard Set is expected to be loaded when the user inputs an applicable Number | Tested the feature by inputting Numbers between 1 and 4 | The feature behaved as expected, and loaded each | Test concluded and passed | ![screenshot](documentation/images/defensive-onload-1.gif)
@@ -103,7 +105,9 @@ Defensive programming was manually tested with the below user acceptance testing
 
 I used github Issues to track bugs and fixes. The following bugs were identified and fixed:
 
-[Github Issues labeled as bug](https://github.com/benschaf/flash-cli/issues?q=label%3Abug)
+Click the following link to see all of the bugs in the project: [Github Issues labeled as bug](https://github.com/benschaf/flash-cli/issues?q=label%3Abug)
+
+Or see the list of bugs below:
 
 ![screenshot](documentation/images/bugs.png)
 
