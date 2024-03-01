@@ -54,6 +54,7 @@ _Note_: For this specific project, the terminal environment is emulated within a
 The app provides a main menu with options to choose between different quiz modes and to exit the app. Users can navigate the app using keyboard shortcuts that are displayed in the menu. If the user wishes to have more information about the options, they can use the help (?) command.
 All invalid inputs are handled gracefully, and the app provides helpful messages to guide users.
 
+Screenshot of Main Menu:
 ![Main Menu](documentation/images/feature-main-menu.png)
 
 ### Flashcard Mode: Users can review flashcards and decide if they know the answer.
@@ -65,6 +66,7 @@ Functionality:
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
 This mode is designed to help users for initial learning and self-assessment. It's a simple and effective way to memorize new flashcards.
 
+Screenshot of Flashcard Mode:
 ![Flashcard Mode](documentation/images/feature-flashcard-mode.png)
 
 ### Typed Answer Quizzes: Users type their answers directly.
@@ -77,6 +79,7 @@ Functionality:
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
 This mode is designed to test the user's recall and understanding of the flashcard. It's a more challenging and interactive way to practice and reinforce learning.
 
+Screenshot of Typed Answer Mode:
 ![Typed Answer Mode](documentation/images/feature-typed-answer-mode.png)
 
 ### Real-Time Google Sheets Sync
@@ -84,6 +87,7 @@ The app automatically syncs flashcard data with a connected Google Sheets docume
 
 The Google Sheet is set up so that every worksheet is a deck of flashcards. Each row represents a flashcard, with the word in the first column and the definition in the second column. Further columns are used to store the status of the flashcard.
 
+Screenshot of the Google Sheets Sync feature:
 ![Google Sheets](documentation/images/feature-google-sheets-sync.png)
 
 Link to the [Google Sheets document](https://docs.google.com/spreadsheets/d/1hGXKTWDj8vrl2kdby4OqQysjKpAUj-r4rwd_002I7Vc/edit?usp=sharing) used by the app.
@@ -104,6 +108,7 @@ Here are some examples of the feedback:
 - "You're doing better than 20% of people who attempted this flashcard."
 - "50% of people opted to treat the answer as correct or wrote it correctly. Keep practicing!"
 
+Screenshot of Real-Time Feedback:
 ![Feedback](documentation/images/feature-feedback.png)
 
 ### Error Handling and Logging
@@ -143,6 +148,7 @@ except FileNotFoundError as e:
 ```
 [Vew code in project](https://github.com/benschaf/flash-cli/blob/04f1b1e25fe9bb4242dcb49575435691b4b7cfb1/run.py#L77-L86)
 
+Screenshot of Error Handling:
 ![Error Handling](documentation/images/feature-error.png)
 
 ### Gracefully handle unexpected errors (e.g., invalid input).
@@ -150,6 +156,7 @@ Invalid input: If the user enters an invalid command or input, the app will disp
 
 Example:
 
+Screenshot of Invalid Input Handling:
 ![Invalid Input](documentation/images/feature-invalid-input.png)
 
 ## Future Features
@@ -211,6 +218,7 @@ Below is the flowchart of the main process of this Python program. It shows the 
 
 [Link to the Flowchart](https://drive.google.com/file/d/1rDfChnROSVD_QkKvOzWtL8e4Z6Wk0UX-/view?usp=sharing)
 
+Screenshot of the Flowchart:
 ![screenshot](documentation/images/flowchart.png)
 
 ### Classes & Functions
