@@ -224,6 +224,7 @@ Screenshot of Invalid Input Handling:
 - [GitHub](https://github.com) used for secure online code storage.
 - [Gitpod](https://gitpod.io) used as a cloud-based IDE for development.
 - [Heroku](https://www.heroku.com) used for hosting the deployed back-end site.
+- [Markdown Builder by Tim Nelson](https://tim.2bn.dev/markdown-builder/) used as a template for the README.md file.
 - [draw.io](https://www.drawio.com/) used for Flowchart creation
 - [Windows Snipping Tool](https://support.microsoft.com/de-de/windows/aufnehmen-von-screenshots-mithilfe-des-snipping-tools-00246869-1843-655f-f220-97299b865f6b) used to take screenshots and screencasts on Windows
 - [Github Issues](https://github.com/benschaf/tabletennis-vs-pingpong/issues) used for issue tracking
