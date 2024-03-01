@@ -115,37 +115,62 @@ Screenshot of Real-Time Feedback:
 ### Error Handling and Logging
 Flash-CLI gracefully handles unexpected errors and provides helpful messages to guide users. Additionally, the app logs application events for debugging and troubleshooting.
 
+If an error with the Google Sheets API occurs, the app will prompt the user to decide whether to try to reconnect or quit the program. This is achieved using a custom built helper function.
+
 This is achieved using a custom built helper function:
 ```python
-def handle_exception(e: Exception, message: str) -> NoReturn:
+def handle_exception(e: Exception, message: str) -> Union[None, NoReturn]:
     """
-    Handles an exception by printing an error message, logging the error,
-    and exiting the program.
+    Handles an exception by printing an error message and logging the error.
+    The user is prompted to decide whether to reconnect or quit the program.
 
     Args:
         e (Exception): The exception that occurred.
         message (str): The error message to display.
 
     Returns:
-        None
+        None: If the user decides to reconnect.
+        NoReturn: If the user decides to quit the program. (Exits the program)
     """
     print(message)
     print(f"Error details: {e}")
     logging.exception(f"{message} Error details: %s", str(e))
-    print("Quitting due to error.")
-    sys.exit(1)
+    quitting = input("Do you want to try connecting again? (y/n)\n").lower()
+    if quitting == "y":
+        print("Reconnecting ...")
+        return
+    else:
+        confirmation = input(
+            "Are you sure? If you enter 'y', the program will quit. (y/n)\n"
+        ).lower()
+        if confirmation == "y":
+            print("Quitting due to error.")
+            sys.exit(1)
+        else:
+            print("Reconnecting ...")
+            return
+
 ```
 [View Code in project](https://github.com/benschaf/flash-cli/blob/04f1b1e25fe9bb4242dcb49575435691b4b7cfb1/run.py#L58-L74)
 
-An example of how this function is called:
+An example of how this function is called (simplified):
 ```python
+def connect_to_spreadsheet() -> gspread.models.Spreadsheet:
+    """
+    Connects to the Google Sheets document and returns the spreadsheet object.
+
+    Returns:
+        gspread.models.Spreadsheet: The spreadsheet object.
+    """
+while True:
 try:
     # more code ...
-    CREDS = Credentials.from_service_account_file("creds.json")
-    # more code ...
-except FileNotFoundError as e:
-    handle_exception(e, "Failed to load 'creds.json'. Please ensure the file "
-                     "exists in the same directory as this script.")
+    SHEET = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
+except gspread.exceptions.SpreadsheetNotFound as e:
+    handle_exception(e, "Failed to find spreadsheet: '{SPREADSHEET_NAME}'")
+else:
+    print(f"Connected to spreadsheet: '{SPREADSHEET_NAME}'")
+    return SHEET
 ```
 [Vew code in project](https://github.com/benschaf/flash-cli/blob/04f1b1e25fe9bb4242dcb49575435691b4b7cfb1/run.py#L77-L86)
 

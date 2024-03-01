@@ -55,7 +55,8 @@ def handle_exception(e: Exception, message: str) -> Union[None, NoReturn]:
         message (str): The error message to display.
 
     Returns:
-        None
+        None: If the user decides to reconnect.
+        NoReturn: If the user decides to quit the program. (Exits the program)
     """
     print(message)
     print(f"Error details: {e}")
