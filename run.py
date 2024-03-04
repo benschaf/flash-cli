@@ -761,7 +761,7 @@ def input_or_quit(ipt: str) -> str:
                 elif user_input == "n":
                     break
                 else:
-                    print("Invalid input. Please enter 'y' or 'n'.")
+                    print("Invalid input. Please enter 'y', 'n' or 'q'.")
         else:
             return user_answer
 
