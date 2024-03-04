@@ -131,3 +131,8 @@ Note: Some of the bugs were only tracked in github issues retroactively. For the
 
 - For a full explanation and the history of the bug, see the issue linked above.
 - I did not understand this bug for a long time, until my mentor pointed out that the clear() function was not working as expected. It won't clear lines that are not visible anymore because they have been scrolled up too far. This is a known bug and is not fixed, as it is not a priority. The user can still review all flashcards without issue and only a little bit of confusion. -- Thanks [TravelTimN](https://github.com/TravelTimN) for the help with this bug.
+
+[sometimes the deployed cli freezes ... Issue #71](https://github.com/benschaf/flash-cli/issues/71)
+- This is a known bug where the CLI provided by Code Institute freezes sometimes (most often after switching between different windows on Windows and going back to the browser tab with the CLI)
+- This bug is known by CI and sadly forces the user to restart the application occasionally without being able to save progress.
+- Fixing of this bug is not in the scope of this project.
