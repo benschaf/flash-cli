@@ -15,8 +15,9 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 | File | CI URL | Screenshot | Notes |
 | --- | --- | --- | --- |
 | run.py | [PEP8 CI direct link to run.py linting](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/benschaf/flash-cli/main/run.py) | ![screenshot](documentation/images/py-validation-run.png) | All clear, no errors found |
+| copy-credits.py | [PEP8 CI direct link to copy-credits.py linting](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/benschaf/flash-cli/main/copy-credits.py) | ![screenshot](documentation/images/py-validation-copy-credits.png) | All clear, no errors found |
 
-Note: The [copy-credits.py](copy-credits.py) file was not validated, as it is a simple script used only for development and not part of the main project.
+Note: The [copy-credits.py](copy-credits.py) file is not part of the application, but is used to copy the credits from the run.py file to the appropriate section within the README.md file. It is included in the validation to ensure that it is also up to standard.
 
 ## Browser Compatibility
 
