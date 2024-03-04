@@ -14,9 +14,11 @@ Flash-CLI is a Python-based command-line flashcard application that seamlessly i
 
 ![title image](documentation/images/title-image.png)
 
-[Link to the google Spreadsheet](https://docs.google.com/spreadsheets/d/1hGXKTWDj8vrl2kdby4OqQysjKpAUj-r4rwd_002I7Vc/edit?usp=sharing): This is the Google Spreadsheet that the app uses to store the flashcards.
+**Some useful links:**
 
-[Link to the live Website](https://flash-cli-1471beedfcc0.herokuapp.com/)
+- [Link to the google Spreadsheet](https://docs.google.com/spreadsheets/d/1hGXKTWDj8vrl2kdby4OqQysjKpAUj-r4rwd_002I7Vc/edit?usp=sharing): This is the Google Spreadsheet that the app uses to store the flashcards.
+
+- [Link to the live Website](https://flash-cli-1471beedfcc0.herokuapp.com/)
 
 ## UX
 
@@ -65,7 +67,7 @@ Functionality:
 - Update the flashcard status based on the user's response.
 - Provide personalized feedback based on the user's responses and the responses of the community so far.
 
-This mode is designed to help users for initial learning and self-assessment. It's a simple and effective way to memorize new flashcards.
+This mode is designed to help users with initial learning and self-assessment. It's a simple and effective way to memorize new flashcards.
 
 Screenshot of Flashcard Mode:
 ![Flashcard Mode](documentation/images/feature-flashcard-mode.png)
@@ -88,6 +90,8 @@ Screenshot of Typed Answer Mode:
 The app automatically syncs flashcard data with a connected Google Sheets document using the Google Sheets API. No user login is required.
 
 The Google Sheet is set up so that every worksheet is a deck of flashcards. Each row represents a flashcard, with the word in the first column and the definition in the second column. Further columns are used to store the status of the flashcard.
+
+Keep in mind that the Google sheet is not accessible by the user and only used as a database for the app. Instead, the sheet is very helpful for the app provider to manage and update flashcards online.
 
 Screenshot of the Google Sheets Sync feature:
 ![Google Sheets](documentation/images/feature-google-sheets-sync.png)
@@ -227,12 +231,15 @@ Screenshot of Invalid Input Handling:
 - [Markdown Builder by Tim Nelson](https://tim.2bn.dev/markdown-builder/) used as a template for the README.md file.
 - [draw.io](https://www.drawio.com/) used for Flowchart creation
 - [Windows Snipping Tool](https://support.microsoft.com/de-de/windows/aufnehmen-von-screenshots-mithilfe-des-snipping-tools-00246869-1843-655f-f220-97299b865f6b) used to take screenshots and screencasts on Windows
-- [Github Issues](https://github.com/benschaf/tabletennis-vs-pingpong/issues) used for issue tracking
-- [GitHub Projects](https://github.com/users/benschaf/projects/3) used for project management in conjunction with GitHub Issues
+- [Github Issues](https://github.com/benschaf/flash-cli/issues) used for issue tracking
+- [GitHub Projects](https://github.com/users/benschaf/projects/4) used for project management in conjunction with GitHub Issues
 - [shields.io](https://shields.io/) used to create the badges in the README.md file
 - [LICEcap](https://www.cockos.com/licecap/) used to create GIFs for the TESTING.md file
 - [markdown-link-check](https://www.npmjs.com/package/markdown-link-check) used to check for broken links in the README.md file
 - [copy-credits.py](copy-credits.py) used to automatically generate the credits for the README.md file (this script was written by me as a side project, using much help from the Microsoft Edge Copilot)
+
+Screenshot of the Github Projects Board:
+![Github Projects](documentation/images/tools.-project.png)
 
 ## Data Model
 
@@ -301,7 +308,7 @@ class Flashcard_Set:
     Methods:
         _load_flashcards(): Loads the flashcards from the worksheet data.
         show_all(): Displays all the flashcards in a table format.
-        upload() -> None: Prepares the flashcard data and uploads it to the
+        upload(): Prepares the flashcard data and uploads it to the
         Google Sheets worksheet.
 
         Note: The methods above all use helper methods to perform their tasks.
@@ -310,7 +317,7 @@ class Flashcard_Set:
     def __init__(self, title: str):
         """
         Initializes a Flashcard_Set object.
-        Uses the load_flashcards method to load the flashcards from the
+        Uses the _load_flashcards method to load the flashcards from the
         worksheet data.
         """
         self.title = title
