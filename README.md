@@ -359,15 +359,15 @@ The primary functions outside of the classes used on this application are:
 
 I've used the following Python packages and external imported packages.
 
-- `import sys`: sys is used for system-specific parameters and functions.
-- `import os`: os provides a way of using operating system dependent functionality.
+- `import sys`: sys is used for system-specific parameters and functions. In this project, it's used to exit the program.
+- `import os`: os provides a way of using operating system dependent functionality. In this project, it's used to clear the terminal.
 - `import random`: random is used for generating random numbers.
-- `import time`: time provides various time-related functions.
+- `import time`: time provides various time-related functions. In this project, it's used to the sleep function.
 - `from typing import Dict, List, NoReturn, Tuple, Union`: These are used for type hinting in function signatures and variable declarations.
 - `import gspread`: gspread is used for interacting with Google Spreadsheets.
 - `from google.oauth2.service_account import Credentials`: Credentials is used for authenticating with the Google Sheets API.
 - `import logging`: logging is used for logging errors, information, and warnings.
-- `from prettytable import PrettyTable`: PrettyTable is used for creating ASCII art tables.
+- `from prettytable import PrettyTable`: PrettyTable is used for creating ASCII art tables. In this project, it's used to display a flashcard deck in a table format.
 
 ## Testing
 
