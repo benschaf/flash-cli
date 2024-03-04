@@ -101,6 +101,10 @@ Link to the [Google Sheets document](https://docs.google.com/spreadsheets/d/1hGX
 Screenshot of the Google Sheets document used by the app:
 ![Google Sheets Screenshot](documentation/images/feature-google-sheets-screenshot.png)
 
+**Note:** In the Google Sheets document there are two special worksheets:
+- *short quiz for testing* - This worksheet is used for testing the quiz functionality. It contains only 3 flashcards. That way, the quiz can be tested quickly.
+- *python (review mode not supported yet) - This worksheet is an interesting python quiz that only works with the quiz modes, because its content is too long for it to be displayed in review mode.
+
 ### Real-Time Feedback:
 The app will provide personalized and dynamically generated feedback based on collective performance. Feedback is given after answering most questions and at the end of each quiz. It's designed to motivate users and help put their progress into perspective.
 
