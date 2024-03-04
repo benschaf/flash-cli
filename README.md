@@ -224,7 +224,7 @@ Screenshot of Invalid Input Handling:
 - [Quizlet](https://quizlet.com/) for inspiration and comparison.
 - [HTML](https://en.wikipedia.org/wiki/HTML) used to display a terminal in the browser.
 - [Python](https://www.python.org) used as the back-end programming language (main focus of the project).
-- [Git](https://git-scm.com) used for version control. (`git add`, `git commit`, `git push`)
+- [Git](https://git-scm.com) used for version control. (`git add`, `git commit`, `git push`) - for this project i additionally learned how to use 'git add -p', 'git diff', 'git log', 'git reset' and some more commands to get a better understanding of the git workflow.
 - [GitHub](https://github.com) used for secure online code storage.
 - [Gitpod](https://gitpod.io) used as a cloud-based IDE for development.
 - [Heroku](https://www.heroku.com) used for hosting the deployed back-end site.
