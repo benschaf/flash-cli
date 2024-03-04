@@ -514,5 +514,5 @@ The script was written by me, with much help from the Microsoft Edge Copilot.
 ## Acknowledgements
 - I would like to thank my Code Institute mentor, [Tim Nelson](https://tim.2bn.dev/) for his support throughout the development of this project.
 - I would like to thank the [Code Institute](https://codeinstitute.net/) tutor team for their assistance with troubleshooting and debugging some project issues.
-- I would like to thank the Code Institute Slack community for the moral support; it kept me going during periods of self doubt and imposter syndrome.
+- I would like to thank the Code Institute Slack community for the moral support and for providing a great environment for learning and sharing knowledge.
 - I would like to thank my wife Maria, for believing in me, and allowing me to make this transition into software development.
