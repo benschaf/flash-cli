@@ -4,7 +4,7 @@ Return back to the [README.md](README.md) file.
 
 **Note:** In the Google Sheets document there are two special worksheets:
 - *short quiz for testing* - This worksheet is used for testing the quiz functionality. It contains only 3 flashcards. That way, the quiz can be tested quickly.
-- *python (review mode not supported yet) - This worksheet is an interesting python quiz that only works with the quiz modes, because its content is too long for it to be displayed in review mode.
+- *python* (review mode not supported yet) - This worksheet is an interesting python quiz that only works with the quiz modes, because its content is too long for it to be displayed in review mode.
 
 ## Code Validation
 
