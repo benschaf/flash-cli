@@ -177,6 +177,12 @@ class Flashcard:
     def update_progress(self, progress_key: str) -> None:
         """
         Updates the progress of the flashcard.
+        Possible progress keys are:
+        - "flash_correct"
+        - "flash_incorrect"
+        - "write_correct"
+        - "write_correct_user_opted"
+        - "write_incorrect"
 
         Args:
             progress_key (str): The key to identify the progress to be updated.
@@ -195,7 +201,7 @@ class Flashcard_Set:
     Methods:
         _load_flashcards(): Loads the flashcards from the worksheet data.
         show_all(): Displays all the flashcards in a table format.
-        upload() -> None: Prepares the flashcard data and uploads it to the
+        upload(): Prepares the flashcard data and uploads it to the
         Google Sheets worksheet.
 
         Note: The methods above all use helper methods to perform their tasks.
@@ -205,7 +211,7 @@ class Flashcard_Set:
     def __init__(self, title: str):
         """
         Initializes a Flashcard_Set object.
-        Uses the load_flashcards method to load the flashcards from the
+        Uses the _load_flashcards method to load the flashcards from the
         worksheet data.
         """
         self.title = title
